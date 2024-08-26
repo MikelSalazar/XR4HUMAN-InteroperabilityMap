@@ -1,0 +1,297 @@
+{
+	"title": "Interoperability Map",
+	"authors": "Mikel Salazar, Alina Kadlubsky, Sathiya Kumar",
+	"favicon": "../../resources/favicon.png",
+	"resources": {
+		"logo": "../../resources/logo.svg"
+	},
+	"model": {
+		"domains": {
+			"Standards": {
+				"title": "Standards",
+				"description": "Standards"
+			},
+			"Ethics": {
+				"title": "Ethics",
+				"description": "Ethics"
+			},
+			"Law": {
+				"title": "Law",
+				"description": "Law"
+			},
+			"Science": {
+				"title": "Science",
+				"description": "Science"
+			},
+			"Infrastructure": {
+				"title": "Infrastructure",
+				"description": "Infrastructure"
+			},
+			"Content": {
+				"title": "Content",
+				"description": "Content"
+			}
+		},
+		"relations": {
+			"Ethicists": {
+				"title": "Ethicists",
+				"description": "",
+				// "classes": ["BusinessModels", "ResearchEthics", "SocialConnectivity"]
+			},
+			"Regulators": {
+				"title": "Regulators",
+				"description": "",
+				// "classes": ["SensorsAndIoT", "OpenSource", "SDKs", "DecentralizedComputing", "Networks", "Architectures", "BusinessModels", "Privacy", "Security", "SocialConnectivity"]
+			},
+			"StandardGroups": {
+				"title": "Standard Groups",
+				"description": "",
+				// "classes": ["3dModelFormats", "UIDLs", "SensorsAndIoT", "HardwareDevices", "OpenSource", "3dMiddleware", "OpenAPIs", "SDKs", "DecentralizedComputing", "Network", "Architectures", "Usability", "Ergonomics", "Accessibility", "ResearchEthics", "SocialConnectivity" ]
+			},
+			"Developers": {
+				"title": "Developers",
+				"description": "",
+				// "classes": ["3dModelFormats", "UIDLs", "SensorsAndIoT", "HardwareDevices", "OpenSource", "3dMiddleware", "OpenAPIs", "SDKs", "DecentralizedComputing", "Network", "Architectures", "CloudEdgeComputing", "BusinessModels", "PaymentPlatforms", "PrivacyAndSecurity", "Usability", "Ergonomics", "Accessibility", "SocialConnectivity"]
+			},
+			"Authors": {
+				"title": "Authors",
+				"description": "",
+				// "classes": ["UIDLs", "OpenSource", "3dMiddleware", "OpenAPIs", "SDKs", "DecentralizedComputing", "PaymentPlatforms", "Privacy", "Security", "Usability", "Ergonomics", "Accessibility", "ResearchEthics", "SocialConnectivity"]
+			},
+			"Providers": {
+				"title": "Providers",
+				"description": "",
+				// "classes": ["SensorsAndIoT", "HardwareDevices", "OpenSource", "3dMiddleware", "CloudEdgeComputing", "PaymentPlatforms"]
+			},
+			"Scientists": {
+				"title": "Scientists",
+				"description": "",
+				// "classes": ["3dModelFormats", "UIDLs", "SensorsAndIoT", "HardwareDevices", "OpenSource", "3dMiddleware", "OpenAPIs", "SDKs", "Network", "Architectures", "CloudEdgeComputing", "ResearchEthics"]
+			},
+			"Users": {
+				"title": "Users",
+				"description": "",
+				// "classes": ["3dModelFormats", "UIDLs", "SensorsAndIoT", "HardwareDevices", "OpenSource", "3dMiddleware", "OpenAPIs", "SDKs", "DecentralizedComputing", "Network", "Architectures", "CloudEdgeComputing", "BusinessModels", "PaymentPlatforms", "Privacy", "Security", "Usability", "Ergonomics", "Accessibility", "ResearchEthics", "SocialConnectivity"]
+			}
+		},
+		"classes": {
+			"Element": { "abstract": true },
+			// "A": { "title": "A", "relations": { "Ethicists":1, "Regulators":1  } },
+			// "B": { "title": "B", "relations": { "Ethicists":1, "Regulators":1, "StandardGroups": 1  } },
+			// "C": { "title": "C", "relations": { "Ethicists":1, "StandardGroups": 1 } },
+			"3dModelFormats": {
+				"extends": "Element",
+				"title": "3D Model\nFormats",
+				"domains": { "Standards": 1, "Science":1, "Content": 1 },
+				"relations": { "StandardGroups":1, "Developers":0.5 },
+				"instances": {
+					"OBJ": {},
+					"USD": {},
+					"glTF": {},
+					"FBX": {}
+				}
+			},
+			"UIDLs": {
+				"extends": "Element",
+				"title": "User Experience\nDescription Language",
+				"domains": { "Standards": 1 },
+				"relations": { "StandardGroups":1, "Developers":1, "Authors":1, "Scientists":1 },
+				"instances": {}
+			},
+			"SensorsAndIoT": {
+				"extends": "Element",
+				"title": "Sensors\nand IoT",
+				"domains": {},
+				"relations": { "StandardGroups":1, "Developers":1, "Providers":1, "Scientists":1, "Regulators": 1 },
+				"instances": {}
+			},
+			"HardwareDevices": {
+				"extends": "Element",
+				"title": "Hardware Devices\n and Deliverables",
+				"domains": { "Science": 1 },
+				"relations": { "StandardGroups":1, "Developers":1, "Providers":1, "Scientists":1 },
+				"instances": {}
+			},
+			"OpenSource": {
+				"extends": "Element",
+				"title": "Open Source\nSoftware/Hardware",
+				"domains": { "Science": 1 },
+				"relations": { "StandardGroups":1, "Developers":1, "Authors":1, "Providers":1, "Scientists":1, "Regulators":1 },
+				"instances": {}
+			},
+			"3dMiddleware": {
+				"extends": "Element",
+				"title": "3D APIs and\nMiddleware",
+				"domains": { "Standards": 1 },
+				"relations": { "StandardGroups":1, "Developers":1, "Authors":1, "Providers":1, "Scientists":1 },
+				"instances": {
+					"Unity": {},
+					"Unreal": {},
+					"ThreeJS": {}
+				}
+			},
+			"OpenAPIs": {
+				"extends": "Element",
+				"title": "Open APIs",
+				"domains": { "Standards": 1 },
+				"relations": { "StandardGroups":1, "Developers":1, "Authors":1, "Scientists":1, "Users":1 },
+				"instances": {}
+			},
+			"SDKs": {
+				"extends": "Element",
+				"title": "SDK (Software\n Development Kits)",
+				"domains": { "Standards": 1 },
+				"relations": { "Regulators":1, "StandardGroups":1, "Developers":1, "Authors":1, "Scientists":1 },
+				"instances": {}
+			},
+			"DecentralizedComputing": {
+				"extends": "Element",
+				"title": "Decentralized\nComputing",
+				"domains": { "Standards": 1 },
+				"relations": {"Regulators":1, "StandardGroups":1, "Developers":1, "Authors":1,"Users":1 },
+				"instances": {}
+			},
+			"Network": {
+				"extends": "Element",
+				"title": "Network",
+				"domains": { "Standards": 1 },
+				"relations": { "Regulators":1, "StandardGroups":1, "Developers":1, "Scientists":1 },
+				"instances": {}
+			},
+			"Architectures": {
+				"extends": "Element",
+				"title": "Architectures",
+				"domains": { "Standards": 1 },
+				"relations": { "Regulators":1, "StandardGroups":1, "Developers":1, "Scientists":1 },
+				"instances": {}
+			},
+			"CloudEdgeComputing": {
+				"extends": "Element",
+				"title": "Cloud Edge\nComputing",
+				"domains": { "Standards": 1 },
+				"relations": { "Developers":1, "Providers":1, "Scientists":1 },
+				"instances": {}
+			},
+			"BusinessModels": {
+				"extends": "Element",
+				"title": "Business\nModels",
+				"domains": {},
+				"relations": { "Ethicists":1, "Regulators":1, "Developers":1 },
+				"instances": {}
+			},
+			"PaymentPlatforms": {
+				"extends": "Element",
+				"title": "Payment\nPlatforms",
+				"domains": {},
+				"relations": { "Developers":1, "Authors":1, "Providers":1 },
+				"instances": {}
+			},
+			"Privacy": {
+				"extends": "Element",
+				"title": "Privacy",
+				"domains": {},
+				"relations": { "Ethicists":1, "Regulators":1,"Developers":1, "Users":1 },
+				"instances": {}
+			},
+			"Security": {
+				"extends": "Element",
+				"title": "Security",
+				"domains": {},
+				"relations": { "Ethicists":1, "Regulators":1,"Developers":1, "Users":1 },
+				"instances": {}
+			},
+			"Usability": {
+				"extends": "Element",
+				"title": "Usability",
+				"domains": {},
+				"relations": { "StandardGroups":1, "Developers":1, "Authors":1, "Providers":1, "Users":1 },
+				"instances": {}
+			},
+			"Ergonomics": {
+				"extends": "Element",
+				"title": "Ergonomics",
+				"domains": {},
+				"relations": {  "Developers":1, "Authors":1, "Providers":1, "Users":1 },
+				"instances": {}
+			},
+			"Accessibility": {
+				"extends": "Element",
+				"title": "Accessibility",
+				"domains": {},
+				"relations": {  "Developers":1, "Authors":1, "Providers":1, "Users":1 },
+				"instances": {}
+			},
+			"ResearchEthics": {
+				"extends": "Element",
+				"title": "Research\nEthics" ,
+				"domains": ["Science"],
+				"relations": { "Ethicists":1, "Scientists":1 },
+				"instances": {}
+			},
+			"SocialConnectivity": {
+				"extends": "Element",
+				"title": "Social Connectivity",
+				"domains": {},
+				"relations": { "Ethicists":1, "Regulators":1, "Developers":1, "Scientists":1, "Users":1 },
+				"instances": {}
+
+			},
+			"ExperienceDiscovery": {
+				"extends": "Element",
+				"title": "Experience Discovery",
+				"domains": {},
+				"relations": { "StandardGroups":1, "Developers": 0.5,  "Users":1 },
+				"instances": {}
+			}
+		}
+	},
+	"viewports": [{
+		"name": "Viewport",
+		"color": "url(#Background)",
+		"state": "maximized",
+		"style": "dark",
+		"styles": {
+			"dark": {
+				"colors": {
+					"Background": "black",
+					"Foreground": "white"
+				}
+			}
+		},
+		"layers": {
+			"SubwayMap": {
+				"debug": true, "pan": true,
+				"widgets": [
+					{
+						"abstract": true,
+						"name": "Station",
+						"variables": {
+							"title": { "type":"string", "value": "Title with\nseveral lines"},
+							"description": { "type":"string", "value": "Description"},
+							"showData": { "type":"string", "value": "false"},
+						},
+						"shapes": [
+							{ "name": "Circle", "type": "circle", "radius": 30, "color": "url(#Background)", "strokes": [{ "width": 5, "color": "url(#Foreground)"}] },
+							{ "name": "Title", "type": "text",  "font": "Arial", "weight": "bold", "content": { "link": "variables/title" }, "position": [0, -20], "anchor": "bottom" },
+						],
+						"actions": [ { "event": "click", "variable": "variables/showData", "value": "true" } ],
+						"widgets": [
+							{
+								"name": "StationToolTip",
+								"context": { "variable": "variables/showData", "value": "true" },
+								"shapes": [ { "type": "text", "font": "Arial", "weight": "bold", "content": { "link": "variables/description" }, "position": [0, 60], "anchor": "top", "color": "blue" } ],
+								"actions": [ { "event": "click", "variable": "variables/showData", "value": "false" } ]
+							}
+						]
+					},
+					{
+						"name": "Generator",
+						"type": "generator",
+						"seed": 18,
+						"widget": "Station"
+					}
+				]
+			}
+		}
+	}]
+}
