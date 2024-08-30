@@ -82,6 +82,7 @@
 			"3dModelFormats": {
 				"extends": "Element",
 				"title": "3D Model\nFormats",
+				"description": "Description",
 				"domains": { "Standards": 1, "Science":1, "Content": 1 },
 				"relations": { "StandardGroups":1, "Developers":0.5 },
 				"instances": {
@@ -94,6 +95,7 @@
 			"UIDLs": {
 				"extends": "Element",
 				"title": "User Experience\nDescription Language",
+				"description": "Description",
 				"domains": { "Standards": 1 },
 				"relations": { "StandardGroups":1, "Developers":1, "Authors":1, "Scientists":1 },
 				"instances": {}
@@ -101,6 +103,7 @@
 			"SensorsAndIoT": {
 				"extends": "Element",
 				"title": "Sensors\nand IoT",
+				"description": "Description",
 				"domains": {},
 				"relations": { "StandardGroups":1, "Developers":1, "Providers":1, "Scientists":1, "Regulators": 1 },
 				"instances": {}
@@ -108,6 +111,7 @@
 			"HardwareDevices": {
 				"extends": "Element",
 				"title": "Hardware Devices\n and Deliverables",
+				"description": "Description",
 				"domains": { "Science": 1 },
 				"relations": { "StandardGroups":1, "Developers":1, "Providers":1, "Scientists":1 },
 				"instances": {}
@@ -115,6 +119,7 @@
 			"OpenSource": {
 				"extends": "Element",
 				"title": "Open Source\nSoftware/Hardware",
+				"description": "Description",
 				"domains": { "Science": 1 },
 				"relations": { "StandardGroups":1, "Developers":1, "Authors":1, "Providers":1, "Scientists":1, "Regulators":1 },
 				"instances": {}
@@ -122,6 +127,7 @@
 			"3dMiddleware": {
 				"extends": "Element",
 				"title": "3D APIs and\nMiddleware",
+				"description": "Description",
 				"domains": { "Standards": 1 },
 				"relations": { "StandardGroups":1, "Developers":1, "Authors":1, "Providers":1, "Scientists":1 },
 				"instances": {
@@ -133,6 +139,7 @@
 			"OpenAPIs": {
 				"extends": "Element",
 				"title": "Open APIs",
+				"description": "Description",
 				"domains": { "Standards": 1 },
 				"relations": { "StandardGroups":1, "Developers":1, "Authors":1, "Scientists":1, "Users":1 },
 				"instances": {}
@@ -147,6 +154,7 @@
 			"DecentralizedComputing": {
 				"extends": "Element",
 				"title": "Decentralized\nComputing",
+				"description": "Description",
 				"domains": { "Standards": 1 },
 				"relations": {"Regulators":1, "StandardGroups":1, "Developers":1, "Authors":1,"Users":1 },
 				"instances": {}
@@ -154,6 +162,7 @@
 			"Network": {
 				"extends": "Element",
 				"title": "Network",
+				"description": "Description",
 				"domains": { "Standards": 1 },
 				"relations": { "Regulators":1, "StandardGroups":1, "Developers":1, "Scientists":1 },
 				"instances": {}
@@ -161,6 +170,7 @@
 			"Architectures": {
 				"extends": "Element",
 				"title": "Architectures",
+				"description": "Description",
 				"domains": { "Standards": 1 },
 				"relations": { "Regulators":1, "StandardGroups":1, "Developers":1, "Scientists":1 },
 				"instances": {}
@@ -168,6 +178,7 @@
 			"CloudEdgeComputing": {
 				"extends": "Element",
 				"title": "Cloud Edge\nComputing",
+				"description": "Description",
 				"domains": { "Standards": 1 },
 				"relations": { "Developers":1, "Providers":1, "Scientists":1 },
 				"instances": {}
@@ -175,6 +186,7 @@
 			"BusinessModels": {
 				"extends": "Element",
 				"title": "Business\nModels",
+				"description": "Description",
 				"domains": {},
 				"relations": { "Ethicists":1, "Regulators":1, "Developers":1 },
 				"instances": {}
@@ -182,6 +194,7 @@
 			"PaymentPlatforms": {
 				"extends": "Element",
 				"title": "Payment\nPlatforms",
+				"description": "Description",
 				"domains": {},
 				"relations": { "Developers":1, "Authors":1, "Providers":1 },
 				"instances": {}
@@ -189,6 +202,7 @@
 			"Privacy": {
 				"extends": "Element",
 				"title": "Privacy",
+				"description": "Description",
 				"domains": {},
 				"relations": { "Ethicists":1, "Regulators":1,"Developers":1, "Users":1 },
 				"instances": {}
@@ -196,6 +210,7 @@
 			"Security": {
 				"extends": "Element",
 				"title": "Security",
+				"description": "Description",
 				"domains": {},
 				"relations": { "Ethicists":1, "Regulators":1,"Developers":1, "Users":1 },
 				"instances": {}
@@ -203,6 +218,7 @@
 			"Usability": {
 				"extends": "Element",
 				"title": "Usability",
+				"description": "Description",
 				"domains": {},
 				"relations": { "StandardGroups":1, "Developers":1, "Authors":1, "Providers":1, "Users":1 },
 				"instances": {}
@@ -210,6 +226,7 @@
 			"Ergonomics": {
 				"extends": "Element",
 				"title": "Ergonomics",
+				"description": "Description",
 				"domains": {},
 				"relations": {  "Developers":1, "Authors":1, "Providers":1, "Users":1 },
 				"instances": {}
@@ -217,6 +234,7 @@
 			"Accessibility": {
 				"extends": "Element",
 				"title": "Accessibility",
+				"description": "Description",
 				"domains": {},
 				"relations": {  "Developers":1, "Authors":1, "Providers":1, "Users":1 },
 				"instances": {}
@@ -224,6 +242,7 @@
 			"ResearchEthics": {
 				"extends": "Element",
 				"title": "Research\nEthics" ,
+				"description": "Description",
 				"domains": ["Science"],
 				"relations": { "Ethicists":1, "Scientists":1 },
 				"instances": {}
@@ -231,6 +250,7 @@
 			"SocialConnectivity": {
 				"extends": "Element",
 				"title": "Social Connectivity",
+				"description": "Description",
 				"domains": {},
 				"relations": { "Ethicists":1, "Regulators":1, "Developers":1, "Scientists":1, "Users":1 },
 				"instances": {}
@@ -239,6 +259,7 @@
 			"ExperienceDiscovery": {
 				"extends": "Element",
 				"title": "Experience Discovery",
+				"description": "Description",
 				"domains": {},
 				"relations": { "StandardGroups":1, "Developers": 0.5,  "Users":1 },
 				"instances": {}
@@ -278,8 +299,8 @@
 						"widgets": [
 							{
 								"name": "StationToolTip",
-								"context": { "variable": "variables/showData", "value": "true" },
-								"shapes": [ { "type": "text", "font": "Arial", "weight": "bold", "content": { "link": "variables/description" }, "position": [0, 60], "anchor": "top", "color": "blue" } ],
+								// "context": { "variable": "variables/showData", "value": "true" },
+								"shapes": [ { "type": "text", "font": "Arial", "weight": "bold", "content": { "link": "variables/description" }, "position": [0, 60], "anchor": "top", "color": "lightgrey" } ],
 								"actions": [ { "event": "click", "variable": "variables/showData", "value": "false" } ]
 							}
 						]
