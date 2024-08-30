@@ -147,6 +147,7 @@
 			"SDKs": {
 				"extends": "Element",
 				"title": "SDK (Software\n Development Kits)",
+				"description": "Description",
 				"domains": { "Standards": 1 },
 				"relations": { "Regulators":1, "StandardGroups":1, "Developers":1, "Authors":1, "Scientists":1 },
 				"instances": {}
