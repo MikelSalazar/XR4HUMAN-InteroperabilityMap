@@ -119,7 +119,7 @@
 			"OpenSource and OpenSourceHardware": {
 				"extends": "Element",
 				"title": "Open Source\nSoftware/Hardware",
-				"description": Open hardware, or "open source hardware," refers to design specifications /n of physical objects licensed for public use, allowing anyone to study, modify, create, /n and distribute them. It covers various objects like cars, chairs, computers, and robots. /n The source code (schematics, blueprints, CAD files, etc.) is accessible for modification /n under permissive licenses. This openness enables users to update, improve, and share /n both the software and physical design, promoting broad accessibility and collaboration in /n hardware design and manufacturing.",
+				"description": "Open hardware, or 'open source hardware', refers to design specifications /n of physical objects licensed for public use, allowing anyone to study, modify, create, /n and distribute them. It covers various objects like cars, chairs, computers, and robots. /n The source code (schematics, blueprints, CAD files, etc.) is accessible for modification /n under permissive licenses. This openness enables users to update, improve, and share /n both the software and physical design, promoting broad accessibility and collaboration in /n hardware design and manufacturing.",
 				"domains": { "Science": 1 },
 				"relations": { "StandardGroups":1, "Developers":1, "Authors":1, "Providers":1, "Scientists":1, "Regulators":1 },
 				"instances": {}
