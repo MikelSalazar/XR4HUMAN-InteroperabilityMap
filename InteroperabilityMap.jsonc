@@ -9,68 +9,68 @@
 		"domains": {
 			"Standards": {
 				"title": "Standards",
-				"description": "Standards"
+				"description": "3D Model/Data Formats; User Experience Description Languages; /n Sensors and IoT; Decentralized Computing Hardware Devices and Wearables; Open Source/Hardware; /n 3D Middleware and APIs; Open APIs; SDKs; Network; Architecture; Usability (UI/UX); Experience Discovery"
 			},
 			"Ethics": {
 				"title": "Ethics",
-				"description": "Ethics"
+				"description": "Sensors and IoT; Hardware Devices and Wearables; Business/Monetization Models; /n Privacy and Security; Usability (UI/UX); Accessibility; Research Ethics; Social Connectivity"
 			},
 			"Law": {
 				"title": "Law",
-				"description": "Law"
+				"description": "3D Model/Data Formats; Sensors and IoT; Hardware Devices and Wearables; SDKs; /n Network; Architecture; Business/Monetization Models; Privacy and Security; Accessibility; Social Connectivity"
 			},
 			"Science": {
 				"title": "Science",
-				"description": "Science"
+				"description": "3D Model/Data Formats; Sensors and IoT; Hardware Devices and Wearables; Open /n Source/Hardware; 3D Middleware and APIs; Open APIs; SDKs; Network; Architecture; Cloud Edge Computing; Research Ethics; Social Connectivity"
 			},
 			"Infrastructure": {
 				"title": "Infrastructure",
-				"description": "Infrastructure"
+				"description": "3D Model/Data Formats; Sensors and IoT; Open Source/Hardware; Hardware Devices /n and Wearables; Decentralized Computing; Network; Architecture; Cloud Edge /n Computing; Ergonomics; Accessibility"
 			},
 			"Content": {
 				"title": "Content",
-				"description": "Content"
+				"description": "3D Model/Data Formats; User Experience Description Languages; Sensors and IoT 3D Middleware /n and APIs; Open APIs; SDKs; Business/Monetization Models; Payment Platforms; /n Privacy and Security; Usability (UI/UX); Ergonomics; Accessibility; Social Connectivity; Experience Discovery"
 			}
 		},
 		"relations": {
 			"Ethicists": {
 				"title": "Ethicists",
-				"description": "",
+				"description": "Ethics committees: corporate governance",
 				// "classes": ["BusinessModels", "ResearchEthics", "SocialConnectivity"]
 			},
 			"Regulators": {
 				"title": "Regulators",
-				"description": "",
+				"description": "Legislators (hard-law). policy makers (soft-law)",
 				// "classes": ["SensorsAndIoT", "OpenSource", "SDKs", "DecentralizedComputing", "Networks", "Architectures", "BusinessModels", "Privacy", "Security", "SocialConnectivity"]
 			},
 			"StandardGroups": {
 				"title": "Standard Groups",
-				"description": "",
+				"description": "Standard bodies and industry associations",
 				// "classes": ["3dModelFormats", "UIDLs", "SensorsAndIoT", "HardwareDevices", "OpenSource", "3dMiddleware", "OpenAPIs", "SDKs", "DecentralizedComputing", "Network", "Architectures", "Usability", "Ergonomics", "Accessibility", "ResearchEthics", "SocialConnectivity" ]
 			},
 			"Developers": {
 				"title": "Developers",
-				"description": "",
+				"description": "Programmers, Engineers",
 				// "classes": ["3dModelFormats", "UIDLs", "SensorsAndIoT", "HardwareDevices", "OpenSource", "3dMiddleware", "OpenAPIs", "SDKs", "DecentralizedComputing", "Network", "Architectures", "CloudEdgeComputing", "BusinessModels", "PaymentPlatforms", "PrivacyAndSecurity", "Usability", "Ergonomics", "Accessibility", "SocialConnectivity"]
 			},
 			"Authors": {
 				"title": "Authors",
-				"description": "",
+				"description": "Artists, Designers, Content Creators",
 				// "classes": ["UIDLs", "OpenSource", "3dMiddleware", "OpenAPIs", "SDKs", "DecentralizedComputing", "PaymentPlatforms", "Privacy", "Security", "Usability", "Ergonomics", "Accessibility", "ResearchEthics", "SocialConnectivity"]
 			},
 			"Providers": {
 				"title": "Providers",
-				"description": "",
+				"description": "Hardware Providers, Software Providers, Platform Providers",
 				// "classes": ["SensorsAndIoT", "HardwareDevices", "OpenSource", "3dMiddleware", "CloudEdgeComputing", "PaymentPlatforms"]
 			},
 			"Scientists": {
 				"title": "Scientists",
-				"description": "",
+				"description": "Researchers and Scientists",
 				// "classes": ["3dModelFormats", "UIDLs", "SensorsAndIoT", "HardwareDevices", "OpenSource", "3dMiddleware", "OpenAPIs", "SDKs", "Network", "Architectures", "CloudEdgeComputing", "ResearchEthics"]
 			},
 			"Users": {
 				"title": "Users",
-				"description": "",
+				"description": "XR Users, General Public",
 				// "classes": ["3dModelFormats", "UIDLs", "SensorsAndIoT", "HardwareDevices", "OpenSource", "3dMiddleware", "OpenAPIs", "SDKs", "DecentralizedComputing", "Network", "Architectures", "CloudEdgeComputing", "BusinessModels", "PaymentPlatforms", "Privacy", "Security", "Usability", "Ergonomics", "Accessibility", "ResearchEthics", "SocialConnectivity"]
 			}
 		},
@@ -95,7 +95,7 @@
 			"UIDLs": {
 				"extends": "Element",
 				"title": "User Experience\nDescription Language",
-				"description": "Description",
+				"description": "Description: UIDL is important as it important across various industries. /n In web development, it helps create responsive, accessible interfaces and ensures /n consistency and efficiency in design. In software, UIDL enhances usability and customer /n satisfaction. It's crucial in UX/UI design, enabling engaging visuals and interactions",
 				"domains": { "Standards": 1 },
 				"relations": { "StandardGroups":1, "Developers":1, "Authors":1, "Scientists":1 },
 				"instances": {}
@@ -103,7 +103,7 @@
 			"SensorsAndIoT": {
 				"extends": "Element",
 				"title": "Sensors\nand IoT",
-				"description": "Description",
+				"description": "Generally, sensors are used in the architecture of IoT devices. /n Sensory are used for sensing thing and devices etc. The Internet of Things (IoT) is a network of devices embedded with sensors, electronics, and connectivity to collect and communicate data. IoT sensors help understand systems /n for better actions, prevent tragedies, reduce costs, and simplify life. This article discusses /n various IoT sensors, their roles, and examples.",
 				"domains": {},
 				"relations": { "StandardGroups":1, "Developers":1, "Providers":1, "Scientists":1, "Regulators": 1 },
 				"instances": {}
@@ -111,15 +111,15 @@
 			"HardwareDevices": {
 				"extends": "Element",
 				"title": "Hardware Devices\n and Deliverables",
-				"description": "Description",
+				"description": "Computer hardware refers to the physical components of a computer, /n essential for its function. It includes internal parts like the CPU, video card, and memory, /n and external parts like the keyboard and case. Early hardware included mechanical parts /n and switches, evolving to vacuum tubes, transistors, and now modern components /n in various devices like desktops, laptops, tablets, smartphones and HMDs. /n Wearable devices often use Bluetooth or Wi-Fi to track health, fitness, location, or biofeedback data. /n These electronic devices, worn on the body, have sensors, processors, /n and connectivity features to collect data, perform tasks, and communicate. They enhance /n user experiences and provide real-time information, integrating into the IoT ecosystem.",
 				"domains": { "Science": 1 },
 				"relations": { "StandardGroups":1, "Developers":1, "Providers":1, "Scientists":1 },
 				"instances": {}
 			},
-			"OpenSource": {
+			"OpenSource and OpenSourceHardware": {
 				"extends": "Element",
 				"title": "Open Source\nSoftware/Hardware",
-				"description": "Description",
+				"description": Open hardware, or "open source hardware," refers to design specifications /n of physical objects licensed for public use, allowing anyone to study, modify, create, /n and distribute them. It covers various objects like cars, chairs, computers, and robots. /n The source code (schematics, blueprints, CAD files, etc.) is accessible for modification /n under permissive licenses. This openness enables users to update, improve, and share /n both the software and physical design, promoting broad accessibility and collaboration in /n hardware design and manufacturing.",
 				"domains": { "Science": 1 },
 				"relations": { "StandardGroups":1, "Developers":1, "Authors":1, "Providers":1, "Scientists":1, "Regulators":1 },
 				"instances": {}
@@ -127,7 +127,7 @@
 			"3dMiddleware": {
 				"extends": "Element",
 				"title": "3D APIs and\nMiddleware",
-				"description": "Description",
+				"description": "Middleware has two meanings: software enabling interaction between two programs, /n and a software layer within an application allowing its components to work /n together.",
 				"domains": { "Standards": 1 },
 				"relations": { "StandardGroups":1, "Developers":1, "Authors":1, "Providers":1, "Scientists":1 },
 				"instances": {
@@ -139,7 +139,7 @@
 			"OpenAPIs": {
 				"extends": "Element",
 				"title": "Open APIs",
-				"description": "Description",
+				"description": "An open API, or public API, is an application programming interface made /n publicly available to developers. Open APIs allow universal access to network services. /n While both terms are similar, open APIs are shared freely, while public APIs might have /n restrictions. Open APIs aim for easy consumption and access, favoring open-source /n technology and community standards over proprietary protocols.",
 				"domains": { "Standards": 1 },
 				"relations": { "StandardGroups":1, "Developers":1, "Authors":1, "Scientists":1, "Users":1 },
 				"instances": {}
@@ -147,7 +147,7 @@
 			"SDKs": {
 				"extends": "Element",
 				"title": "SDK (Software\n Development Kits)",
-				"description": "Description",
+				"description": "SDK stands for software development kit, a set of tools for building software /n on a specific platform. It includes compilers, code samples, code libraries, testing and /n analytics tools, documentation, and debuggers. An SDK often includes an API, enabling /n applications to communicate and work together.",
 				"domains": { "Standards": 1 },
 				"relations": { "Regulators":1, "StandardGroups":1, "Developers":1, "Authors":1, "Scientists":1 },
 				"instances": {}
@@ -155,7 +155,7 @@
 			"DecentralizedComputing": {
 				"extends": "Element",
 				"title": "Decentralized\nComputing",
-				"description": "Description",
+				"description": "Decentralized computing is the allocation of resources, both hardware and /n software, to each individual workstation, or office location. In contrast, centralized computing /n exists when the majority of functions are carried out, or obtained from a remote /n centralized location.",
 				"domains": { "Standards": 1 },
 				"relations": {"Regulators":1, "StandardGroups":1, "Developers":1, "Authors":1,"Users":1 },
 				"instances": {}
@@ -163,7 +163,7 @@
 			"Network": {
 				"extends": "Element",
 				"title": "Network",
-				"description": "Description",
+				"description": "A network connects computing devices through interconnected nodes using /n protocols like TCP/IP. These nodes communicate via devices (switches, routers, security gateways) /n that forward traffic. Networks vary by proximity (LANs, WANs), /n type (public/private, voice/data), and structure (physical/virtual).",
 				"domains": { "Standards": 1 },
 				"relations": { "Regulators":1, "StandardGroups":1, "Developers":1, "Scientists":1 },
 				"instances": {}
@@ -179,7 +179,7 @@
 			"CloudEdgeComputing": {
 				"extends": "Element",
 				"title": "Cloud Edge\nComputing",
-				"description": "Description",
+				"description": "Edge computing is a distributed computing framework that brings enterprise /n applications closer to data sources such as IoT devices or local edge servers. /n This proximity to data at its source can deliver strong business benefits, /n including faster insights, improved response times and /n better bandwidth availability.",
 				"domains": { "Standards": 1 },
 				"relations": { "Developers":1, "Providers":1, "Scientists":1 },
 				"instances": {}
@@ -187,7 +187,7 @@
 			"BusinessModels": {
 				"extends": "Element",
 				"title": "Business\nModels",
-				"description": "Description",
+				"description": "A monetization model is a blueprint that outlines the methods and processes /n a business will use to make money from its assets. Monetization models are a core /n concept in business, defining the strategy a company uses to convert its offerings and /n products into financial returns. Monetization models can take /n various forms depending on the nature of the business and /n the market in which it operates. For instance, a software company might opt for a /n subscription-based model, where customers pay a recurring fee for continued access to /n a product. In contrast, an e-commerce platform might implement a transaction fee model, /n earning a commission on each sale made through its site.",
 				"domains": {},
 				"relations": { "Ethicists":1, "Regulators":1, "Developers":1 },
 				"instances": {}
@@ -195,7 +195,7 @@
 			"PaymentPlatforms": {
 				"extends": "Element",
 				"title": "Payment\nPlatforms",
-				"description": "Description",
+				"description": "A payment platform is a form of online infrastructure that supports online /n money transfers and serves as an electronic alternative to traditional paper methods like /n cheques and money orders.",
 				"domains": {},
 				"relations": { "Developers":1, "Authors":1, "Providers":1 },
 				"instances": {}
@@ -211,7 +211,15 @@
 			"Security": {
 				"extends": "Element",
 				"title": "Security",
-				"description": "Description",
+				"description": "Security is protection from, or resilience against, potential harm /n or other unwanted coercion. Beneficiaries technically referents of security may be persons and /n social groups, objects and institutions, ecosystems, or any other entity or phenomenon /n vulnerable to unwanted change.",
+				"domains": {},
+				"relations": { "Ethicists":1, "Regulators":1,"Developers":1, "Users":1 },
+				"instances": {}
+			},
+			"Computer Security": {
+				"extends": "Element",
+				"title": "Computer Security",
+				"description": "Computer security, or cybersecurity, protects computer systems and /n networks from malicious attacks that can lead to unauthorized information disclosure, /n theft, or damage to hardware, software, or data. It is crucial due to the reliance on /n computer systems, the Internet, wireless networks, and IoT devices. Cybersecurity is vital /n for systems with significant physical impacts, like power distribution and finance. /n It involves both digital measures (passwords, encryption) and physical security (locks).",
 				"domains": {},
 				"relations": { "Ethicists":1, "Regulators":1,"Developers":1, "Users":1 },
 				"instances": {}
@@ -219,7 +227,15 @@
 			"Usability": {
 				"extends": "Element",
 				"title": "Usability",
-				"description": "Description",
+				"description": "Usability is a measure of how well a specific user in a specific context can use /n a product/design to achieve a defined goal effectively, efficiently, and satisfactorily. /n Designers usually measure a design’s usability throughout the development process—from /n wireframes to the final deliverable—to ensure maximum usability.",
+				"domains": {},
+				"relations": { "StandardGroups":1, "Developers":1, "Authors":1, "Providers":1, "Users":1 },
+				"instances": {}
+			},
+			"User Interface UI": {
+				"extends": "Element",
+				"title": "User Interface UI",
+				"description": "In human-computer interaction, a user interface (UI) facilitates interaction /n between humans and machines, aiming for efficient operation and control while providing /n feedback for decision-making. It encompasses physical input/output devices and can /n include multisensory interfaces like tactile, visual, auditory, and more. UI design aims for /n usability, minimizing user input for desired outcomes, and can extend to brain-computer /n interfaces (BCIs) or augmented reality (AR) interfaces.",
 				"domains": {},
 				"relations": { "StandardGroups":1, "Developers":1, "Authors":1, "Providers":1, "Users":1 },
 				"instances": {}
@@ -227,7 +243,7 @@
 			"Ergonomics": {
 				"extends": "Element",
 				"title": "Ergonomics",
-				"description": "Description",
+				"description": "Ergonomics (or human factors) is the scientific discipline concerned with /n the understanding of the interactions among human and other elements of a system, /n and the profession that applies theory, principles, data and methods to design in order to /n optimize human well-being and overall system performance.",
 				"domains": {},
 				"relations": {  "Developers":1, "Authors":1, "Providers":1, "Users":1 },
 				"instances": {}
@@ -235,7 +251,7 @@
 			"Accessibility": {
 				"extends": "Element",
 				"title": "Accessibility",
-				"description": "Description",
+				"description": "Accessibility ensures products, services, and environments are usable by /n people with disabilities, directly or through assistive technology like screen readers. /n It aims for universal access and benefits everyone. Unlike usability, which focuses on /n effectiveness and efficiency for specific users, accessibility aligns with universal design principles, /n aiming to eliminate barriers and ensure inclusivity for all.",
 				"domains": {},
 				"relations": {  "Developers":1, "Authors":1, "Providers":1, "Users":1 },
 				"instances": {}
@@ -243,7 +259,7 @@
 			"ResearchEthics": {
 				"extends": "Element",
 				"title": "Research\nEthics" ,
-				"description": "Description",
+				"description": "Research ethics is a discipline within the study of applied ethics. /n Its scope ranges from general scientific integrity and misconduct to the treatment of human /n and animal subjects. The societal responsibilities science and research has are not /n traditionally included and less well defined.",
 				"domains": ["Science"],
 				"relations": { "Ethicists":1, "Scientists":1 },
 				"instances": {}
@@ -251,7 +267,7 @@
 			"SocialConnectivity": {
 				"extends": "Element",
 				"title": "Social Connectivity",
-				"description": "Description",
+				"description": "Social connection is the feeling of closeness and value in relationships. /n It's vital for human development and well-being, impacting health and longevity. /n According to Brené Brown, it involves being seen, heard, and accepted without judgment. /n Lack of connection, or loneliness, can lead to serious health risks and societal challenges.",
 				"domains": {},
 				"relations": { "Ethicists":1, "Regulators":1, "Developers":1, "Scientists":1, "Users":1 },
 				"instances": {}
