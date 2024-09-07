@@ -155,7 +155,7 @@
 			"SDKs": {
 				"extends": "Element",
 				"title": "SDK Software \n Development Kits",
-				"description": "SDK stands for software development kit, a set of tools for building software \n on a specific platform. It includes compilers, code samples, code libraries, testing and \n analytics tools, documentation, and debuggers. An SDK often includes an API, enabling \n applications to communicate and work together.",
+				"description": "SDK stands for a software development kit, a set of tools for building software \n on a specific platform. It includes compilers, code samples, code libraries, testing and \n analytics tools, documentation, and debuggers. An SDK often includes an API, enabling \n applications to communicate and work together.",
 				"domains": { "Standards":1 },
 				"relations": { "Regulators":1, "StandardGroups":1, "Developers":1, "Authors":1, "Scientists":1 },
 				"instances": {}
@@ -179,7 +179,7 @@
 			"Architectures": {
 				"extends": "Element",
 				"title": "Architectures",
-				"description": "Architecture is concerned with balancing the performance, efficiency, cost, and rliability of a system",
+				"description": "Architecture is concerned with balancing the performance, efficiency, cost, and reliability of a system",
 				"domains": { "Standards":1 },
 				"relations": { "Regulators":1, "StandardGroups":1, "Developers":1, "Scientists":1 },
 				"instances": {}
