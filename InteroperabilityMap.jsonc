@@ -77,13 +77,13 @@
 		"classes": {
 			"Element": { "abstract": true },
 			// "A": { "title": "A", "relations": { "Ethicists":1, "Regulators":1  } },
-			// "B": { "title": "B", "relations": { "Ethicists":1, "Regulators":1, "StandardGroups": 1  } },
-			// "C": { "title": "C", "relations": { "Ethicists":1, "StandardGroups": 1 } },
+			// "B": { "title": "B", "relations": { "Ethicists":1, "Regulators":1, "StandardGroups":1  } },
+			// "C": { "title": "C", "relations": { "Ethicists":1, "StandardGroups":1 } },
 			"3dModelFormats": {
 				"extends": "Element",
 				"title": "3D Model\nFormats",
 				"description": "Description",
-				"domains": { "Standards": 1, "Science":1, "Content": 1 },
+				"domains": { "Standards":1, "Science":1, "Content": 1 },
 				"relations": { "StandardGroups":1, "Developers":0.5 },
 				"instances": {
 					"OBJ": {},
@@ -96,7 +96,7 @@
 				"extends": "Element",
 				"title": "User Experience \n Description Language",
 				"description": "Description: UIDL is important as it important across various industries. \n In web development, it helps create responsive, accessible interfaces and ensures \n consistency and efficiency in design. In software, UIDL enhances usability and customer \n satisfaction. It's crucial in UX/UI design, enabling engaging visuals and interactions",
-				"domains": { "Standards": 1 },
+				"domains": { "Standards":1 },
 				"relations": { "StandardGroups":1, "Developers":1, "Authors":1, "Scientists":1 },
 				"instances": {}
 			},
@@ -105,22 +105,22 @@
 				"title": "Sensors \n and IoT",
 				"description": "Generally, sensors are used in the architecture of IoT devices. \n Sensory are used for sensing thing and devices etc. The Internet of Things (IoT) is a network of devices embedded with sensors, electronics, and connectivity to collect and communicate data. IoT sensors help understand systems \n for better actions, prevent tragedies, reduce costs, and simplify life. This article discusses \n various IoT sensors, their roles, and examples.",
 				"domains": {},
-				"relations": { "StandardGroups":1, "Developers":1, "Providers":1, "Scientists":1, "Regulators": 1 },
+				"relations": { "StandardGroups":1, "Developers":1, "Providers":1, "Scientists":1, "Regulators":1 },
 				"instances": {}
 			},
 			"HardwareDevices": {
 				"extends": "Element",
-				"title": "Hardware Devices \n and Deliverables",
+				"title": "Hardware Devices and Deliverables",
 				"description": "Computer hardware refers to the physical components of a computer, \n essential for its function. It includes internal parts like the CPU, video card, and memory, \n and external parts like the keyboard and case. Early hardware included mechanical parts \n and switches, evolving to vacuum tubes, transistors, and now modern components \n in various devices like desktops, laptops, tablets, smartphones and HMDs. \n Wearable devices often use Bluetooth or Wi-Fi to track health, fitness, location, or biofeedback data. \n These electronic devices, worn on the body, have sensors, processors, \n and connectivity features to collect data, perform tasks, and communicate. They enhance \n user experiences and provide real-time information, integrating into the IoT ecosystem.",
-				"domains": { "Science": 1 },
+				"domains": { "Science":1 },
 				"relations": { "StandardGroups":1, "Developers":1, "Providers":1, "Scientists":1 },
 				"instances": {}
 			},
 			"OpenSource and OpenSourceHardware": {
 				"extends": "Element",
-				"title": "Open Source \n Software Hardware",
+				"title": "Open Source Software Hardware",
 				"description": "Open hardware, or \"open source hardware\", refers to design specifications \n of physical objects licensed for public use, allowing anyone to study, modify, create, \n and distribute them. It covers various objects like cars, chairs, computers, and robots. \n The source code (schematics, blueprints, CAD files, etc.) is accessible for modification \n under permissive licenses. This openness enables users to update, improve, and share \n both the software and physical design, promoting broad accessibility and collaboration in \n hardware design and manufacturing.",
-				"domains": { "Science": 1 },
+				"domains": { "Science":1 },
 				"relations": { "StandardGroups":1, "Developers":1, "Authors":1, "Providers":1, "Scientists":1, "Regulators":1 },
 				"instances": {}
 			},
@@ -128,7 +128,7 @@
 				"extends": "Element",
 				"title": "3D APIs and Middleware",
 				"description": "Middleware has two meanings: software enabling interaction between two programs, \n and a software layer within an application allowing its components to work \n together.",
-				"domains": { "Standards": 1 },
+				"domains": { "Standards":1 },
 				"relations": { "StandardGroups":1, "Developers":1, "Authors":1, "Providers":1, "Scientists":1 },
 				"instances": {
 					"Unity": {},
@@ -140,7 +140,7 @@
 				"extends": "Element",
 				"title": "Open APIs",
 				"description": "An open API, or public API, is an application programming interface made \n publicly available to developers. Open APIs allow universal access to network services. \n While both terms are similar, open APIs are shared freely, while public APIs might have \n restrictions. Open APIs aim for easy consumption and access, favoring open-source \n technology and community standards over proprietary protocols.",
-				"domains": { "Standards": 1 },
+				"domains": { "Standards":1 },
 				"relations": { "StandardGroups":1, "Developers":1, "Authors":1, "Scientists":1, "Users":1 },
 				"instances": {}
 			},
@@ -148,7 +148,7 @@
 				"extends": "Element",
 				"title": "APIs",
 				"description": "API stands for application programming interface. It enables communication between two platforms, allowing third-party developers to use its services. An API is an agreement on how information is exchanged, sometimes called an interface. APIs consist of: Technical specifications and documentation The interface itself Popular APIs, Web APIs for browsers and devices, SOAP APIs for secure data exchange, Open and REST APIs for ease of use, JSON-RPC for asynchronous calls, Custom APIs for flexible development",
-				"domains": { "Standards": 1 },
+				"domains": { "Standards":1 },
 				"relations": { "StandardGroups":1, "Developers":1, "Authors":1, "Scientists":1, "Users":1 },
 				"instances": {}
 			},
@@ -156,7 +156,7 @@
 				"extends": "Element",
 				"title": "SDK Software \n Development Kits",
 				"description": "SDK stands for software development kit, a set of tools for building software \n on a specific platform. It includes compilers, code samples, code libraries, testing and \n analytics tools, documentation, and debuggers. An SDK often includes an API, enabling \n applications to communicate and work together.",
-				"domains": { "Standards": 1 },
+				"domains": { "Standards":1 },
 				"relations": { "Regulators":1, "StandardGroups":1, "Developers":1, "Authors":1, "Scientists":1 },
 				"instances": {}
 			},
@@ -164,15 +164,15 @@
 				"extends": "Element",
 				"title": "Decentralized Computing",
 				"description": "Decentralized computing is the allocation of resources, both hardware and \n software, to each individual workstation, or office location. In contrast, centralized computing \n exists when the majority of functions are carried out, or obtained from a remote \n centralized location.",
-				"domains": { "Standards": 1 },
-				"relations": { "Regulators":1, "StandardGroups":1, "Developers":1, "Authors":1,"Users":1 },
+				"domains": { "Standards":1 },
+				"relations": { "Regulators":1, "StandardGroups":1, "Developers":1, "Authors":1, "Users":1 },
 				"instances": {}
 			},
 			"Network": {
 				"extends": "Element",
 				"title": "Network",
 				"description": "A network connects computing devices through interconnected nodes using \n protocols like TCP/IP. These nodes communicate via devices (switches, routers, security gateways) \n that forward traffic. Networks vary by proximity (LANs, WANs), \n type (public/private, voice/data), and structure (physical/virtual).",
-				"domains": { "Standards": 1 },
+				"domains": { "Standards":1 },
 				"relations": { "Regulators":1, "StandardGroups":1, "Developers":1, "Scientists":1 },
 				"instances": {}
 			},
@@ -180,7 +180,7 @@
 				"extends": "Element",
 				"title": "Architectures",
 				"description": "Architecture is concerned with balancing the performance, efficiency, cost, and rliability of a system",
-				"domains": { "Standards": 1 },
+				"domains": { "Standards":1 },
 				"relations": { "Regulators":1, "StandardGroups":1, "Developers":1, "Scientists":1 },
 				"instances": {}
 			},
@@ -213,7 +213,7 @@
 				"title": "Privacy",
 				"description": "Data privacy, also called "information privacy," is the principle that a person should have control over their personal data, including the ability to decide how organizations collect, store and use their data",
 				"domains": {},
-				"relations": { "Ethicists":1, "Regulators":1,"Developers":1, "Users":1 },
+				"relations": { "Ethicists":1, "Regulators":1, "Developers":1, "Users":1 },
 				"instances": {}
 			},
 			"DataSecurity": {
@@ -221,7 +221,7 @@
 				"title": "Security",
 				"description": "Data security is the practice of protecting digital information from unauthorized access, corruption or theft throughout its entire lifecycle. This concept encompasses the entire spectrum of information security. It includes the physical security of hardware and storage devices, along with administrative and access controls. It also covers the logical security of software applications and organizational policies and procedures.",
 				"domains": {},
-				"relations": { "Ethicists":1, "Regulators":1,"Developers":1, "Users":1 },
+				"relations": { "Ethicists":1, "Regulators":1, "Developers":1, "Users":1 },
 				"instances": {}
 			},
 			"ComputerSecurity": {
@@ -229,7 +229,7 @@
 				"title": "Computer Security",
 				"description": "Computer security, or cybersecurity, protects computer systems and \n networks from malicious attacks that can lead to unauthorized information disclosure, \n theft, or damage to hardware, software, or data. It is crucial due to the reliance on \n computer systems, the Internet, wireless networks, and IoT devices. Cybersecurity is vital \n for systems with significant physical impacts, like power distribution and finance. \n It involves both digital measures (passwords, encryption) and physical security (locks).",
 				"domains": {},
-				"relations": { "Ethicists":1, "Regulators":1,"Developers":1, "Users":1 },
+				"relations": { "Ethicists":1, "Regulators":1, "Developers":1, "Users":1 },
 				"instances": {}
 			},
 			"Usability": {
@@ -303,7 +303,7 @@
 				"title": "Experience Preservation:",
 				"description": "Most cultural promotion and dissemination are nowadays performed through \n the digitization of heritage sites and museums, a necessary requirement to meet the new needs of the public. \n Augmented Reality (AR), Mixed Reality (MR), and Virtual Reality (VR) \n have the potential to improve the experience quality and educational effect of these sites \n by stimulating users’ senses in a more natural and vivid way.",
 				"domains": {},
-				"relations": { "Users":1, "Developers":1, ,"Authors":1, "Regulators":1 },
+				"relations": { "Users":1, "Developers":1, "Authors":1, "Regulators":1 },
 				"instances": {}
 
 			},
@@ -373,7 +373,7 @@
 			"RegulationsandPolicies": {
 				"extends": "Element",
 				"title": "Regulations and Policies",
-				"description": "Policy refers to a set of principles, guidance or documents adopted by a government. \n Regulations pertain to rules or directives of a government, which may be contained in law or some other form of administrative issuance \n that has been approved by the relevant authorised government body.",
+				"description": "Policy refers to a set of principles, guidance, or documents adopted by a government. \n Regulations pertain to rules or directives of a government, which may be contained in law or some other form of administrative issuance \n that has been approved by the relevant authorised government body.",
 				"domains": {},
 				"relations": { "StandardGroups":1, "Regulators":1, "Developers":1 },
 				"instances": {}
@@ -381,7 +381,7 @@
 			},
 			"IntellectualPropertyandUnfairpractices": {
 				"extends": "Element",
-				"title": "Intellectual Property and Unfair practices",
+				"title": "Intellectual Property and Unfair Practices",
 				"description": "Intellectual property IP encompasses intangible creations of the human intellect, \n including patents, copyrights, trademarks, and trade secrets. IP laws aim to stimulate innovation by granting creators property rights \n over their inventions and creative works for a limited time, fostering economic incentives \n while balancing widespread use and protection challenges. \n Unfair business practices, including fraud and misrepresentation, are prohibited by law in many countries. In the EU, practices are regulated under the Unfair Commercial Practices Directive. In the US, the FTC's Bureau of Consumer Protection investigates and takes legal action against offenders, aiming to maintain fair market conditions and educate consumers.",
 				"domains": {},
 				"relations": { "StandardGroups":1, "Regulators":1, "Developers":1, "Users":1 },
@@ -422,7 +422,8 @@
 				"domains": {},
 				"relations": { "StandardGroups":1, "Regulators":1, "Developers":1, "Users":1 },
 				"instances": {}
-},
+
+			},
 			"ParentalControlsandContentRatings": {
 				"extends": "Element",
 				"title": "Parental Controls and Content Ratings",
@@ -440,7 +441,7 @@
 				"relations": { "Ethicists":1, "Regulators":1, "Developers":1, "Scientists":1, "Users":1 },
 				"instances": {}
 
-},
+			},
 			"PhysicalRiskandHarm": {
 				"extends": "Element",
 				"title": "Physical Risk and Harm",
@@ -448,7 +449,8 @@
 				"domains": {},
 				"relations": { "StandardGroups":1, "Regulators":1, "Developers":1, "Users":1 },
 				"instances": {}
-},
+
+			},
 			"Crime": {
 				"extends": "Element",
 				"title": "Crime",
@@ -513,7 +515,7 @@
 			"KPIs KeyPerformanceIndicators": {
 				"extends": "Element",
 				"title": "KPIs Key Performance Indicators",
-				"description": "Key Performance Indicators KPIs are the critical key quantifiable indicators \n of progress toward an intended result. KPIs provide a focus for strategic \n and operational improvement, create an analytical basis for decision making and help focus attention on what matters most.",
+				"description": "Key Performance Indicators KPIs are the critical key quantifiable indicators \n of progress toward an intended result. KPIs provide a focus for strategic \n and operational improvement, create an analytical basis for decision making, and help focus attention on what matters most.",
 				"domains": {},
 				"relations": { "Developers":1 },
 				"instances": {}
@@ -521,7 +523,7 @@
 			},
 			"DesignGuidelines": {
 				"extends": "Element",
-				"title": "Design Guide lines",
+				"title": "Design Guidelines",
 				"description": "Design guidelines are a set of principles and recommendations that are used \n to ensure consistency and best practices in the design of a product, \n application, or website. They provide a framework for designers to follow, ensuring that the end product is functional, easy to use, and aesthetically pleasing.",
 				"domains": {},
 				"relations": { "Authors":1, "Developers":1, "StandardGroups":1, "Users":1 },
@@ -540,7 +542,7 @@
 			"DevelopmentGuidelines": {
 				"extends": "Element",
 				"title": "Development Guidelines",
-				"description": "Developer guidelines are a set of principles and recommendations that helps \n software developers create high-quality, consistent, and maintainable code.",
+				"description": "Developer guidelines are a set of principles and recommendations that help \n software developers create high-quality, consistent, and maintainable code.",
 				"domains": {},
 				"relations": { "StandardGroups":1, "Developers":1, "Authors":1 },
 				"instances": {}
@@ -566,7 +568,7 @@
 			},
 			"3DModelandDataFormats": {
 				"extends": "Element",
-				"title": "3D Model and Data ormats",
+				"title": "3D Model and Data formats",
 				"description": "A 3D file stores information about a 3D model in a computer readable fromat, either plain text or binary data. It can include details on four key features, the models's geometry, surface texture, scene details, and animation. However not all file formats use or support all four features.",
 				"domains": {},
 				"relations": { "Standard Groups":1, "Developers":1, },
@@ -576,7 +578,7 @@
 			"UserExperienceDescriptionLanguages": {
 				"extends": "Element",
 				"title": "User Experience Description Languages",
-				"description": "UIDL is important as it important across various industries. In web development, it helps create responsive, accessible interfaces and ensures consistency and efficiency in design. In software, UIDL enhances usability and customer satisfaction. It's crucial in UX/UI design, enabling engaging visuals and interactions",
+				"description": "UIDL is important as it is important across various industries. In web development, it helps create responsive, accessible interfaces and ensures consistency and efficiency in design. In software, UIDL enhances usability and customer satisfaction. It's crucial in UX/UI design, enabling engaging visuals and interactions",
 				"domains": {},
 				"relations": { "Standard Groups":1, "Developers":1, "Authors":1 },
 				"instances": {}
@@ -594,7 +596,7 @@
 			"ExperienceDiscovery": {
 				"extends": "Element",
 				"title": "Experience Discovery",
-				"description": "the process of localisation of an object, asset or an experience around us",
+				"description": "the process of localization of an object, asset or an experience around us",
 				"domains": {},
 				"relations": { "StandardGroups":1, "Developers": 0.5,  "Users":1 },
 				"instances": {}
@@ -635,7 +637,7 @@
 							{
 								"name": "StationToolTip",
 								// "context": { "variable": "variables/showData", "value": "true" },
-								"shapes": [ { "type": "text", "font": "Arial", "weight": "bold", "content": { "link": "variables/description" }, "position": [0, 60], "anchor": "top", "color": "lightgrey" } ],
+								"shapes": [ { "type": "text", "font": "Arial", "weight": "bold", "content": { "link": "variables/description" }, "position": [0, 60], "anchor": "top", "color": "light grey" } ],
 								"actions": [ { "event": "click", "variable": "variables/showData", "value": "false" } ]
 							}
 						]
