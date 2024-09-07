@@ -508,7 +508,7 @@
 				"title": "Collaboration and Content Creation",
 				"description": "Content collaboration involves multiple parties working together to create content, \n improving quality and efficiency in producing blogs, videos, webinars, and more.",
 				"domains": {},
-				"relations": { "Developers":1, "Providers, "Users":1 },
+				"relations": { "Developers":1, "Providers", "Users":1 },
 				"instances": {}
 
 			},
