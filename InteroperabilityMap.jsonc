@@ -294,7 +294,7 @@
 				"title": "ExperienceDiscovery:",
 				"description": "Social connection is the feeling of closeness and value in relationships. \n It's vital for human development and well-being, impacting health and longevity. \n According to Brené Brown, it involves being seen, heard, and accepted without judgment. \n Lack of connection, or loneliness, can lead to serious health risks and societal challenges.",
 				"domains": {},
-				"relations": { Standard Groups":1, "Developers":1, "StandardGroups":1, "Users":1 },
+				"relations": { StandardGroups":1, "Developers":1, "Users":1 },
 				"instances": {}
 
 			},
@@ -321,7 +321,7 @@
 				"title": "Formats for Immersive and Spatial Audio and Video",
 				"description": "Volumetric objects are typically stored as point clouds or meshes. Compared to traditional \n two-dimensional video, volumetric video requires the storage of geometric information in addition to the texture \n (i.e., color information), which results in a huge amount of data. Immersive sound formats once exclusive to the world of cinema have crept into our everyday lives, with both music and movie streaming services now offering compatibility with an array of spatial audio formats. The most recent addition is Apple Spatial Audio, joining an already busy market of 3D audio codecs including Dolby Atmos, DTS:X and Sony 360 Reality Audio, with each offering a unique spin on the immersive audio experience.",
 				"domains": {},
-				"relations": { Standard Groups":1, "Developers":1, "Authors":1, "Scientists":1  },
+				"relations": { StandardGroups":1, "Developers":1, "Authors":1, "Scientists":1  },
 				"instances": {}
 
 			},
@@ -330,7 +330,7 @@
 				"title": "Formats and Realtime 3D Assets authoring and delivery",
 				"description": "A component system is comprised of individual equipment or material items connected together \n to operate as a system, such as when individual computers and servers are joined together to create a network.",
 				"domains": {},
-				"relations": { Standard Groups":1, "Developers":1, "Scientists":1, "Authors":1 },
+				"relations": { StandardGroups":1, "Developers":1, "Scientists":1, "Authors":1 },
 				"instances": {}
 
 			},
@@ -339,7 +339,7 @@
 				"title": "Scene Description",
 				"description": "The scene description information at the scene and object levels is expressed in terms of color, texture, shape, motion, \n localization, events and relationships between objects via a set of \n standardized descriptors, combinations of such descriptors in description schemes \n and a description definition language.",
 				"domains": {},
-				"relations": { Standard Groups":1, "Developers":1, "Authors":1, , "Scientists":1  },
+				"relations": { StandardGroups":1, "Developers":1, "Authors":1, , "Scientists":1  },
 				"instances": {}
 
 			},
@@ -348,7 +348,7 @@
 				"title": "Hardware Infrastructure",
 				"description": "Traditional Infrastructure, A traditional IT infrastructure is made up of the usual hardware and software components: \n facilities, data centers, servers, networking hardware desktop computers \n and enterprise application software solutions. Typically, this infrastructure setup requires more power, physical space \n and money than other infrastructure types. A traditional infrastructure is typically installed on-premises \n for company-only or private use.",
 				"domains": {},
-				"relations": { Standard Groups":1, "Providers":1, "Regulators":1, "Scientists":1 },
+				"relations": { StandardGroups":1, "Providers":1, "Regulators":1, "Scientists":1 },
 				"instances": {}
 
 			},
@@ -357,7 +357,7 @@
 				"title": "Cloud Infrastructure",
 				"description": "A cloud computing IT infrastructure is similar to traditional infrastructure. \n Virtualization connects physical servers maintained by a service provider at any or many geographical locations. \n Then, it divides and abstracts resources, like storage, to make them accessible to users almost anywhere an internet connection \n can be made. Because cloud infrastructure is often public, it’s usually referred to as a public cloud.",
 				"domains": {},
-				"relations": { Standard Groups":1, "Developers":1, "Scientists":1, "Providers":1  },
+				"relations": { StandardGroups":1, "Developers":1, "Scientists":1, "Providers":1  },
 				"instances": {}
 
 			},
@@ -366,7 +366,7 @@
 				"title": "Sensors Trackers and IoT",
 				"description": "Devices equipped with the ability to collect, transmit, and analyze data about the location \n and condition of objects. These sensors use various technologies, \n including GPS, RFID, Bluetooth, and Wi-Fi, to provide real-time information.",
 				"domains": {},
-				"relations": { "Standard Groups":1, "Regulators":1, "Developers":1, "Scientists":1 },
+				"relations": { "StandardGroups":1, "Regulators":1, "Developers":1, "Scientists":1 },
 				"instances": {}
 
 			},
