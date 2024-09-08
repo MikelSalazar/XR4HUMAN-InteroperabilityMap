@@ -1,4 +1,6 @@
 {
+	"$schema": "https://shishou.org/schema/shishou.schema.json",
+	"SHISHOU": 0.1,
 	"title": "Interoperability Map",
 	"authors": "Mikel Salazar, Alina Kadlubsky, Sathiya Kumar",
 	"favicon": "../../resources/favicon.png",
