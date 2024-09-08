@@ -317,7 +317,7 @@
 							{
 								"name": "StationToolTip",
 								// "context": { "variable": "variables/showData", "value": "true" },
-								"shapes": [ { "type": "text", "font": "Arial", "weight": "bold", "content": { "link": "variables/description" }, "position": [0, 60], "anchor": "top", "color": "lightgrey" } ],
+								"shapes": [ { "type": "text", "font": "Arial", "weight": "bold", "fontSize": 10, "content": { "link": "variables/description" }, "position": [0, 60], "anchor": "top", "color": "lightgrey" } ],
 								"actions": [ { "event": "click", "variable": "variables/showData", "value": "false" } ]
 							}
 						]
