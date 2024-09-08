@@ -1,6 +1,9 @@
 {
 	"folders": [ { "path": "." } ],
 	"settings": {
-		"liveServer.settings.port": 5502
+		"liveServer.settings.port": 5502,
+		"cSpell.words": [
+			"SHISHOU"
+		]
 	}
 }
