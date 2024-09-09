@@ -253,7 +253,7 @@
 			},
 			"ExperienceDiscovery": {
 				"extends": "Element",
-				"title": "ExperienceDiscovery:",
+				"title": "Experience Discovery:",
 				"description": "Social connection is the feeling of closeness and value in relationships. \n It's vital for human development and well-being, impacting health and longevity. \n According to Brené Brown, it involves being seen, heard, and accepted without judgment. \n Lack of connection, or loneliness, can lead to serious health risks and societal challenges.",
 				"domains": {},
 				"relations": { "Ethicists":1, "Regulators":1, "Developers":1, "Scientists":1, "Users":1 },
@@ -261,7 +261,7 @@
 			},
 			"ExperiencePreservation": {
 				"extends": "Element",
-				"title": "ExperiencePreservation:",
+				"title": "Experience Preservation:",
 				"description": "Most cultural promotion and dissemination are nowadays performed through \n the digitization of heritage sites and museums, a necessary requirement to meet the new needs of the public. \n Augmented Reality (AR), Mixed Reality (MR), and Virtual Reality (VR) \n have the potential to improve the experience quality and educational effect of these sites \n by stimulating users’ senses in a more natural and vivid way.",
 				"domains": {},
 				"relations": { "Users":1, "Developers":1, "Regulators":1 },
@@ -269,7 +269,7 @@
 			},
 			"CollaborativeContentCreation": {
 				"extends": "Element",
-				"title": "CollaborativeContentCreation",
+				"title": "Collaborative Content Creation",
 				"description": "Content collaboration covers the tools and processes that two or more individuals \n use to create, edit, store and share content",
 				"domains": {},
 				"relations": { "Users":1, "Developers":1, "StandardGroups":1 },
@@ -277,7 +277,7 @@
 			},
 			"FormatsforImmersiveandSpatialAudioandVideo": {
 				"extends": "Element",
-				"title": "FormatsforImmersiveandSpatialAudioandVideo",
+				"title": "Formats for Immersive and Spatial Audio and Video",
 				"description": "Spatial audio is a rather broad term used to describe a suite of audio technologies that aim to deliver a more immersive sound than standard stereo playback (left and right channels), with the aim of making sound feel like it’s coming at you from everywhere when playing games, watching movies and, more recently, listening to music.",
 				"domains": {},
 				"relations": { "Ethicists":1, "Regulators":1, "Developers":1, "Scientists":1, "Users":1 },
@@ -287,7 +287,7 @@
 			},
 			"SceneDescription": {
 				"extends": "Element",
-				"title": "SceneDescription",
+				"title": "Scene Description",
 				"description": "The scene description information at the scene and object levels is expressed in terms of color, texture, shape, motion, \n localization, events and relationships between objects via a set of \n standardized descriptors, combinations of such descriptors in description schemes \n and a description definition language.",
 				"domains": {},
 				"relations": { "Ethicists":1, "Regulators":1, "Developers":1, "Scientists":1, "Users":1 },
@@ -295,7 +295,7 @@
 			},
 			"CloudInfrastructure": {
 				"extends": "Element",
-				"title": "CloudInfrastructure",
+				"title": "Cloud Infrastructure",
 				"description": "A cloud computing IT infrastructure is similar to traditional infrastructure. \n Virtualization connects physical servers maintained by a service provider at any or many geographical locations. \n Then, it divides and abstracts resources, like storage, to make them accessible to users almost anywhere an internet connection \n can be made. Because cloud infrastructure is often public, it’s usually referred to as a public cloud.",
 				"domains": {},
 				"relations": { "Ethicists":1, "Regulators":1, "Developers":1, "Scientists":1, "Users":1 },
@@ -311,7 +311,7 @@
 			},
 			"IntellectualPropertyandUnfairpractices": {
 				"extends": "Element",
-				"title": "IntellectualPropertyandUnfairpractices",
+				"title": "Intellectual Property and Unfair practices",
 				"description": "Intellectual property IP encompasses intangible creations of the human intellect, \n including patents, copyrights, trademarks, and trade secrets. IP laws aim to stimulate innovation by granting creators property rights \n over their inventions and creative works for a limited time, fostering economic incentives \n while balancing widespread use and protection challenges. \n Unfair business practices, including fraud and misrepresentation, are prohibited by law in many countries. In the EU, practices are regulated under the Unfair Commercial Practices Directive. In the US, the FTC's Bureau of Consumer Protection investigates and takes legal action against offenders, aiming to maintain fair market conditions and educate consumers.",
 				"domains": {},
 				"relations": { "Ethicists":1, "Regulators":1, "Developers":1, "Scientists":1, "Users":1 },
@@ -338,7 +338,7 @@
 			},
 			"DataProvenance": {
 				"extends": "Element",
-				"title": "DataProvenance",
+				"title": "Data Provenance",
 				"description": "Data provenance is the historical record of data from its original sources \n by capturing metadata of data’s changes throughout the lifecycle. Data provenance is concerned with authenticity; it provides details such as who created the data, \n the history of modifications that have been made to the data, and who made those changes.",
 				"domains": {},
 				"relations": { "Ethicists":1, "Regulators":1, "Developers":1, "Scientists":1, "Users":1 },
@@ -346,7 +346,7 @@
 			},
 			"ConsumerRights": {
 				"extends": "Element",
-				"title": "ConsumerRights",
+				"title": "Consumer Rights",
 				"description": "Lodging a complaint means that the consumer contacts your company and complains \n about the goods. You are obliged to accept the complaint. The consumer can \n lodge a complaint about defects in the goods for up to three years. The right \n to lodge a complaint is not affected by the existence of a warranty. EU consumer protection rules ensure \n that when you buy goods and services in the EU you have \n clear information on the product or service you're buying, its price, shipping and delivery costs as well as on your rights when things go wrong.",
 				"domains": {},
 				"relations": { "Ethicists":1, "Regulators":1, "Developers":1, "Scientists":1, "Users":1 },
@@ -354,7 +354,7 @@
 			},
 			"ParentalControlsandContentRatings": {
 				"extends": "Element",
-				"title": "ParentalControlsandContentRatings",
+				"title": "Parental Controls and Content Ratings",
 				"description": "Parental controls are features in digital services, computers, video games, \n, mobile devices and HMDs allowing parents to restrict their children's access \n to content deemed inappropriate due to age or maturity. They include content filters, usage controls \n like time limits, computer management tools, and monitoring features for  \n tracking activities and location. A content rating, also known as a maturity rating, assesses the appropriateness of TV shows, movies, comic books, or video games for specific target audiences. It categorizes media into different age groups to indicate suitability, covering all ages above the specified category thresholds.",
 				"domains": {},
 				"relations": { "Ethicists":1, "Regulators":1, "Developers":1, "Scientists":1, "Users":1 },
@@ -362,7 +362,7 @@
 			},
 			"RiskandHarm": {
 				"extends": "Element",
-				"title": "RiskandHarm",
+				"title": "Risk and Harm",
 				"description": "Social connection is the feeling of closeness and value in relationships. \n It's vital for human development and well-being, impacting health and longevity. \n According to Brené Brown, it involves being seen, heard, and accepted without judgment. \n Lack of connection, or loneliness, can lead to serious health risks and societal challenges.",
 				"domains": {},
 				"relations": { "Ethicists":1, "Regulators":1, "Developers":1, "Scientists":1, "Users":1 },
@@ -374,7 +374,7 @@
 			},
 			"ChildSafetyandRiskandHarm": {
 				"extends": "Element",
-				"title": "ChildSafetyandRiskandHarm",
+				"title": "Child Safety and Riskand Harm",
 				"description": "Social connection is the feeling of closeness and value in relationships. \n It's vital for human development and well-being, impacting health and longevity. \n According to Brené Brown, it involves being seen, heard, and accepted without judgment. \n Lack of connection, or loneliness, can lead to serious health risks and societal challenges.",
 				"domains": {},
 				"relations": { "Ethicists":1, "Regulators":1, "Developers":1, "Scientists":1, "Users":1 },
@@ -390,7 +390,7 @@
 			},
 			"TerminologyandTaxonomies": {
 				"extends": "Element",
-				"title": "TerminologyandTaxonomies",
+				"title": "Terminology and Taxonomies",
 				"description": "A taxonomy is a way to classify words into hierarchical groups. \n Taxonomies are most often associated with search. Terminology is a system of words that belong to something in common.",
 				"domains": {},
 				"relations": { "Ethicists":1, "Regulators":1, "Developers":1, "Scientists":1, "Users":1 },
@@ -399,7 +399,7 @@
 			},
 			"ResearchPrograms": {
 				"extends": "Element",
-				"title": "ResearchPrograms",
+				"title": "Research Programs",
 				"description": "A research program is a professional network of scientists conducting basic research. \n The term was used by philosopher of science Imre Lakatos to blend and revise the normative model \n of science offered with its idea of falsifiability and the descriptive model of science offered \n with its ideas of normal science and paradigm shifts.",
 				"domains": {},
 				"relations": { "Ethicists":1, "Regulators":1, "Developers":1, "Scientists":1, "Users":1 },
@@ -408,7 +408,7 @@
 			},
 			"ResearchLiterature": {
 				"extends": "Element",
-				"title": "ResearchLiterature",
+				"title": "Research Literature",
 				"description": "Research literature in any field is all the published research in that field. \n The research literature in psychology is enormous—including millions of scholarly articles \n and books dating to the beginning of the field—and it continues to grow.",
 				"domains": {},
 				"relations": { "Ethicists":1, "Regulators":1, "Developers":1, "Scientists":1, "Users":1 },
@@ -417,7 +417,7 @@
 		
 			"KPIs KeyPerformanceIndicators": {
 				"extends": "Element",
-				"title": "KPIs KeyPerformanceIndicators",
+				"title": "KPIs Key Performance Indicators",
 				"description": "Key Performance Indicators KPIs are the critical key quantifiable indicators \n of progress toward an intended result. KPIs provide a focus for strategic \n and operational improvement, create an analytical basis for decision making and help focus attention on what matters most.",
 				"domains": {},
 				"relations": { "Ethicists":1, "Regulators":1, "Developers":1, "Scientists":1, "Users":1 },
@@ -438,7 +438,7 @@
 
 			"TerminologiesandUseCases": {
 				"extends": "Element",
-				"title": "TerminologiesandUseCases",
+				"title": "Terminologies and Use Cases",
 				"description": "It encompasses specialized words and their meanings within a field, \n studied as terminology science. It analyzes how terms develop and relate \n within domains to ensure consistent usage. Describes software usage scenarios. \n Outlines how a system responds to external requests (e.g., user input). A use case details interactions \n between an actor (human or system) and a system to achieve goals.",
 				"domains": {},
 				"relations": { "Ethicists":1, "Regulators":1, "Developers":1, "Scientists":1, "Users":1 },
@@ -447,7 +447,7 @@
 			
 			"RequirementsandUserexpectation": {
 				"extends": "Element",
-				"title": "RequirementsandUserexpectation",
+				"title": "Requirements and User expectation",
 				"description": "Social connection is the feeling of closeness and value in relationships. \n It's vital for human development and well-being, impacting health and longevity. \n According to Brené Brown, it involves being seen, heard, and accepted without judgment. \n Lack of connection, or loneliness, can lead to serious health risks and societal challenges.",
 				"domains": {},
 				"relations": { "Ethicists":1, "Regulators":1, "Developers":1, "Scientists":1, "Users":1 },
