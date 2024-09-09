@@ -84,7 +84,7 @@
 			"3dModelFormats": {
 				"extends": "Element",
 				"title": "3D Model\nFormats",
-				"description": "Description",
+				"description": "Generally speaking, you’ll encounter two types of formats: polygonal geometric data, and boundary representation (BREP) depending on where the geometry was originally constructed. CAD applications can output both methods of storing geometric data. To preserve the higher-level geometric information in the CAD world, you’ll encounter a separate set of file formats which also contain standard polygonal data used in 3D printing and in gaming applications. Both types of geometric definition can be complex and result in large file-sizes.",
 				"domains": { "Standards": 1, "Science":1, "Content": 1 },
 				"relations": { "StandardGroups":1, "Developers":0.5 },
 				"instances": {
@@ -102,29 +102,30 @@
 				"relations": { "StandardGroups":1, "Developers":1, "Authors":1, "Scientists":1 },
 				"instances": {}
 			},
-			"SensorsAndIoT": {
+			
+			"HardwareInfrastructure": {
 				"extends": "Element",
-				"title": "Sensors\nand IoT",
-				"description": "Generally, sensors are used in the architecture of IoT devices. \n Sensory are used for sensing thing and devices etc. The Internet of Things (IoT) is a network of devices embedded with sensors, electronics, and connectivity to collect and communicate data. IoT sensors help understand systems \n for better actions, prevent tragedies, reduce costs, and simplify life. This article discusses \n various IoT sensors, their roles, and examples.",
+				"title": "Hardware Infrastructure",
+				"description": "Traditional Infrastructure, A traditional IT infrastructure is made up of the usual hardware and software components: \n facilities, data centers, servers, networking hardware desktop computers \n and enterprise application software solutions. Typically, this infrastructure setup requires more power, physical space \n and money than other infrastructure types. A traditional infrastructure is typically installed on-premises \n for company-only or private use.",
 				"domains": {},
-				"relations": { "StandardGroups":1, "Developers":1, "Providers":1, "Scientists":1, "Regulators": 1 },
-				"instances": {}
+				"relations": { "Ethicists":1, "Regulators":1, "Developers":1, "Scientists":1, "Users":1 },
+				"instances": { 
+					"Sensors,TrackersandIoT": {},
+					"Ergonomics": {},
+					"HardwareandDevices": {}
+				}
 			},
-			"HardwareDevices": {
+			
+			"OpenSource": {
 				"extends": "Element",
-				"title": "Hardware Devices\n and Deliverables",
-				"description": "Computer hardware refers to the physical components of a computer, \n essential for its function. It includes internal parts like the CPU, video card, and memory, \n and external parts like the keyboard and case. Early hardware included mechanical parts \n and switches, evolving to vacuum tubes, transistors, and now modern components \n in various devices like desktops, laptops, tablets, smartphones and HMDs. \n Wearable devices often use Bluetooth or Wi-Fi to track health, fitness, location, or biofeedback data. \n These electronic devices, worn on the body, have sensors, processors, \n and connectivity features to collect data, perform tasks, and communicate. They enhance \n user experiences and provide real-time information, integrating into the IoT ecosystem.",
-				"domains": { "Science": 1 },
-				"relations": { "StandardGroups":1, "Developers":1, "Providers":1, "Scientists":1 },
-				"instances": {}
-			},
-			"OpenSource and OpenSourceHardware": {
-				"extends": "Element",
-				"title": "Open Source\nSoftware/Hardware",
+				"title": "Open Source",
 				"description": "Open hardware, or \"open source hardware\", refers to design specifications \n of physical objects licensed for public use, allowing anyone to study, modify, create, \n and distribute them. It covers various objects like cars, chairs, computers, and robots. \n The source code (schematics, blueprints, CAD files, etc.) is accessible for modification \n under permissive licenses. This openness enables users to update, improve, and share \n both the software and physical design, promoting broad accessibility and collaboration in \n hardware design and manufacturing.",
 				"domains": { "Science": 1 },
 				"relations": { "StandardGroups":1, "Developers":1, "Authors":1, "Providers":1, "Scientists":1, "Regulators":1 },
-				"instances": {}
+				"instances": {
+					"OpenSourceHardware": {},
+					"OpenSourceSoftware": {}
+				}
 			},
 			"3dMiddleware": {
 				"extends": "Element",
@@ -144,7 +145,9 @@
 				"description": "An open API, or public API, is an application programming interface made \n publicly available to developers. Open APIs allow universal access to network services. \n While both terms are similar, open APIs are shared freely, while public APIs might have \n restrictions. Open APIs aim for easy consumption and access, favoring open-source \n technology and community standards over proprietary protocols.",
 				"domains": { "Standards": 1 },
 				"relations": { "StandardGroups":1, "Developers":1, "Authors":1, "Scientists":1, "Users":1 },
-				"instances": {}
+				"instances": {
+					"API": {}
+				}
 			},
 			"SDKs": {
 				"extends": "Element",
@@ -180,7 +183,7 @@
 			},
 			"CloudEdgeComputing": {
 				"extends": "Element",
-				"title": "Cloud Edge\nComputing",
+				"title": "Cloud Edge \n Computing",
 				"description": "Edge computing is a distributed computing framework that brings enterprise \n applications closer to data sources such as IoT devices or local edge servers. \n This proximity to data at its source can deliver strong business benefits, \n including faster insights, improved response times and \n better bandwidth availability.",
 				"domains": { "Standards": 1 },
 				"relations": { "Developers":1, "Providers":1, "Scientists":1 },
@@ -192,39 +195,21 @@
 				"description": "A monetization model is a blueprint that outlines the methods and processes \n a business will use to make money from its assets. Monetization models are a core \n concept in business, defining the strategy a company uses to convert its offerings and \n products into financial returns. Monetization models can take \n various forms depending on the nature of the business and \n the market in which it operates. For instance, a software company might opt for a \n subscription-based model, where customers pay a recurring fee for continued access to \n a product. In contrast, an e-commerce platform might implement a transaction fee model, \n earning a commission on each sale made through its site.",
 				"domains": {},
 				"relations": { "Ethicists":1, "Regulators":1, "Developers":1 },
-				"instances": {}
+				"instances": {
+					"PaymentPlatforms": {}
+				}
 			},
-			"PaymentPlatforms": {
-				"extends": "Element",
-				"title": "Payment\nPlatforms",
-				"description": "A payment platform is a form of online infrastructure that supports online \n money transfers and serves as an electronic alternative to traditional paper methods like \n cheques and money orders.",
-				"domains": {},
-				"relations": { "Developers":1, "Authors":1, "Providers":1 },
-				"instances": {}
-			},
+			
 			"Privacy": {
 				"extends": "Element",
 				"title": "Privacy",
 				"description": "Description",
 				"domains": {},
 				"relations": { "Ethicists":1, "Regulators":1,"Developers":1, "Users":1 },
-				"instances": {}
-			},
-			"Security": {
-				"extends": "Element",
-				"title": "Security",
-				"description": "Security is protection from, or resilience against, potential harm \n or other unwanted coercion. Beneficiaries technically referents of security may be persons and \n social groups, objects and institutions, ecosystems, or any other entity or phenomenon \n vulnerable to unwanted change.",
-				"domains": {},
-				"relations": { "Ethicists":1, "Regulators":1,"Developers":1, "Users":1 },
-				"instances": {}
-			},
-			"Computer Security": {
-				"extends": "Element",
-				"title": "Computer Security",
-				"description": "Computer security, or cybersecurity, protects computer systems and \n networks from malicious attacks that can lead to unauthorized information disclosure, \n theft, or damage to hardware, software, or data. It is crucial due to the reliance on \n computer systems, the Internet, wireless networks, and IoT devices. Cybersecurity is vital \n for systems with significant physical impacts, like power distribution and finance. \n It involves both digital measures (passwords, encryption) and physical security (locks).",
-				"domains": {},
-				"relations": { "Ethicists":1, "Regulators":1,"Developers":1, "Users":1 },
-				"instances": {}
+				"instances": {	
+					"Security": {},
+					"ComputerSecurity": {}
+				}
 			},
 			"Usability": {
 				"extends": "Element",
@@ -242,25 +227,17 @@
 				"relations": { "StandardGroups":1, "Developers":1, "Authors":1, "Providers":1, "Users":1 },
 				"instances": {}
 			},
-			"Ergonomics": {
-				"extends": "Element",
-				"title": "Ergonomics",
-				"description": "Ergonomics (or human factors) is the scientific discipline concerned with \n the understanding of the interactions among human and other elements of a system, \n and the profession that applies theory, principles, data and methods to design in order to \n optimize human well-being and overall system performance.",
-				"domains": {},
-				"relations": {  "Developers":1, "Authors":1, "Providers":1, "Users":1 },
-				"instances": {}
-			},
 			"Accessibility": {
-				"extends": "Element",
-				"title": "Accessibility",
-				"description": "Accessibility ensures products, services, and environments are usable by \n people with disabilities, directly or through assistive technology like screen readers. \n It aims for universal access and benefits everyone. Unlike usability, which focuses on \n effectiveness and efficiency for specific users, accessibility aligns with universal design principles, \n aiming to eliminate barriers and ensure inclusivity for all.",
-				"domains": {},
-				"relations": {  "Developers":1, "Authors":1, "Providers":1, "Users":1 },
-				"instances": {}
+                "extends": "Element",
+                "title": "Accessibility",
+                "description": "Accessibility ensures products, services, and environments are usable by \n people with disabilities, directly or through assistive technology like screen readers. \n It aims for universal access and benefits everyone. Unlike usability, which focuses on \n effectiveness and efficiency for specific users, accessibility aligns with universal design principles, \n aiming to eliminate barriers and ensure inclusivity for all.",
+                "domains": {},
+                "relations": {  "Developers":1, "Authors":1, "Providers":1, "Users":1 },
+                "instances": {}
 			},
 			"ResearchEthics": {
 				"extends": "Element",
-				"title": "Research\nEthics" ,
+				"title": "Research\nEthics",
 				"description": "Research ethics is a discipline within the study of applied ethics. \n Its scope ranges from general scientific integrity and misconduct to the treatment of human \n and animal subjects. The societal responsibilities science and research has are not \n traditionally included and less well defined.",
 				"domains": ["Science"],
 				"relations": { "Ethicists":1, "Scientists":1 },
@@ -273,16 +250,212 @@
 				"domains": {},
 				"relations": { "Ethicists":1, "Regulators":1, "Developers":1, "Scientists":1, "Users":1 },
 				"instances": {}
-
 			},
 			"ExperienceDiscovery": {
 				"extends": "Element",
-				"title": "Experience Discovery",
-				"description": "Description",
+				"title": "ExperienceDiscovery:",
+				"description": "Social connection is the feeling of closeness and value in relationships. \n It's vital for human development and well-being, impacting health and longevity. \n According to Brené Brown, it involves being seen, heard, and accepted without judgment. \n Lack of connection, or loneliness, can lead to serious health risks and societal challenges.",
 				"domains": {},
-				"relations": { "StandardGroups":1, "Developers": 0.5,  "Users":1 },
+				"relations": { "Ethicists":1, "Regulators":1, "Developers":1, "Scientists":1, "Users":1 },
 				"instances": {}
-			}
+			},
+			"ExperiencePreservation": {
+				"extends": "Element",
+				"title": "ExperiencePreservation:",
+				"description": "Most cultural promotion and dissemination are nowadays performed through \n the digitization of heritage sites and museums, a necessary requirement to meet the new needs of the public. \n Augmented Reality (AR), Mixed Reality (MR), and Virtual Reality (VR) \n have the potential to improve the experience quality and educational effect of these sites \n by stimulating users’ senses in a more natural and vivid way.",
+				"domains": {},
+				"relations": { "Users":1, "Developers":1, "Regulators":1 },
+				"instances": {}
+			},
+			"CollaborativeContentCreation": {
+				"extends": "Element",
+				"title": "CollaborativeContentCreation",
+				"description": "Content collaboration covers the tools and processes that two or more individuals \n use to create, edit, store and share content",
+				"domains": {},
+				"relations": { "Users":1, "Developers":1, "StandardGroups":1 },
+				"instances": {}
+			},
+			"FormatsforImmersiveandSpatialAudioandVideo": {
+				"extends": "Element",
+				"title": "FormatsforImmersiveandSpatialAudioandVideo",
+				"description": "Spatial audio is a rather broad term used to describe a suite of audio technologies that aim to deliver a more immersive sound than standard stereo playback (left and right channels), with the aim of making sound feel like it’s coming at you from everywhere when playing games, watching movies and, more recently, listening to music.",
+				"domains": {},
+				"relations": { "Ethicists":1, "Regulators":1, "Developers":1, "Scientists":1, "Users":1 },
+				"instances": {	
+					"FormatsandRealtime3DAssetsauthoringanddelivery": {}
+				}
+			},
+			"SceneDescription": {
+				"extends": "Element",
+				"title": "SceneDescription",
+				"description": "The scene description information at the scene and object levels is expressed in terms of color, texture, shape, motion, \n localization, events and relationships between objects via a set of \n standardized descriptors, combinations of such descriptors in description schemes \n and a description definition language.",
+				"domains": {},
+				"relations": { "Ethicists":1, "Regulators":1, "Developers":1, "Scientists":1, "Users":1 },
+				"instances": {}
+			},
+			"CloudInfrastructure": {
+				"extends": "Element",
+				"title": "CloudInfrastructure",
+				"description": "A cloud computing IT infrastructure is similar to traditional infrastructure. \n Virtualization connects physical servers maintained by a service provider at any or many geographical locations. \n Then, it divides and abstracts resources, like storage, to make them accessible to users almost anywhere an internet connection \n can be made. Because cloud infrastructure is often public, it’s usually referred to as a public cloud.",
+				"domains": {},
+				"relations": { "Ethicists":1, "Regulators":1, "Developers":1, "Scientists":1, "Users":1 },
+				"instances": {}
+			},
+			"RegulationsandPolicies": {
+				"extends": "Element",
+				"title": "RegulationsandPolicies",
+				"description": "Policy refers to a set of principles, guidance or documents adopted by a government. \n Regulations pertain to rules or directives of a government, which may be contained in law or some other form of administrative issuance \n that has been approved by the relevant authorised government body.",
+				"domains": {},
+				"relations": { "Ethicists":1, "Regulators":1, "Developers":1, "Scientists":1, "Users":1 },
+				"instances": {}
+			},
+			"IntellectualPropertyandUnfairpractices": {
+				"extends": "Element",
+				"title": "IntellectualPropertyandUnfairpractices",
+				"description": "Intellectual property IP encompasses intangible creations of the human intellect, \n including patents, copyrights, trademarks, and trade secrets. IP laws aim to stimulate innovation by granting creators property rights \n over their inventions and creative works for a limited time, fostering economic incentives \n while balancing widespread use and protection challenges. \n Unfair business practices, including fraud and misrepresentation, are prohibited by law in many countries. In the EU, practices are regulated under the Unfair Commercial Practices Directive. In the US, the FTC's Bureau of Consumer Protection investigates and takes legal action against offenders, aiming to maintain fair market conditions and educate consumers.",
+				"domains": {},
+				"relations": { "Ethicists":1, "Regulators":1, "Developers":1, "Scientists":1, "Users":1 },
+				"instances": {}
+
+			},
+			"DataOwnership": {
+				"extends": "Element",
+				"title": "DataOwnership",
+				"description": "Data Ownership refers to the responsibility associated with managing, controlling, \n and ensuring the security of data within an organization. It is primarily concerned with determining \n who within the company has the authority to manipulate data and dictate its use.",
+				"domains": {},
+				"relations": { "Ethicists":1, "Regulators":1, "Developers":1, "Scientists":1, "Users":1 },
+				"instances": {}
+
+			},
+			"DataGovernance": {
+				"extends": "Element",
+				"title": "DataProvenance",
+				"description": "Data governance means setting internal standards—data policies—that apply to \n how data is gathered, stored, processed, and disposed of. It governs who can access what kinds of data and \n what kinds of data are under governance. Data governance is a term used on both a macro and a micro level. \n The former is a political concept and forms part of international relations and Internet governance; the latter \n is a data management concept and forms part of corporate data governance.",
+				"domains": {},
+				"relations": { "Ethicists":1, "Regulators":1, "Developers":1, "Scientists":1, "Users":1 },
+				"instances": {}
+
+			},
+			"DataProvenance": {
+				"extends": "Element",
+				"title": "DataProvenance",
+				"description": "Data provenance is the historical record of data from its original sources \n by capturing metadata of data’s changes throughout the lifecycle. Data provenance is concerned with authenticity; it provides details such as who created the data, \n the history of modifications that have been made to the data, and who made those changes.",
+				"domains": {},
+				"relations": { "Ethicists":1, "Regulators":1, "Developers":1, "Scientists":1, "Users":1 },
+				"instances": {}
+			},
+			"ConsumerRights": {
+				"extends": "Element",
+				"title": "ConsumerRights",
+				"description": "Lodging a complaint means that the consumer contacts your company and complains \n about the goods. You are obliged to accept the complaint. The consumer can \n lodge a complaint about defects in the goods for up to three years. The right \n to lodge a complaint is not affected by the existence of a warranty. EU consumer protection rules ensure \n that when you buy goods and services in the EU you have \n clear information on the product or service you're buying, its price, shipping and delivery costs as well as on your rights when things go wrong.",
+				"domains": {},
+				"relations": { "Ethicists":1, "Regulators":1, "Developers":1, "Scientists":1, "Users":1 },
+				"instances": {}
+			},
+			"ParentalControlsandContentRatings": {
+				"extends": "Element",
+				"title": "ParentalControlsandContentRatings",
+				"description": "Parental controls are features in digital services, computers, video games, \n, mobile devices and HMDs allowing parents to restrict their children's access \n to content deemed inappropriate due to age or maturity. They include content filters, usage controls \n like time limits, computer management tools, and monitoring features for  \n tracking activities and location. A content rating, also known as a maturity rating, assesses the appropriateness of TV shows, movies, comic books, or video games for specific target audiences. It categorizes media into different age groups to indicate suitability, covering all ages above the specified category thresholds.",
+				"domains": {},
+				"relations": { "Ethicists":1, "Regulators":1, "Developers":1, "Scientists":1, "Users":1 },
+				"instances": {}
+			},
+			"RiskandHarm": {
+				"extends": "Element",
+				"title": "RiskandHarm",
+				"description": "Social connection is the feeling of closeness and value in relationships. \n It's vital for human development and well-being, impacting health and longevity. \n According to Brené Brown, it involves being seen, heard, and accepted without judgment. \n Lack of connection, or loneliness, can lead to serious health risks and societal challenges.",
+				"domains": {},
+				"relations": { "Ethicists":1, "Regulators":1, "Developers":1, "Scientists":1, "Users":1 },
+				"instances": {
+					"MentalRiskandHarm": {},
+					"PhysicalRiskandHarm": {},
+					"Crime": {}
+				}
+			},
+			"ChildSafetyandRiskandHarm": {
+				"extends": "Element",
+				"title": "ChildSafetyandRiskandHarm",
+				"description": "Social connection is the feeling of closeness and value in relationships. \n It's vital for human development and well-being, impacting health and longevity. \n According to Brené Brown, it involves being seen, heard, and accepted without judgment. \n Lack of connection, or loneliness, can lead to serious health risks and societal challenges.",
+				"domains": {},
+				"relations": { "Ethicists":1, "Regulators":1, "Developers":1, "Scientists":1, "Users":1 },
+				"instances": {}
+			},
+			"NonDiscriminationDiversityandInclusion": {
+				"extends": "Element",
+				"title": "NonDiscriminationDiversityandInclusion",
+				"description": "The principle of equality and non discrimination in international human rights law ensures \n equal treatment without discrimination based on race, color, sex, religion, etc. Distinctions must \n be justified objectively and proportionally, as outlined by international bodies like \n the European Court and Human Rights Committee. Affirmative action \n may be required to combat systemic discrimination, as affirmed by the Human Rights Committee and other bodies.",
+				"domains": {},
+				"relations": { "Ethicists":1, "Regulators":1, "Developers":1, "Scientists":1, "Users":1 },
+				"instances": {}
+			},
+			"TerminologyandTaxonomies": {
+				"extends": "Element",
+				"title": "TerminologyandTaxonomies",
+				"description": "A taxonomy is a way to classify words into hierarchical groups. \n Taxonomies are most often associated with search. Terminology is a system of words that belong to something in common.",
+				"domains": {},
+				"relations": { "Ethicists":1, "Regulators":1, "Developers":1, "Scientists":1, "Users":1 },
+				"instances": {}
+
+			},
+			"ResearchPrograms": {
+				"extends": "Element",
+				"title": "ResearchPrograms",
+				"description": "A research program is a professional network of scientists conducting basic research. \n The term was used by philosopher of science Imre Lakatos to blend and revise the normative model \n of science offered with its idea of falsifiability and the descriptive model of science offered \n with its ideas of normal science and paradigm shifts.",
+				"domains": {},
+				"relations": { "Ethicists":1, "Regulators":1, "Developers":1, "Scientists":1, "Users":1 },
+				"instances": {}
+
+			},
+			"ResearchLiterature": {
+				"extends": "Element",
+				"title": "ResearchLiterature",
+				"description": "Research literature in any field is all the published research in that field. \n The research literature in psychology is enormous—including millions of scholarly articles \n and books dating to the beginning of the field—and it continues to grow.",
+				"domains": {},
+				"relations": { "Ethicists":1, "Regulators":1, "Developers":1, "Scientists":1, "Users":1 },
+				"instances": {}
+			},
+		
+			"KPIs KeyPerformanceIndicators": {
+				"extends": "Element",
+				"title": "KPIs KeyPerformanceIndicators",
+				"description": "Key Performance Indicators KPIs are the critical key quantifiable indicators \n of progress toward an intended result. KPIs provide a focus for strategic \n and operational improvement, create an analytical basis for decision making and help focus attention on what matters most.",
+				"domains": {},
+				"relations": { "Ethicists":1, "Regulators":1, "Developers":1, "Scientists":1, "Users":1 },
+				"instances": {}
+			},
+
+			"Guidelines": {
+				"extends": "Element",
+				"title": "Guidelines",
+				"description": "Technical documentation refers to comprehensive written guides and materials that explain the design, development, and usage of a system, software, or product, facilitating understanding, troubleshooting, and maintenance for users, developers, and other stakeholders.",
+				"domains": {},
+				"relations": { "Ethicists":1, "Regulators":1, "Developers":1, "Scientists":1, "Users":1 },
+				"instances": {
+					"DesignGuidelines": {},
+					"DevelopmentGuidelines": {}
+				}
+			},
+
+			"TerminologiesandUseCases": {
+				"extends": "Element",
+				"title": "TerminologiesandUseCases",
+				"description": "It encompasses specialized words and their meanings within a field, \n studied as terminology science. It analyzes how terms develop and relate \n within domains to ensure consistent usage. Describes software usage scenarios. \n Outlines how a system responds to external requests (e.g., user input). A use case details interactions \n between an actor (human or system) and a system to achieve goals.",
+				"domains": {},
+				"relations": { "Ethicists":1, "Regulators":1, "Developers":1, "Scientists":1, "Users":1 },
+				"instances": {}
+			},
+			
+			"RequirementsandUserexpectation": {
+				"extends": "Element",
+				"title": "RequirementsandUserexpectation",
+				"description": "Social connection is the feeling of closeness and value in relationships. \n It's vital for human development and well-being, impacting health and longevity. \n According to Brené Brown, it involves being seen, heard, and accepted without judgment. \n Lack of connection, or loneliness, can lead to serious health risks and societal challenges.",
+				"domains": {},
+				"relations": { "Ethicists":1, "Regulators":1, "Developers":1, "Scientists":1, "Users":1 },
+				"instances": {
+					"UserExperienceRequirements": {}
+				}
+			} 
+		
 		}
 	},
 	"viewports": [{
@@ -308,18 +481,18 @@
 						"variables": {
 							"title": { "type":"string", "value": "Title with\nseveral lines"},
 							"description": { "type":"string", "value": "Description"},
-							"showData": { "type":"string", "value": "false"},
+							"showData": { "type":"string", "value": "false"}
 						},
 						"shapes": [
 							{ "name": "Circle", "type": "circle", "radius": 30, "color": "url(#Background)", "strokes": [{ "width": 5, "color": "url(#Foreground)"}] },
-							{ "name": "Title", "type": "text",  "font": "Arial", "weight": "bold", "content": { "link": "variables/title" }, "position": [0, -20], "anchor": "bottom" },
+							{ "name": "Title", "type": "text",  "font": "Arial", "weight": "bold", "content": { "link": "variables/title" }, "position": [0, -20], "anchor": "bottom" }
 						],
 						"actions": [ { "event": "click", "variable": "variables/showData", "value": "true" } ],
 						"widgets": [
 							{
 								"name": "StationToolTip",
 								// "context": { "variable": "variables/showData", "value": "true" },
-								"shapes": [ { "type": "text", "font": "Arial", "weight": "bold", "fontSize": 10, "content": { "link": "variables/description" }, "position": [0, 60], "anchor": "top", "color": "lightgrey" } ],
+								"shapes": [ { "type": "text", "font": "Arial", "weight": "bold", "content": { "link": "variables/description" }, "position": [0, 60], "anchor": "top", "color": "lightgrey" } ],
 								"actions": [ { "event": "click", "variable": "variables/showData", "value": "false" } ]
 							}
 						]
