@@ -91,12 +91,12 @@
 					"OBJ": {},
 					"USD": {},
 					"glTF": {},
-					"FBX": {}
+					"FBX": {},
 				}
 			},
 			"UIDLs": {
 				"extends": "Element",
-				"title": "User Experience\nDescription Language",
+				"title": "User Experience \n Description Language",
 				"description": "Description: UIDL is important as it important across various industries. \n In web development, it helps create responsive, accessible interfaces and ensures \n consistency and efficiency in design. In software, UIDL enhances usability and customer \n satisfaction. It's crucial in UX/UI design, enabling engaging visuals and interactions",
 				"domains": { "Standards": 1 },
 				"relations": { "StandardGroups":1, "Developers":1, "Authors":1, "Scientists":1 },
@@ -105,14 +105,14 @@
 			
 			"HardwareInfrastructure": {
 				"extends": "Element",
-				"title": "Hardware Infrastructure",
+				"title": "Hardware \n Infrastructure",
 				"description": "Traditional Infrastructure, A traditional IT infrastructure is made up of the usual hardware and software components: \n facilities, data centers, servers, networking hardware desktop computers \n and enterprise application software solutions. Typically, this infrastructure setup requires more power, physical space \n and money than other infrastructure types. A traditional infrastructure is typically installed on-premises \n for company-only or private use.",
 				"domains": {},
 				"relations": { "Ethicists":1, "Regulators":1, "Developers":1, "Scientists":1, "Users":1 },
 				"instances": { 
 					"Sensors,TrackersandIoT": {},
 					"Ergonomics": {},
-					"HardwareandDevices": {}
+					"HardwareandDevices": {},
 				}
 			},
 			
@@ -124,19 +124,19 @@
 				"relations": { "StandardGroups":1, "Developers":1, "Authors":1, "Providers":1, "Scientists":1, "Regulators":1 },
 				"instances": {
 					"OpenSourceHardware": {},
-					"OpenSourceSoftware": {}
+					"OpenSourceSoftware": {},
 				}
 			},
-			"3dMiddleware": {
+			"3DAPIs&Middleware": {
 				"extends": "Element",
-				"title": "3D APIs and\nMiddleware",
+				"title": "3D APIs & Middleware",
 				"description": "Middleware has two meanings: software enabling interaction between two programs, \n and a software layer within an application allowing its components to work \n together.",
 				"domains": { "Standards": 1 },
 				"relations": { "StandardGroups":1, "Developers":1, "Authors":1, "Providers":1, "Scientists":1 },
 				"instances": {
 					"Unity": {},
 					"Unreal": {},
-					"ThreeJS": {}
+					"ThreeJS": {},
 				}
 			},
 			"OpenAPIs": {
@@ -146,21 +146,21 @@
 				"domains": { "Standards": 1 },
 				"relations": { "StandardGroups":1, "Developers":1, "Authors":1, "Scientists":1, "Users":1 },
 				"instances": {
-					"API": {}
+					"API": {},
 				}
 			},
 			"SDKs": {
 				"extends": "Element",
 				"title": "SDK (Software\n Development Kits)",
-				"description": "SDK stands for software development kit, a set of tools for building software \n on a specific platform. It includes compilers, code samples, code libraries, testing and \n analytics tools, documentation, and debuggers. An SDK often includes an API, enabling \n applications to communicate and work together.",
+				"description": "SDK stands for a software development kit, a set of tools for building software \n on a specific platform. It includes compilers, code samples, code libraries, testing and \n analytics tools, documentation, and debuggers. An SDK often includes an API, enabling \n applications to communicate and work together.",
 				"domains": { "Standards": 1 },
 				"relations": { "Regulators":1, "StandardGroups":1, "Developers":1, "Authors":1, "Scientists":1 },
 				"instances": {}
 			},
 			"DecentralizedComputing": {
 				"extends": "Element",
-				"title": "Decentralized\nComputing",
-				"description": "Decentralized computing is the allocation of resources, both hardware and \n software, to each individual workstation, or office location. In contrast, centralized computing \n exists when the majority of functions are carried out, or obtained from a remote \n centralized location.",
+				"title": "Decentralized \n Computing",
+				"description": "Decentralized computing is the allocation of resources, both hardware and \n software, to each individual workstation or office location. In contrast, centralized computing \n exists when the majority of functions are carried out, or obtained from a remote \n centralized location.",
 				"domains": { "Standards": 1 },
 				"relations": {"Regulators":1, "StandardGroups":1, "Developers":1, "Authors":1,"Users":1 },
 				"instances": {}
@@ -176,7 +176,7 @@
 			"Architectures": {
 				"extends": "Element",
 				"title": "Architectures",
-				"description": "Description",
+				"description": "Architecture within this context is used to design computer systems. \n It involves the development of a technical blueprint with regard to the arrangement, \n interaction, and interdependence of all elements so that system-relevant requirements are met.",
 				"domains": { "Standards": 1 },
 				"relations": { "Regulators":1, "StandardGroups":1, "Developers":1, "Scientists":1 },
 				"instances": {}
@@ -191,24 +191,24 @@
 			},
 			"BusinessModels": {
 				"extends": "Element",
-				"title": "Business\nModels",
+				"title": "Business \n Models",
 				"description": "A monetization model is a blueprint that outlines the methods and processes \n a business will use to make money from its assets. Monetization models are a core \n concept in business, defining the strategy a company uses to convert its offerings and \n products into financial returns. Monetization models can take \n various forms depending on the nature of the business and \n the market in which it operates. For instance, a software company might opt for a \n subscription-based model, where customers pay a recurring fee for continued access to \n a product. In contrast, an e-commerce platform might implement a transaction fee model, \n earning a commission on each sale made through its site.",
 				"domains": {},
 				"relations": { "Ethicists":1, "Regulators":1, "Developers":1 },
 				"instances": {
-					"PaymentPlatforms": {}
+					"PaymentPlatforms": {},
 				}
 			},
-			
 			"Privacy": {
 				"extends": "Element",
 				"title": "Privacy",
-				"description": "Description",
+				"description": "The assurance that the confidentiality of, and access to, certain information about an entity is protected",
 				"domains": {},
 				"relations": { "Ethicists":1, "Regulators":1,"Developers":1, "Users":1 },
 				"instances": {	
 					"Security": {},
-					"ComputerSecurity": {}
+					"ComputerSecurity": {},
+					"PrivacyRiskMitigation": {},
 				}
 			},
 			"Usability": {
@@ -217,27 +217,16 @@
 				"description": "Usability is a measure of how well a specific user in a specific context can use \n a product/design to achieve a defined goal effectively, efficiently, and satisfactorily. \n Designers usually measure a design’s usability throughout the development process—from \n wireframes to the final deliverable—to ensure maximum usability.",
 				"domains": {},
 				"relations": { "StandardGroups":1, "Developers":1, "Authors":1, "Providers":1, "Users":1 },
-				"instances": {}
-			},
-			"User Interface UI": {
-				"extends": "Element",
-				"title": "User Interface UI",
-				"description": "In human-computer interaction, a user interface (UI) facilitates interaction \n between humans and machines, aiming for efficient operation and control while providing \n feedback for decision-making. It encompasses physical input/output devices and can \n include multisensory interfaces like tactile, visual, auditory, and more. UI design aims for \n usability, minimizing user input for desired outcomes, and can extend to brain-computer \n interfaces (BCIs) or augmented reality (AR) interfaces.",
-				"domains": {},
-				"relations": { "StandardGroups":1, "Developers":1, "Authors":1, "Providers":1, "Users":1 },
-				"instances": {}
-			},
-			"Accessibility": {
-                "extends": "Element",
-                "title": "Accessibility",
-                "description": "Accessibility ensures products, services, and environments are usable by \n people with disabilities, directly or through assistive technology like screen readers. \n It aims for universal access and benefits everyone. Unlike usability, which focuses on \n effectiveness and efficiency for specific users, accessibility aligns with universal design principles, \n aiming to eliminate barriers and ensure inclusivity for all.",
-                "domains": {},
-                "relations": {  "Developers":1, "Authors":1, "Providers":1, "Users":1 },
-                "instances": {}
+				"instances": {
+					"UserInterfaceUI": {},
+					"UserExperienceUX": {},
+					"UserInterfaceUIDesign": {},
+					"UserExperienceUXDesign": {},
+				}
 			},
 			"ResearchEthics": {
 				"extends": "Element",
-				"title": "Research\nEthics",
+				"title": "Research \n Ethics",
 				"description": "Research ethics is a discipline within the study of applied ethics. \n Its scope ranges from general scientific integrity and misconduct to the treatment of human \n and animal subjects. The societal responsibilities science and research has are not \n traditionally included and less well defined.",
 				"domains": ["Science"],
 				"relations": { "Ethicists":1, "Scientists":1 },
@@ -245,7 +234,7 @@
 			},
 			"SocialConnectivity": {
 				"extends": "Element",
-				"title": "Social Connectivity",
+				"title": "Social \n Connectivity",
 				"description": "Social connection is the feeling of closeness and value in relationships. \n It's vital for human development and well-being, impacting health and longevity. \n According to Brené Brown, it involves being seen, heard, and accepted without judgment. \n Lack of connection, or loneliness, can lead to serious health risks and societal challenges.",
 				"domains": {},
 				"relations": { "Ethicists":1, "Regulators":1, "Developers":1, "Scientists":1, "Users":1 },
@@ -253,7 +242,7 @@
 			},
 			"ExperienceDiscovery": {
 				"extends": "Element",
-				"title": "Experience Discovery:",
+				"title": "Experience \n Discovery:",
 				"description": "Social connection is the feeling of closeness and value in relationships. \n It's vital for human development and well-being, impacting health and longevity. \n According to Brené Brown, it involves being seen, heard, and accepted without judgment. \n Lack of connection, or loneliness, can lead to serious health risks and societal challenges.",
 				"domains": {},
 				"relations": { "Ethicists":1, "Regulators":1, "Developers":1, "Scientists":1, "Users":1 },
@@ -261,7 +250,7 @@
 			},
 			"ExperiencePreservation": {
 				"extends": "Element",
-				"title": "Experience Preservation:",
+				"title": "Experience \n Preservation:",
 				"description": "Most cultural promotion and dissemination are nowadays performed through \n the digitization of heritage sites and museums, a necessary requirement to meet the new needs of the public. \n Augmented Reality (AR), Mixed Reality (MR), and Virtual Reality (VR) \n have the potential to improve the experience quality and educational effect of these sites \n by stimulating users’ senses in a more natural and vivid way.",
 				"domains": {},
 				"relations": { "Users":1, "Developers":1, "Regulators":1 },
@@ -269,20 +258,21 @@
 			},
 			"CollaborativeContentCreation": {
 				"extends": "Element",
-				"title": "Collaborative Content Creation",
+				"title": "Collaborative \n Content Creation",
 				"description": "Content collaboration covers the tools and processes that two or more individuals \n use to create, edit, store and share content",
 				"domains": {},
 				"relations": { "Users":1, "Developers":1, "StandardGroups":1 },
 				"instances": {}
 			},
-			"FormatsforImmersiveandSpatialAudioandVideo": {
+			"FormatsforImmersiveandSpatialAudio&Video": {
 				"extends": "Element",
-				"title": "Formats for Immersive and Spatial Audio and Video",
+				"title": "Formats for Immersive & \n Spatial Audio and Video",
 				"description": "Spatial audio is a rather broad term used to describe a suite of audio technologies that aim to deliver a more immersive sound than standard stereo playback (left and right channels), with the aim of making sound feel like it’s coming at you from everywhere when playing games, watching movies and, more recently, listening to music.",
 				"domains": {},
 				"relations": { "Ethicists":1, "Regulators":1, "Developers":1, "Scientists":1, "Users":1 },
 				"instances": {	
-					"FormatsandRealtime3DAssetsauthoringanddelivery": {}
+					"FormatsandRealtime3DAssetsauthoring&delivery": {},
+					"FormatsforImmersive&SpatialAudio": {},
 				}
 			},
 			"SceneDescription": {
@@ -301,17 +291,17 @@
 				"relations": { "Ethicists":1, "Regulators":1, "Developers":1, "Scientists":1, "Users":1 },
 				"instances": {}
 			},
-			"RegulationsandPolicies": {
+			"Regulations&Policies": {
 				"extends": "Element",
-				"title": "RegulationsandPolicies",
+				"title": "Regulations & Policies",
 				"description": "Policy refers to a set of principles, guidance or documents adopted by a government. \n Regulations pertain to rules or directives of a government, which may be contained in law or some other form of administrative issuance \n that has been approved by the relevant authorised government body.",
 				"domains": {},
 				"relations": { "Ethicists":1, "Regulators":1, "Developers":1, "Scientists":1, "Users":1 },
 				"instances": {}
 			},
-			"IntellectualPropertyandUnfairpractices": {
+			"IntellectualProperty&Unfairpractices": {
 				"extends": "Element",
-				"title": "Intellectual Property and Unfair practices",
+				"title": "Intellectual Property & Unfair practices",
 				"description": "Intellectual property IP encompasses intangible creations of the human intellect, \n including patents, copyrights, trademarks, and trade secrets. IP laws aim to stimulate innovation by granting creators property rights \n over their inventions and creative works for a limited time, fostering economic incentives \n while balancing widespread use and protection challenges. \n Unfair business practices, including fraud and misrepresentation, are prohibited by law in many countries. In the EU, practices are regulated under the Unfair Commercial Practices Directive. In the US, the FTC's Bureau of Consumer Protection investigates and takes legal action against offenders, aiming to maintain fair market conditions and educate consumers.",
 				"domains": {},
 				"relations": { "Ethicists":1, "Regulators":1, "Developers":1, "Scientists":1, "Users":1 },
@@ -320,7 +310,7 @@
 			},
 			"DataOwnership": {
 				"extends": "Element",
-				"title": "DataOwnership",
+				"title": "Data Ownership",
 				"description": "Data Ownership refers to the responsibility associated with managing, controlling, \n and ensuring the security of data within an organization. It is primarily concerned with determining \n who within the company has the authority to manipulate data and dictate its use.",
 				"domains": {},
 				"relations": { "Ethicists":1, "Regulators":1, "Developers":1, "Scientists":1, "Users":1 },
@@ -329,7 +319,7 @@
 			},
 			"DataGovernance": {
 				"extends": "Element",
-				"title": "DataProvenance",
+				"title": "Data Provenance",
 				"description": "Data governance means setting internal standards—data policies—that apply to \n how data is gathered, stored, processed, and disposed of. It governs who can access what kinds of data and \n what kinds of data are under governance. Data governance is a term used on both a macro and a micro level. \n The former is a political concept and forms part of international relations and Internet governance; the latter \n is a data management concept and forms part of corporate data governance.",
 				"domains": {},
 				"relations": { "Ethicists":1, "Regulators":1, "Developers":1, "Scientists":1, "Users":1 },
@@ -352,45 +342,51 @@
 				"relations": { "Ethicists":1, "Regulators":1, "Developers":1, "Scientists":1, "Users":1 },
 				"instances": {}
 			},
-			"ParentalControlsandContentRatings": {
+			"Risk&Harm": {
 				"extends": "Element",
-				"title": "Parental Controls and Content Ratings",
-				"description": "Parental controls are features in digital services, computers, video games, \n, mobile devices and HMDs allowing parents to restrict their children's access \n to content deemed inappropriate due to age or maturity. They include content filters, usage controls \n like time limits, computer management tools, and monitoring features for  \n tracking activities and location. A content rating, also known as a maturity rating, assesses the appropriateness of TV shows, movies, comic books, or video games for specific target audiences. It categorizes media into different age groups to indicate suitability, covering all ages above the specified category thresholds.",
-				"domains": {},
-				"relations": { "Ethicists":1, "Regulators":1, "Developers":1, "Scientists":1, "Users":1 },
-				"instances": {}
-			},
-			"RiskandHarm": {
-				"extends": "Element",
-				"title": "Risk and Harm",
+				"title": "Risk & Harm",
 				"description": "Social connection is the feeling of closeness and value in relationships. \n It's vital for human development and well-being, impacting health and longevity. \n According to Brené Brown, it involves being seen, heard, and accepted without judgment. \n Lack of connection, or loneliness, can lead to serious health risks and societal challenges.",
 				"domains": {},
 				"relations": { "Ethicists":1, "Regulators":1, "Developers":1, "Scientists":1, "Users":1 },
 				"instances": {
 					"MentalRiskandHarm": {},
 					"PhysicalRiskandHarm": {},
-					"Crime": {}
+					"Crime": {},
 				}
 			},
-			"ChildSafetyandRiskandHarm": {
+			"ChildSafety": {
 				"extends": "Element",
-				"title": "Child Safety and Riskand Harm",
+				"title": "Child Safety",
 				"description": "Social connection is the feeling of closeness and value in relationships. \n It's vital for human development and well-being, impacting health and longevity. \n According to Brené Brown, it involves being seen, heard, and accepted without judgment. \n Lack of connection, or loneliness, can lead to serious health risks and societal challenges.",
 				"domains": {},
 				"relations": { "Ethicists":1, "Regulators":1, "Developers":1, "Scientists":1, "Users":1 },
-				"instances": {}
+				"instances": { 
+					"MentalRisk&Harm": {},
+					"PhysicalRisk&Harm": {},
+					"ParentalControls&ContentRatings": {},
+
+				}
 			},
-			"NonDiscriminationDiversityandInclusion": {
+			"Diversity&Inclusion": {
 				"extends": "Element",
-				"title": "NonDiscriminationDiversityandInclusion",
+				"title": "Diversity & Inclusion",
 				"description": "The principle of equality and non discrimination in international human rights law ensures \n equal treatment without discrimination based on race, color, sex, religion, etc. Distinctions must \n be justified objectively and proportionally, as outlined by international bodies like \n the European Court and Human Rights Committee. Affirmative action \n may be required to combat systemic discrimination, as affirmed by the Human Rights Committee and other bodies.",
 				"domains": {},
 				"relations": { "Ethicists":1, "Regulators":1, "Developers":1, "Scientists":1, "Users":1 },
-				"instances": {}
+				"instances": {
+					"NonDiscrimination": {},
+					"Equity": {},
+					"Accessibility": {},
+					"VisualAccessibiltiy": {},
+					"Deaf&HardofHearing": {},
+					"MobilityDisabilities": {},
+					"CognitiveDisabilities": {},
+
+				}
 			},
-			"TerminologyandTaxonomies": {
+			"Terminology&Taxonomies": {
 				"extends": "Element",
-				"title": "Terminology and Taxonomies",
+				"title": "Terminology & Taxonomies",
 				"description": "A taxonomy is a way to classify words into hierarchical groups. \n Taxonomies are most often associated with search. Terminology is a system of words that belong to something in common.",
 				"domains": {},
 				"relations": { "Ethicists":1, "Regulators":1, "Developers":1, "Scientists":1, "Users":1 },
@@ -415,7 +411,7 @@
 				"instances": {}
 			},
 		
-			"KPIs KeyPerformanceIndicators": {
+			"KPIsKeyPerformanceIndicators": {
 				"extends": "Element",
 				"title": "KPIs Key Performance Indicators",
 				"description": "Key Performance Indicators KPIs are the critical key quantifiable indicators \n of progress toward an intended result. KPIs provide a focus for strategic \n and operational improvement, create an analytical basis for decision making and help focus attention on what matters most.",
@@ -432,27 +428,29 @@
 				"relations": { "Ethicists":1, "Regulators":1, "Developers":1, "Scientists":1, "Users":1 },
 				"instances": {
 					"DesignGuidelines": {},
-					"DevelopmentGuidelines": {}
+					"DevelopmentGuidelines": {},
 				}
 			},
 
-			"TerminologiesandUseCases": {
+			"Terminologies&UseCases": {
 				"extends": "Element",
-				"title": "Terminologies and Use Cases",
+				"title": "Terminologies & Use Cases",
 				"description": "It encompasses specialized words and their meanings within a field, \n studied as terminology science. It analyzes how terms develop and relate \n within domains to ensure consistent usage. Describes software usage scenarios. \n Outlines how a system responds to external requests (e.g., user input). A use case details interactions \n between an actor (human or system) and a system to achieve goals.",
 				"domains": {},
 				"relations": { "Ethicists":1, "Regulators":1, "Developers":1, "Scientists":1, "Users":1 },
 				"instances": {}
 			},
 			
-			"RequirementsandUserexpectation": {
+			"Requirements&Userexpectation": {
 				"extends": "Element",
-				"title": "Requirements and User expectation",
+				"title": "Requirements & User expectation",
 				"description": "Social connection is the feeling of closeness and value in relationships. \n It's vital for human development and well-being, impacting health and longevity. \n According to Brené Brown, it involves being seen, heard, and accepted without judgment. \n Lack of connection, or loneliness, can lead to serious health risks and societal challenges.",
 				"domains": {},
 				"relations": { "Ethicists":1, "Regulators":1, "Developers":1, "Scientists":1, "Users":1 },
 				"instances": {
-					"UserExperienceRequirements": {}
+					"UserExperienceRequirements": {},
+					"UserInterface": {},
+					
 				}
 			} 
 		
