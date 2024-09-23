@@ -2,6 +2,33 @@
 export class NodeType {
 
 
+	// ------------------------------------------------------ PUBLIC PROPERTIES
+
+	/** The name of the NodeType. */
+	get name() { return this._name; }
+
+	/** The tag of the NodeType. */
+	get tag() { return this._tag; }
+
+	/** Indicates whether to serialize the instances of NodeType or not. */
+	get serializable() { return this._serializable; }
+
+	/** The name of the NodeType. */
+	get parent() { return this._parent; }
+
+	/** The child NodeTypes. */
+	get children() { return this._children; }
+
+	/** Gets the number of child NodeTypes. */
+	get childCount() { return this._childCount; }
+
+	/** Gets the names of child NodeTypes. */
+	get childTags() { return this._childTags; }
+
+	/** The prototype of the NodeType. */
+	get prototype() { return this._prototype; }
+
+
 	// ------------------------------------------------------------ CONSTRUCTOR
 
 	/** Initializes the Node instance.
@@ -30,33 +57,6 @@ export class NodeType {
 	}
 
 
-	// ------------------------------------------------------ PUBLIC PROPERTIES
-
-	/** The name of the NodeType. */
-	get name() { return this._name; }
-
-	/** The tag of the NodeType. */
-	get tag() { return this._tag; }
-
-	/** Indicates whether to serialize the instances of NodeType or not. */
-	get serializable() { return this._serializable; }
-
-	/** The name of the NodeType. */
-	get parent() { return this._parent; }
-
-	/** The child NodeTypes. */
-	get children() { return this._children; }
-
-	/** Gets the number of child NodeTypes. */
-	get childCount() { return this._childCount; }
-
-	/** Gets the names of child NodeTypes. */
-	get childTags() { return this._childTags; }
-
-	/** The prototype of the NodeType. */
-	get prototype() { return this._prototype; }
-
-
 	// --------------------------------------------------------- PUBLIC METHODS
 
 	/** Checks if the NodeType is of a particular type or not.
@@ -83,50 +83,6 @@ export class NodeType {
 
 /** Defines a data node. */
 export class Node {
-
-
-	// ------------------------------------------------------------ CONSTRUCTOR
-
-	/** Initializes the Node instance.
-	 * @param name The node name.
-	 * @param parent The parent node.
-	 * @param data The initialization data.
-	 * @param type The node type. */
-	constructor(name, parent, data, type = Node.type) {
-
-		// Save the provided data
-		this._name = name;
-		this._type = type;
-
-		// Check the provided node name
-		if (!name || Node.reservedWords.includes(name))
-			throw Error('Invalid node name: ' +
-				(!name ? "(undefined)" : '"' + name + '"') +
-				(parent ? ' for: ' + parent.nodePath : ''));
-
-		// Initialize the children list
-		this._parent = parent;
-		this._children = {};
-
-		// Link to the parent ensuring the name is not repeated
-		if (parent) {
-			let uniqueName = this._name, nameIndex = 1;
-			while (parent.children[uniqueName])
-				uniqueName = this._name + nameIndex++;
-			parent.children[uniqueName] = this;
-		}
-
-		// Initialize the list of links
-		this._links = [];
-
-		// Deserialize the initialization data
-		this._serializable = true;
-		if (data != undefined)
-			this.deserialize(data);
-
-		// Initially, mark the node has not updated
-		this._updated = false;
-	}
 
 
 	// ------------------------------------------------------ PUBLIC PROPERTIES
@@ -173,6 +129,50 @@ export class Node {
 	/** The debug data of the node. */
 	get debug() { return this._debug; }
 	set debug(d) { this._debug = d; }
+
+
+	// ------------------------------------------------------------ CONSTRUCTOR
+
+	/** Initializes the Node instance.
+	 * @param name The node name.
+	 * @param parent The parent node.
+	 * @param data The initialization data.
+	 * @param type The node type. */
+	constructor(name, parent, data, type = Node.type) {
+
+		// Save the provided data
+		this._name = name;
+		this._type = type;
+
+		// Check the provided node name
+		if (!name || Node.reservedWords.includes(name))
+			throw Error('Invalid node name: ' +
+				(!name ? "(undefined)" : '"' + name + '"') +
+				(parent ? ' for: ' + parent.nodePath : ''));
+
+		// Initialize the children list
+		this._parent = parent;
+		this._children = {};
+
+		// Link to the parent ensuring the name is not repeated
+		if (parent) {
+			let uniqueName = this._name, nameIndex = 1;
+			while (parent.children[uniqueName])
+				uniqueName = this._name + nameIndex++;
+			parent.children[uniqueName] = this;
+		}
+
+		// Initialize the list of links
+		this._links = [];
+
+		// Deserialize the initialization data
+		this._serializable = true;
+		if (data != undefined)
+			this.deserialize(data);
+
+		// Initially, mark the node has not updated
+		this._updated = false;
+	}
 
 
 	// --------------------------------------------------------- PUBLIC METHODS
@@ -355,6 +355,30 @@ Node.reservedWords = ['name', 'debug'];
 export class NodeSet extends Node {
 
 
+	// ------------------------------------------------------ PUBLIC PROPERTIES
+
+	/** The child nodes of the NodeSet. */
+	get children() { return this._children; }
+
+	/** The node type of the items pf the NodeSet. */
+	get itemType() { return this._itemType; }
+
+	/** Indicates whether the NodeSet uses indexes or not. */
+	get indexed() { return this._indexed; }
+
+	/** Gets the name of child nodes. */
+	get names() { return Object.keys(this.children); }
+
+	/** Gets the number of child nodes. */
+	get count() { return Object.keys(this.children).length; }
+
+	/** Gets first child node. */
+	get first() { return this.getByIndex(0); }
+
+	/** Gets last child node. */
+	get last() { return this.getByIndex(this.count - 1); }
+
+
 	// ------------------------------------------------------------ CONSTRUCTOR
 
 	/** Initializes the NodeSet instance.
@@ -379,30 +403,6 @@ export class NodeSet extends Node {
 		if (data != undefined)
 			this.deserialize(data);
 	}
-
-
-	// ------------------------------------------------------ PUBLIC PROPERTIES
-
-	/** The child nodes of the NodeSet. */
-	get children() { return this._children; }
-
-	/** The node type of the items pf the NodeSet. */
-	get itemType() { return this._itemType; }
-
-	/** Indicates whether the NodeSet uses indexes or not. */
-	get indexed() { return this._indexed; }
-
-	/** Gets the name of child nodes. */
-	get names() { return Object.keys(this.children); }
-
-	/** Gets the number of child nodes. */
-	get count() { return Object.keys(this.children).length; }
-
-	/** Gets first child node. */
-	get first() { return this.getByIndex(0); }
-
-	/** Gets last child node. */
-	get last() { return this.getByIndex(this.count - 1); }
 
 
 	// --------------------------------------------------------- PUBLIC METHODS
@@ -553,29 +553,6 @@ NodeSet.type = new NodeType('NodeSet', 'set', Node.type, NodeSet);
 export class NodeLink extends Node {
 
 
-	// ------------------------------------------------------ PUBLIC PROPERTIES
-
-	/** Initializes the NodeLink node.
-	 * @param name The node name.
-	 * @param parent The parent node.
-	 * @param data The initialization data. */
-	constructor(name, parent, data) {
-
-		// Call the base class constructor
-		super(name, parent, undefined, NodeLink.type);
-
-		// Initialize the elements of the link
-		this._origin = '';
-		this._reference = undefined;
-		this._strength = 1;
-		this._node = undefined;
-
-		// Deserialize the initialization data
-		if (data != undefined)
-			this.deserialize(data);
-	}
-
-
 	// ------------------------------------------------------- PROTECTED FIELDS
 
 	/** The origin of the NodeLink. */ ;
@@ -612,6 +589,29 @@ export class NodeLink extends Node {
 
 	/** The linked Node of the NodeLink. */ ;
 	get node() { return this._node; }
+
+
+	// ------------------------------------------------------ PUBLIC PROPERTIES
+
+	/** Initializes the NodeLink node.
+	 * @param name The node name.
+	 * @param parent The parent node.
+	 * @param data The initialization data. */
+	constructor(name, parent, data) {
+
+		// Call the base class constructor
+		super(name, parent, undefined, NodeLink.type);
+
+		// Initialize the elements of the link
+		this._origin = '';
+		this._reference = undefined;
+		this._strength = 1;
+		this._node = undefined;
+
+		// Deserialize the initialization data
+		if (data != undefined)
+			this.deserialize(data);
+	}
 
 
 	// --------------------------------------------------------- PUBLIC METHODS
@@ -703,6 +703,33 @@ NodeLink.type = new NodeType('Link', ' link', Node.type, NodeLink);
 export class NodeLinkSet extends Node {
 
 
+	// ------------------------------------------------------ PUBLIC PROPERTIES
+
+	/** The origin to the NodeLinkSet. */
+	get origin() { return this._origin; }
+
+	/** The child nodes of the NodeLinkSet. */
+	get children() { return this._children; }
+
+	/** The node type of the items pf the NodeLinkSet. */
+	get itemType() { return this._itemType; }
+
+	/** Indicates whether the NodeLinkSet uses indexes or not. */
+	get indexed() { return this._indexed; }
+
+	/** Gets the name of NodeLinks. */
+	get names() { return Object.keys(this.children); }
+
+	/** Gets the number of NodeLinks. */
+	get count() { return Object.keys(this.children).length; }
+
+	/** Gets first NodeLink. */
+	get first() { return this.getChildByIndex(0); }
+
+	/** Gets last NodeLink. */
+	get last() { return this.getChildByIndex(this.count - 1); }
+
+
 	// ------------------------------------------------------------ CONSTRUCTOR
 
 	/** Initializes the NodeLinkSet instance.
@@ -730,33 +757,6 @@ export class NodeLinkSet extends Node {
 		if (data != undefined)
 			this.deserialize(data);
 	}
-
-
-	// ------------------------------------------------------ PUBLIC PROPERTIES
-
-	/** The origin to the NodeLinkSet. */
-	get origin() { return this._origin; }
-
-	/** The child nodes of the NodeLinkSet. */
-	get children() { return this._children; }
-
-	/** The node type of the items pf the NodeLinkSet. */
-	get itemType() { return this._itemType; }
-
-	/** Indicates whether the NodeLinkSet uses indexes or not. */
-	get indexed() { return this._indexed; }
-
-	/** Gets the name of NodeLinks. */
-	get names() { return Object.keys(this.children); }
-
-	/** Gets the number of NodeLinks. */
-	get count() { return Object.keys(this.children).length; }
-
-	/** Gets first NodeLink. */
-	get first() { return this.getChildByIndex(0); }
-
-	/** Gets last NodeLink. */
-	get last() { return this.getChildByIndex(this.count - 1); }
 
 
 	// --------------------------------------------------------- PUBLIC METHODS
@@ -1083,29 +1083,6 @@ export class JsonSerialization {
 export class Simple extends Node {
 
 
-	// ------------------------------------------------------------ CONSTRUCTOR
-
-	/** Initializes the Simple node.
-	 * @param name The node name.
-	 * @param parent The parent node.
-	 * @param data The initialization data.
-	 * @param def The default value.
-	 * @param type The node type. */
-	constructor(name, parent, data, def, type = Simple.type) {
-
-		// Call the base class constructor
-		super(name, parent, undefined, type);
-
-		// Set the default value
-		if (def != undefined)
-			this._default = def;
-
-		// Deserialize the initialization data
-		if (data != undefined)
-			this.deserialize(data);
-	}
-
-
 	// ------------------------------------------------------- PROTECTED FIELDS
 
 	/** The encapsulated value. */ ;
@@ -1143,6 +1120,29 @@ export class Simple extends Node {
 	}
 
 
+	// ------------------------------------------------------------ CONSTRUCTOR
+
+	/** Initializes the Simple node.
+	 * @param name The node name.
+	 * @param parent The parent node.
+	 * @param data The initialization data.
+	 * @param def The default value.
+	 * @param type The node type. */
+	constructor(name, parent, data, def, type = Simple.type) {
+
+		// Call the base class constructor
+		super(name, parent, undefined, type);
+
+		// Set the default value
+		if (def != undefined)
+			this._default = def;
+
+		// Deserialize the initialization data
+		if (data != undefined)
+			this.deserialize(data);
+	}
+
+
 	// --------------------------------------------------------- PUBLIC METHODS
 
 	/** Deserializes a data item into the instance.
@@ -1167,27 +1167,6 @@ Simple.type = new NodeType('Simple', 'simple', Node.type, Simple);
 
 /** Defines a simple data type that stores a boolean value. */
 export class Boolean extends Simple {
-
-
-	// ------------------------------------------------------------ CONSTRUCTOR
-
-	/** Initializes the Boolean node.
-	 * @param name The node name.
-	 * @param parent The parent node.
-	 * @param data The initialization data.
-	 * @param def The default value. */
-	constructor(name, parent, data, def) {
-
-		// Call the base class constructor
-		super(name, parent, undefined, def, Boolean.type);
-
-		// Create the link
-		this._link = new NodeLink('link', this);
-
-		// Deserialize the initialization data
-		if (data != undefined)
-			this.deserialize(data);
-	}
 
 
 	// ------------------------------------------------------- PROTECTED FIELDS
@@ -1227,6 +1206,27 @@ export class Boolean extends Simple {
 	}
 
 
+	// ------------------------------------------------------------ CONSTRUCTOR
+
+	/** Initializes the Boolean node.
+	 * @param name The node name.
+	 * @param parent The parent node.
+	 * @param data The initialization data.
+	 * @param def The default value. */
+	constructor(name, parent, data, def) {
+
+		// Call the base class constructor
+		super(name, parent, undefined, def, Boolean.type);
+
+		// Create the link
+		this._link = new NodeLink('link', this);
+
+		// Deserialize the initialization data
+		if (data != undefined)
+			this.deserialize(data);
+	}
+
+
 	// --------------------------------------------------------- PUBLIC METHODS
 
 	/** Deserializes a data item into the instance.
@@ -1250,35 +1250,6 @@ Boolean.type = new NodeType('Boolean', 'boolean', Simple.type, Boolean);
 
 /** Defines a simple data type that stores a numeric value. */
 export class Number extends Simple {
-
-
-	// ------------------------------------------------------------ CONSTRUCTOR
-
-	/** Initializes the Number node.
-	 * @param name The node name.
-	 * @param parent The parent node.
-	 * @param data The initialization data.
-	 * @param def The default value.
-	 * @param min The minimum value.
-	 * @param max The maximum value. */
-	constructor(name, parent, data, def, min, max) {
-
-		// Call the base class constructor
-		super(name, parent, undefined, def, Number.type);
-
-		// Create the link
-		this._link = new NodeLink('link', this);
-
-		// Set the default value
-		if (min != undefined)
-			this._min = min;
-		if (max != undefined)
-			this._max = max;
-
-		// Deserialize the initialization data
-		if (data != undefined)
-			this.deserialize(data);
-	}
 
 
 	// ------------------------------------------------------ PUBLIC PROPERTIES
@@ -1351,6 +1322,35 @@ export class Number extends Simple {
 	}
 
 
+	// ------------------------------------------------------------ CONSTRUCTOR
+
+	/** Initializes the Number node.
+	 * @param name The node name.
+	 * @param parent The parent node.
+	 * @param data The initialization data.
+	 * @param def The default value.
+	 * @param min The minimum value.
+	 * @param max The maximum value. */
+	constructor(name, parent, data, def, min, max) {
+
+		// Call the base class constructor
+		super(name, parent, undefined, def, Number.type);
+
+		// Create the link
+		this._link = new NodeLink('link', this);
+
+		// Set the default value
+		if (min != undefined)
+			this._min = min;
+		if (max != undefined)
+			this._max = max;
+
+		// Deserialize the initialization data
+		if (data != undefined)
+			this.deserialize(data);
+	}
+
+
 	// --------------------------------------------------------- PUBLIC METHODS
 
 
@@ -1417,31 +1417,6 @@ Number.type = new NodeType('Number', 'number', Simple.type, Number);
 export class String extends Simple {
 
 
-	// ------------------------------------------------------------ CONSTRUCTOR
-
-	/** Initializes the String node.
-	 * @param name The node name.
-	 * @param parent The parent node.
-	 * @param data The initialization data.
-	 * @param def The default value.
-	 * @param def The default value. */
-	constructor(name, parent, data, def, validValues) {
-
-		// Call the base class constructor
-		super(name, parent, undefined, def, String.type);
-
-		// Initialize the list of valid values
-		this._validValues = validValues || [];
-
-		// Create the link
-		this._link = new NodeLink('link', this);
-
-		// Deserialize the initialization data
-		if (data != undefined)
-			this.deserialize(data);
-	}
-
-
 	// ------------------------------------------------------- PROTECTED FIELDS
 
 	/** The encapsulated textual value. */ ;
@@ -1481,6 +1456,31 @@ export class String extends Simple {
 
 	/** The valid values of the String. */ ;
 	get validValues() { return this._validValues; }
+
+
+	// ------------------------------------------------------------ CONSTRUCTOR
+
+	/** Initializes the String node.
+	 * @param name The node name.
+	 * @param parent The parent node.
+	 * @param data The initialization data.
+	 * @param def The default value.
+	 * @param def The default value. */
+	constructor(name, parent, data, def, validValues) {
+
+		// Call the base class constructor
+		super(name, parent, undefined, def, String.type);
+
+		// Initialize the list of valid values
+		this._validValues = validValues || [];
+
+		// Create the link
+		this._link = new NodeLink('link', this);
+
+		// Deserialize the initialization data
+		if (data != undefined)
+			this.deserialize(data);
+	}
 
 
 	// --------------------------------------------------------- PUBLIC METHODS
@@ -1546,46 +1546,6 @@ String.type = new NodeType('String', 'string', Simple.type, String);
 export class Vector extends Node {
 
 
-	// ------------------------------------------------------------ CONSTRUCTOR
-
-	/** Initializes the Vector node.
-	 * @param name The node name.
-	 * @param parent The parent node.
-	 * @param data The initialization data.
-	 * @param def The default values of the vector. */
-	constructor(name, parent, data, def) {
-
-		// Call the base class constructor
-		super(name, parent, undefined, Vector.type);
-
-		// Set the default values
-		let d = { x: 0, y: 0, z: 0 };
-		if (def) {
-			if (Array.isArray(def)) {
-				for (let i = 0; i < 3; i++)
-					if (def.length > i)
-						d.x = def[i];
-			}
-			else if (typeof def == 'object') {
-				d = { x: def.x || 0, y: def.y || 0, z: def.z || 0 };
-			}
-			else if (typeof def == 'number')
-				d = { x: def, y: def, z: def };
-			else
-				throw Error('Invalid definition value for:' + this.nodePath);
-		}
-
-		// Initialize the child nodes
-		this._x = new Number('x', this, undefined, d.x);
-		this._y = new Number('y', this, undefined, d.y);
-		this._z = new Number('z', this, undefined, d.z);
-
-		// Deserialize the initialization data
-		if (data != undefined)
-			this.deserialize(data);
-	}
-
-
 	// ------------------------------------------------------- PROTECTED FIELDS
 
 	/** The numerical value in the X axis. */ ;
@@ -1633,6 +1593,46 @@ export class Vector extends Node {
 			this._y.value = values.y;
 		if (values.z != undefined)
 			this._z.value = values.z;
+	}
+
+
+	// ------------------------------------------------------------ CONSTRUCTOR
+
+	/** Initializes the Vector node.
+	 * @param name The node name.
+	 * @param parent The parent node.
+	 * @param data The initialization data.
+	 * @param def The default values of the vector. */
+	constructor(name, parent, data, def) {
+
+		// Call the base class constructor
+		super(name, parent, undefined, Vector.type);
+
+		// Set the default values
+		let d = { x: 0, y: 0, z: 0 };
+		if (def) {
+			if (Array.isArray(def)) {
+				for (let i = 0; i < 3; i++)
+					if (def.length > i)
+						d.x = def[i];
+			}
+			else if (typeof def == 'object') {
+				d = { x: def.x || 0, y: def.y || 0, z: def.z || 0 };
+			}
+			else if (typeof def == 'number')
+				d = { x: def, y: def, z: def };
+			else
+				throw Error('Invalid definition value for:' + this.nodePath);
+		}
+
+		// Initialize the child nodes
+		this._x = new Number('x', this, undefined, d.x);
+		this._y = new Number('y', this, undefined, d.y);
+		this._z = new Number('z', this, undefined, d.z);
+
+		// Deserialize the initialization data
+		if (data != undefined)
+			this.deserialize(data);
 	}
 
 
@@ -1810,29 +1810,6 @@ Vector.type = new NodeType('Vector', 'vector', Node.type, Vector);
 /** Defines an RGBA Color. */
 export class Color extends Node {
 
-	// ------------------------------------------------------------ CONSTRUCTOR
-
-	/** Initializes the Vector node.
-	 * @param name The node name.
-	 * @param parent The parent node.
-	 * @param data The initialization data. */
-	constructor(name, parent, data) {
-
-		// Call the base class constructor
-		super(name, parent, undefined, Color.type);
-
-		// Initialize the child nodes
-		this._r = new Number('r', this, undefined, 0, 0, 1);
-		this._g = new Number('g', this, undefined, 0, 0, 1);
-		this._b = new Number('b', this, undefined, 0, 0, 1);
-		this._a = new Number('a', this, undefined, 1, 0, 1);
-		this._text = new String('text', this);
-
-		// Deserialize the initialization data
-		if (data != undefined)
-			this.deserialize(data);
-	}
-
 
 	// ------------------------------------------------------- PROTECTED FIELDS
 
@@ -1904,6 +1881,29 @@ export class Color extends Node {
 		catch (e) {
 			throw Error('Invalid Hex value "' + v + '" for ' + this.nodePath);
 		}
+	}
+
+	// ------------------------------------------------------------ CONSTRUCTOR
+
+	/** Initializes the Vector node.
+	 * @param name The node name.
+	 * @param parent The parent node.
+	 * @param data The initialization data. */
+	constructor(name, parent, data) {
+
+		// Call the base class constructor
+		super(name, parent, undefined, Color.type);
+
+		// Initialize the child nodes
+		this._r = new Number('r', this, undefined, 0, 0, 1);
+		this._g = new Number('g', this, undefined, 0, 0, 1);
+		this._b = new Number('b', this, undefined, 0, 0, 1);
+		this._a = new Number('a', this, undefined, 1, 0, 1);
+		this._text = new String('text', this);
+
+		// Deserialize the initialization data
+		if (data != undefined)
+			this.deserialize(data);
 	}
 
 
@@ -2010,29 +2010,6 @@ Color.type = new NodeType('Color', 'color', Node.type, Color);
 export class BoundingBox extends Node {
 
 
-	// ------------------------------------------------------------ CONSTRUCTOR
-
-	/** Initializes a new BoundingBox instance.
-	 * @param name The name of the instance.
-	 * @param data The initialization data.
-	 * @param type The type of node. */
-	constructor(name, parent, data) {
-
-		// Call the parent constructor
-		super(name, parent, null, BoundingBox.type);
-
-		// Initialize the child nodes
-		this._min = new Vector('min', this, null, Number.NEGATIVE_INFINITY);
-		this._max = new Vector('max', this, null, Number.POSITIVE_INFINITY);
-		this._center = new Vector('center', this);
-		this._size = new Vector('size', this, null, Number.POSITIVE_INFINITY);
-
-		// Deserialize the initialization data
-		if (data != undefined)
-			this.deserialize(data);
-	}
-
-
 	// ------------------------------------------------------ PUBLIC PROPERTIES
 
 	/** The minimum Vector of the BoundingBox. */
@@ -2085,6 +2062,29 @@ export class BoundingBox extends Node {
 	get depth() { return this._size.z.value; }
 
 
+	// ------------------------------------------------------------ CONSTRUCTOR
+
+	/** Initializes a new BoundingBox instance.
+	 * @param name The name of the instance.
+	 * @param data The initialization data.
+	 * @param type The type of node. */
+	constructor(name, parent, data) {
+
+		// Call the parent constructor
+		super(name, parent, null, BoundingBox.type);
+
+		// Initialize the child nodes
+		this._min = new Vector('min', this, null, Number.NEGATIVE_INFINITY);
+		this._max = new Vector('max', this, null, Number.POSITIVE_INFINITY);
+		this._center = new Vector('center', this);
+		this._size = new Vector('size', this, null, Number.POSITIVE_INFINITY);
+
+		// Deserialize the initialization data
+		if (data != undefined)
+			this.deserialize(data);
+	}
+
+
 	// --------------------------------------------------------- PUBLIC METHODS
 
 	/** Serializes the instance to a data object.
@@ -2108,6 +2108,27 @@ BoundingBox.type = new NodeType('BoundingBox', 'bb', Node.type, BoundingBox);
 export class Item extends Node {
 
 
+	// ------------------------------------------------------- PROTECTED FIELDS
+
+	/** The title of the data model Item. */ ;
+
+	/** The description of the data model Item. */ ;
+
+	/** The forms of the data model Item. */ ;
+
+
+	// ------------------------------------------------------ PUBLIC PROPERTIES
+
+	/** The title of the data model Item. */
+	get title() { return this._title; }
+
+	/** The description of the data model Item. */
+	get description() { return this._description; }
+
+	/** The forms of the data model Item. */ ;
+	get forms() { return this._forms; }
+
+
 	// ------------------------------------------------------------ CONSTRUCTOR
 
 	/** Initializes the Item node.
@@ -2129,27 +2150,6 @@ export class Item extends Node {
 		if (data != undefined)
 			this.deserialize(data);
 	}
-
-
-	// ------------------------------------------------------- PROTECTED FIELDS
-
-	/** The title of the data model Item. */ ;
-
-	/** The description of the data model Item. */ ;
-
-	/** The forms of the data model Item. */ ;
-
-
-	// ------------------------------------------------------ PUBLIC PROPERTIES
-
-	/** The title of the data model Item. */
-	get title() { return this._title; }
-
-	/** The description of the data model Item. */
-	get description() { return this._description; }
-
-	/** The forms of the data model Item. */ ;
-	get forms() { return this._forms; }
 }
 
 // --------------------------------------------------------------- METADATA
@@ -2168,34 +2168,6 @@ Item.type = new NodeType('Item', 'item', Node.type, Item);
 
 /** Defines the visual representation of an element of a Knowledge Graph */
 export class Form extends Node {
-
-
-
-	// ------------------------------------------------------------ CONSTRUCTOR
-
-	/** Initializes the Form node.
-	 * @param name The node name.
-	 * @param parent The parent node.
-	 * @param data The initialization data. */
-	constructor(name, parent, data) {
-
-		// Call the base class constructor
-		super(name, parent, undefined, Form.type);
-
-		// Initialize the child nodes
-		this._title = new String('title', this);
-		this._description = new String('description', this);
-		// this._shape = {};
-		this._points = new NodeSet('points', this, Vector.type);
-		this._color = new Color('color', this);
-		this._offset = new Number('offset', this);
-		this._position = new Vector('position', this);
-		this._values = new NodeSet('values', this, Number.type);
-
-		// Deserialize the initialization data
-		if (data != undefined)
-			this.deserialize(data);
-	}
 
 
 	// ------------------------------------------------------- PROTECTED FIELDS
@@ -2244,6 +2216,34 @@ export class Form extends Node {
 
 	/** The extra values of the Form. */
 	get values() { return this._values; }
+
+
+
+	// ------------------------------------------------------------ CONSTRUCTOR
+
+	/** Initializes the Form node.
+	 * @param name The node name.
+	 * @param parent The parent node.
+	 * @param data The initialization data. */
+	constructor(name, parent, data) {
+
+		// Call the base class constructor
+		super(name, parent, undefined, Form.type);
+
+		// Initialize the child nodes
+		this._title = new String('title', this);
+		this._description = new String('description', this);
+		// this._shape = {};
+		this._points = new NodeSet('points', this, Vector.type);
+		this._color = new Color('color', this);
+		this._offset = new Number('offset', this);
+		this._position = new Vector('position', this);
+		this._values = new NodeSet('values', this, Number.type);
+
+		// Deserialize the initialization data
+		if (data != undefined)
+			this.deserialize(data);
+	}
 }
 
 // --------------------------------------------------------------- METADATA
@@ -2262,6 +2262,18 @@ Form.type = new NodeType('Form', 'form', Node.type, Form);
 
 /** Defines the Root Node of the data model. */
 export class Model extends Node {
+
+
+	// ------------------------------------------------------ PUBLIC PROPERTIES
+
+	/** The list of domains of the Model. */
+	get domains() { return this._domains; }
+
+	/** The list of classes of the Model. */
+	get classes() { return this._classes; }
+
+	/** The list of relations of the Model. */
+	get relations() { return this._relations; }
 
 
 	// ------------------------------------------------------------ CONSTRUCTOR
@@ -2284,18 +2296,6 @@ export class Model extends Node {
 		if (data != undefined)
 			this.deserialize(data);
 	}
-
-
-	// ------------------------------------------------------ PUBLIC PROPERTIES
-
-	/** The list of domains of the Model. */
-	get domains() { return this._domains; }
-
-	/** The list of classes of the Model. */
-	get classes() { return this._classes; }
-
-	/** The list of relations of the Model. */
-	get relations() { return this._relations; }
 }
 
 // --------------------------------------------------------------- METADATA
@@ -2311,6 +2311,15 @@ Model.type = new NodeType('Model', 'model', Node.type, Model);
 
 /** Defines a Domain of a data model. */
 export class Domain extends Item {
+
+
+	// ------------------------------------------------------ PUBLIC PROPERTIES
+
+	/** The parent Domain of the Domain. */
+	get extends() { return this._extends; }
+
+	/** The classes of the Domain. */
+	get classes() { return this._classes; }
 
 
 	// ------------------------------------------------------------ CONSTRUCTOR
@@ -2332,15 +2341,6 @@ export class Domain extends Item {
 		if (data != undefined)
 			this.deserialize(data);
 	}
-
-
-	// ------------------------------------------------------ PUBLIC PROPERTIES
-
-	/** The parent Domain of the Domain. */
-	get extends() { return this._extends; }
-
-	/** The classes of the Domain. */
-	get classes() { return this._classes; }
 }
 
 // --------------------------------------------------------------- METADATA
@@ -2366,6 +2366,27 @@ Domain.type = new NodeType('Domain', 'domain', Item.type, Domain);
 export class Class extends Item {
 
 
+	// ------------------------------------------------------ PUBLIC PROPERTIES
+
+	/** The domain of the Class. */
+	get abstract() { return this._abstract; }
+
+	/** The domain names of the Class. */
+	get domains() { return this._domains; }
+
+	/** The relation names of the Class. */
+	get relations() { return this._relations; }
+
+	/** The parent class of the Class. */
+	get extends() { return this._extends; }
+
+	/** The properties of the Class. */
+	get properties() { return this._properties; }
+
+	/** The instances of the Class. */
+	get instances() { return this._instances; }
+
+
 	// ------------------------------------------------------------ CONSTRUCTOR
 
 	/** Initializes the Class node.
@@ -2389,27 +2410,6 @@ export class Class extends Item {
 		if (data != undefined)
 			this.deserialize(data);
 	}
-
-
-	// ------------------------------------------------------ PUBLIC PROPERTIES
-
-	/** The domain of the Class. */
-	get abstract() { return this._abstract; }
-
-	/** The domain names of the Class. */
-	get domains() { return this._domains; }
-
-	/** The relation names of the Class. */
-	get relations() { return this._relations; }
-
-	/** The parent class of the Class. */
-	get extends() { return this._extends; }
-
-	/** The properties of the Class. */
-	get properties() { return this._properties; }
-
-	/** The instances of the Class. */
-	get instances() { return this._instances; }
 }
 
 // --------------------------------------------------------------- METADATA
@@ -2462,6 +2462,15 @@ Property.type = new NodeType('Property', 'property', Item.type, Property);
 export class ClassInstance extends Item {
 
 
+	// ------------------------------------------------------ PUBLIC PROPERTIES
+
+	/** The link to the Class of the ClassInstance. */
+	get class() { return this._class; }
+
+	/** The properties of the ClassInstance. */
+	get properties() { return this._properties; }
+
+
 	// ------------------------------------------------------------ CONSTRUCTOR
 
 	/** Initializes the ClassInstance node.
@@ -2481,15 +2490,6 @@ export class ClassInstance extends Item {
 		if (data != undefined)
 			this.deserialize(data);
 	}
-
-
-	// ------------------------------------------------------ PUBLIC PROPERTIES
-
-	/** The link to the Class of the ClassInstance. */
-	get class() { return this._class; }
-
-	/** The properties of the ClassInstance. */
-	get properties() { return this._properties; }
 }
 
 // --------------------------------------------------------------- METADATA
@@ -2508,6 +2508,18 @@ ClassInstance.type = new NodeType('ClassInstance', 'class_instance', Node.type, 
 
 /** Defines a Relation of a data model.  */
 export class Relation extends Item {
+
+
+	// ------------------------------------------------------ PUBLIC PROPERTIES
+
+	/** The parent class of the Relation. */
+	get extends() { return this._extends; }
+
+	/** The instances of the Relation. */
+	get instances() { return this._instances; }
+
+	/** The list of classes with the Relation. */
+	get classes() { return this._classes; }
 
 
 	// ------------------------------------------------------------ CONSTRUCTOR
@@ -2530,18 +2542,6 @@ export class Relation extends Item {
 		if (data != undefined)
 			this.deserialize(data);
 	}
-
-
-	// ------------------------------------------------------ PUBLIC PROPERTIES
-
-	/** The parent class of the Relation. */
-	get extends() { return this._extends; }
-
-	/** The instances of the Relation. */
-	get instances() { return this._instances; }
-
-	/** The list of classes with the Relation. */
-	get classes() { return this._classes; }
 }
 
 // --------------------------------------------------------------- METADATA
@@ -2557,6 +2557,18 @@ Relation.type = new NodeType('Relation', 'relation', Item.type, Relation);
 
 /** Defines a Relation Instance of a data model. */
 export class RelationInstance extends Item {
+
+
+	// ------------------------------------------------------ PUBLIC PROPERTIES
+
+	/** The link to the Relation of the RelationInstance. */
+	get relation() { return this._relation; }
+
+	/** The origin of the RelationInstance. */
+	get origin() { return this._origin; }
+
+	/** The target of the RelationInstance. */
+	get target() { return this._target; }
 
 
 	// ------------------------------------------------------------ CONSTRUCTOR
@@ -2579,18 +2591,6 @@ export class RelationInstance extends Item {
 		if (data != undefined)
 			this.deserialize(data);
 	}
-
-
-	// ------------------------------------------------------ PUBLIC PROPERTIES
-
-	/** The link to the Relation of the RelationInstance. */
-	get relation() { return this._relation; }
-
-	/** The origin of the RelationInstance. */
-	get origin() { return this._origin; }
-
-	/** The target of the RelationInstance. */
-	get target() { return this._target; }
 }
 
 // --------------------------------------------------------------- METADATA
@@ -2603,6 +2603,49 @@ RelationInstance.type = new NodeType('RelationInstance', 'relation_instance', It
 
 /** Creates a visual component (that can be directly be serialized to SVG). */
 export class Component {
+
+
+	// ------------------------------------------------------ PUBLIC PROPERTIES
+
+	/** The tag of the Component. */
+	get tag() { return this._tag; }
+
+	/** The name of the Component. */
+	get name() { return this._name; }
+
+	/** The width of the Component. */
+	get width() { return this._width; }
+	set width(w) { this._width = w; }
+
+	/** The height of the Component. */
+	get height() { return this._height; }
+	set height(h) { this._height = h; }
+
+	/** The content of the Component. */
+	get content() { return this._content; }
+	set content(c) {
+		this._content = c;
+		if (this._element)
+			this._element.innerHTML = c;
+	}
+
+	/** The encapsulated SVG element. */
+	get element() { return this._element; }
+
+	/** The parent Component instance. */
+	get parent() { return this._parent; }
+
+	/** The child Component instances. */
+	get children() { return this._children; }
+
+	/** The animations of the Component. */
+	get animations() { return this._animations; }
+
+	/** Gets the root of the Component hierarchy
+	 * (useful to avoid issues with multiple viewports). */
+	get rootName() {
+		return this._parent ? this._parent.rootName : this.name;
+	}
 
 
 	// ------------------------------------------------------------ CONSTRUCTOR
@@ -2660,49 +2703,6 @@ export class Component {
 		this._children = [];
 		if (parent != undefined)
 			parent.addChild(this);
-	}
-
-
-	// ------------------------------------------------------ PUBLIC PROPERTIES
-
-	/** The tag of the Component. */
-	get tag() { return this._tag; }
-
-	/** The name of the Component. */
-	get name() { return this._name; }
-
-	/** The width of the Component. */
-	get width() { return this._width; }
-	set width(w) { this._width = w; }
-
-	/** The height of the Component. */
-	get height() { return this._height; }
-	set height(h) { this._height = h; }
-
-	/** The content of the Component. */
-	get content() { return this._content; }
-	set content(c) {
-		this._content = c;
-		if (this._element)
-			this._element.innerHTML = c;
-	}
-
-	/** The encapsulated SVG element. */
-	get element() { return this._element; }
-
-	/** The parent Component instance. */
-	get parent() { return this._parent; }
-
-	/** The child Component instances. */
-	get children() { return this._children; }
-
-	/** The animations of the Component. */
-	get animations() { return this._animations; }
-
-	/** Gets the root of the Component hierarchy
-	 * (useful to avoid issues with multiple viewports). */
-	get rootName() {
-		return this._parent ? this._parent.rootName : this.name;
 	}
 
 
@@ -2812,6 +2812,24 @@ Component.anchor = ['none', 'top-left', 'top', 'top-right', 'left',
 export class Element extends Node {
 
 
+	// ------------------------------------------------------ PUBLIC PROPERTIES
+
+	/** The main Component of the Element. */
+	get component() { return this._component; }
+
+	/** The position of the Element. */
+	get position() { return this._position; }
+
+	/** The width of the Element. */
+	get width() { return this._width; }
+
+	/** The height of the Element. */
+	get height() { return this._height; }
+
+	/** The anchor of the Element. */
+	get anchor() { return this._anchor; }
+
+
 	// ------------------------------------------------------------ CONSTRUCTOR
 
 	/** Initializes a new Element instance.
@@ -2850,24 +2868,6 @@ export class Element extends Node {
 		if (parentElement)
 			parentElement.component.addChild(this._component);
 	}
-
-
-	// ------------------------------------------------------ PUBLIC PROPERTIES
-
-	/** The main Component of the Element. */
-	get component() { return this._component; }
-
-	/** The position of the Element. */
-	get position() { return this._position; }
-
-	/** The width of the Element. */
-	get width() { return this._width; }
-
-	/** The height of the Element. */
-	get height() { return this._height; }
-
-	/** The anchor of the Element. */
-	get anchor() { return this._anchor; }
 
 
 	// --------------------------------------------------------- PUBLIC METHODS
@@ -2928,6 +2928,18 @@ Element.anchorValues = ['none', 'top-left', 'top', 'top-right', 'left',
 export class Segment extends Node {
 
 
+	// ------------------------------------------------------ PUBLIC PROPERTIES
+
+	/** The parent Path of the Segment. */
+	get parentPath() { return this._parentPath; }
+
+	/** The start point of the Segment. */
+	get start() { return this._start; }
+
+	/** The end point of the Segment. */
+	get end() { return this._end; }
+
+
 	// ------------------------------------------------------------ CONSTRUCTOR
 
 	/** Initializes a new Segment instance.
@@ -2958,18 +2970,6 @@ export class Segment extends Node {
 		if (this._start.isUndefined && this._parentPath)
 			this.start.copy(this._parentPath.end);
 	}
-
-
-	// ------------------------------------------------------ PUBLIC PROPERTIES
-
-	/** The parent Path of the Segment. */
-	get parentPath() { return this._parentPath; }
-
-	/** The start point of the Segment. */
-	get start() { return this._start; }
-
-	/** The end point of the Segment. */
-	get end() { return this._end; }
 }
 
 // --------------------------------------------------------------- METADATA
@@ -3015,6 +3015,11 @@ Line.type = new NodeType('Line', 'line', Segment.type, Line);
 /** Defines a Arc Segment of a path. */
 export class Arc extends Segment {
 
+	// ------------------------------------------------------ PUBLIC PROPERTIES
+
+	/** The radius of the Arc. */
+	get radius() { return this._radius; }
+
 
 	// ------------------------------------------------------------ CONSTRUCTOR
 
@@ -3034,11 +3039,6 @@ export class Arc extends Segment {
 		if (data != undefined)
 			this.deserialize(data);
 	}
-
-	// ------------------------------------------------------ PUBLIC PROPERTIES
-
-	/** The radius of the Arc. */
-	get radius() { return this._radius; }
 }
 
 // --------------------------------------------------------------- METADATA
@@ -3055,27 +3055,6 @@ Arc.type = new NodeType('Arc', 'arc', Segment.type, Arc);
 
 /** Defines a path. */
 export class Path extends Node {
-
-
-	// ------------------------------------------------------------ CONSTRUCTOR
-
-	/** Initializes a new Path instance.
-	 * @param name The name of the instance.
-	 * @param parent The parent node.
-	 * @param data The initialization data.
-	 * @param type The type of node. */
-	constructor(name, parent, data) {
-
-		// Call the parent class constructor
-		super(name, parent, undefined, Path.type);
-
-		// Initialize the child nodes
-		this._segments = new NodeSet('segments', this, Segment.type);
-
-		// Deserialize the initialization data
-		if (data != undefined)
-			this.deserialize(data);
-	}
 
 
 	// ------------------------------------------------------ PUBLIC PROPERTIES
@@ -3099,6 +3078,27 @@ export class Path extends Node {
 		if (segments == 0)
 			throw Error('No segments in: ' + this.nodePath);
 		return this._segments.getByIndex(segments - 1).end;
+	}
+
+
+	// ------------------------------------------------------------ CONSTRUCTOR
+
+	/** Initializes a new Path instance.
+	 * @param name The name of the instance.
+	 * @param parent The parent node.
+	 * @param data The initialization data.
+	 * @param type The type of node. */
+	constructor(name, parent, data) {
+
+		// Call the parent class constructor
+		super(name, parent, undefined, Path.type);
+
+		// Initialize the child nodes
+		this._segments = new NodeSet('segments', this, Segment.type);
+
+		// Deserialize the initialization data
+		if (data != undefined)
+			this.deserialize(data);
 	}
 
 
@@ -3241,6 +3241,24 @@ Path._epsilon = 0.00001;
 export class Shape extends Element {
 
 
+	// ------------------------------------------------------ PUBLIC PROPERTIES
+
+	/** The color of the Shape. */
+	get color() { return this._color; }
+
+	/** The path of the Shape. */
+	get paths() { return this._paths; }
+
+	/** The fill of the Shape. */
+	get fill() { return this._path; }
+
+	/** The strokes of the Shape. */
+	get strokes() { return this._strokes; }
+
+	/** The child shapes of the Shape. */
+	get shapes() { return this._shapes; }
+
+
 	// ------------------------------------------------------------ CONSTRUCTOR
 
 	/** Initializes a new Shape instance.
@@ -3266,24 +3284,6 @@ export class Shape extends Element {
 		if (data != undefined)
 			this.deserialize(data);
 	}
-
-
-	// ------------------------------------------------------ PUBLIC PROPERTIES
-
-	/** The color of the Shape. */
-	get color() { return this._color; }
-
-	/** The path of the Shape. */
-	get paths() { return this._paths; }
-
-	/** The fill of the Shape. */
-	get fill() { return this._path; }
-
-	/** The strokes of the Shape. */
-	get strokes() { return this._strokes; }
-
-	/** The child shapes of the Shape. */
-	get shapes() { return this._shapes; }
 
 
 	// --------------------------------------------------------- PUBLIC METHODS
@@ -3346,6 +3346,23 @@ Shape.type = new NodeType('Shape', 'shape', Node.type, Shape);
 /** Defines a stroke shape. */
 export class Stroke extends Node {
 
+	// ------------------------------------------------------ PUBLIC PROPERTIES
+
+	/** The component of the Stroke. */
+	get shape() { return this._shape; }
+
+	/** The component of the Stroke. */
+	get component() { return this._component; }
+
+	/** The color of the Stroke. */
+	get color() { return this._color; }
+
+	/** The width of the Stroke. */
+	get width() { return this._width; }
+
+	/** The offset of the Stroke. */
+	get offset() { return this._offset; }
+
 
 	// ------------------------------------------------------------ CONSTRUCTOR
 
@@ -3376,23 +3393,6 @@ export class Stroke extends Node {
 		if (data != undefined)
 			this.deserialize(data);
 	}
-
-	// ------------------------------------------------------ PUBLIC PROPERTIES
-
-	/** The component of the Stroke. */
-	get shape() { return this._shape; }
-
-	/** The component of the Stroke. */
-	get component() { return this._component; }
-
-	/** The color of the Stroke. */
-	get color() { return this._color; }
-
-	/** The width of the Stroke. */
-	get width() { return this._width; }
-
-	/** The offset of the Stroke. */
-	get offset() { return this._offset; }
 
 
 	update(time, forced) {
@@ -3430,6 +3430,15 @@ Stroke.type = new NodeType('Stroke', 'stroke', Node.type, Stroke);
 export class Circle extends Shape {
 
 
+	// ------------------------------------------------------ PUBLIC PROPERTIES
+
+	/** The radius of the Circle. */
+	get radius() { return this._radius; }
+
+	/** The number of segments of the Circle. */
+	get segments() { return this._segments; }
+
+
 	// ------------------------------------------------------------ CONSTRUCTOR
 
 	/** Initializes a new Circle instance.
@@ -3449,15 +3458,6 @@ export class Circle extends Shape {
 		if (data != undefined)
 			this.deserialize(data);
 	}
-
-
-	// ------------------------------------------------------ PUBLIC PROPERTIES
-
-	/** The radius of the Circle. */
-	get radius() { return this._radius; }
-
-	/** The number of segments of the Circle. */
-	get segments() { return this._segments; }
 
 
 	// --------------------------------------------------------- PUBLIC METHODS
@@ -3506,6 +3506,18 @@ Circle.type = new NodeType('Circle', 'circle', Shape.type, Circle);
 export class Rectangle extends Shape {
 
 
+	// ------------------------------------------------------ PUBLIC PROPERTIES
+
+	/** The width of the Rectangle. */
+	get width() { return this._width; }
+
+	/** The height of the Rectangle. */
+	get height() { return this._height; }
+
+	/** The radius of the Rectangle. */
+	get radius() { return this._radius; }
+
+
 	// ------------------------------------------------------------ CONSTRUCTOR
 
 	/** Initializes a new Rectangle instance.
@@ -3526,18 +3538,6 @@ export class Rectangle extends Shape {
 		if (data != undefined)
 			this.deserialize(data);
 	}
-
-
-	// ------------------------------------------------------ PUBLIC PROPERTIES
-
-	/** The width of the Rectangle. */
-	get width() { return this._width; }
-
-	/** The height of the Rectangle. */
-	get height() { return this._height; }
-
-	/** The radius of the Rectangle. */
-	get radius() { return this._radius; }
 
 
 	// --------------------------------------------------------- PUBLIC METHODS
@@ -3609,6 +3609,15 @@ Rectangle.type = new NodeType('Rectangle', 'rectangle', Shape.type, Rectangle);
 export class Polygon extends Shape {
 
 
+	// ------------------------------------------------------ PUBLIC PROPERTIES
+
+	/** The radius of the Polygon. */
+	get radius() { return this._radius; }
+
+	/** The number of segments of the Polygon. */
+	get segments() { return this._segments; }
+
+
 	// ------------------------------------------------------------ CONSTRUCTOR
 
 	/** Initializes a new Polygon instance.
@@ -3629,15 +3638,6 @@ export class Polygon extends Shape {
 			this.deserialize(data);
 
 	}
-
-
-	// ------------------------------------------------------ PUBLIC PROPERTIES
-
-	/** The radius of the Polygon. */
-	get radius() { return this._radius; }
-
-	/** The number of segments of the Polygon. */
-	get segments() { return this._segments; }
 
 
 	// --------------------------------------------------------- PUBLIC METHODS
@@ -3684,6 +3684,25 @@ Polygon.type = new NodeType('Polygon', 'polygon', Shape.type, Polygon);
 export class Text extends Shape {
 
 
+	// ------------------------------------------------------ PUBLIC PROPERTIES
+
+
+	/** The font of the Text. */
+	get font() { return this._font; }
+
+	/** The font weight of the Text. */
+	get weight() { return this._weight; }
+
+	/** The font size of the Text. */
+	get fontSize() { return this._fontSize; }
+
+	/** The horizontal align of the Text. */
+	get align() { return this._align; }
+
+	/** The anchor of the Text. */
+	get anchor() { return this._anchor; }
+
+
 	// ------------------------------------------------------------ CONSTRUCTOR
 
 	/** Initializes a new Text instance.
@@ -3709,25 +3728,6 @@ export class Text extends Shape {
 		if (data != undefined)
 			this.deserialize(data);
 	}
-
-
-	// ------------------------------------------------------ PUBLIC PROPERTIES
-
-
-	/** The font of the Text. */
-	get font() { return this._font; }
-
-	/** The font weight of the Text. */
-	get weight() { return this._weight; }
-
-	/** The font size of the Text. */
-	get fontSize() { return this._fontSize; }
-
-	/** The horizontal align of the Text. */
-	get align() { return this._align; }
-
-	/** The anchor of the Text. */
-	get anchor() { return this._anchor; }
 
 
 	// --------------------------------------------------------- PUBLIC METHODS
@@ -3861,6 +3861,24 @@ Text.align = ['left', 'center', 'right'];
 export class Animation extends Node {
 
 
+	// ------------------------------------------------------ PUBLIC PROPERTIES
+
+	/** The curves of the animation. */
+	get curves() { return this._curves; }
+
+	/** Indicates if the animation should be played automatically. */
+	get autoplay() { return this._autoplay; }
+
+	/** Indicates if the animation should be played in reverse . */
+	get reverse() { return this._reverse; }
+
+	/** The curves of the animation. */
+	get currentTime() { return this._currentTime; }
+
+	/** The curves of the animation. */
+	get previousTime() { return this._previousTime; }
+
+
 
 	// ------------------------------------------------------------ CONSTRUCTOR
 
@@ -3886,24 +3904,6 @@ export class Animation extends Node {
 		if (this._autoplay.value)
 			this.play();
 	}
-
-
-	// ------------------------------------------------------ PUBLIC PROPERTIES
-
-	/** The curves of the animation. */
-	get curves() { return this._curves; }
-
-	/** Indicates if the animation should be played automatically. */
-	get autoplay() { return this._autoplay; }
-
-	/** Indicates if the animation should be played in reverse . */
-	get reverse() { return this._reverse; }
-
-	/** The curves of the animation. */
-	get currentTime() { return this._currentTime; }
-
-	/** The curves of the animation. */
-	get previousTime() { return this._previousTime; }
 
 
 	/** Plays the Animation. */
@@ -3932,6 +3932,18 @@ Animation.type = new NodeType('Animation', 'animation', Node.type, Animation);
 export class AnimationCurve extends Node {
 
 
+	// ------------------------------------------------------ PUBLIC PROPERTIES
+
+	/** The property of the AnimationCurve. */
+	get property() { return this._property; }
+
+	/** The keys of the AnimationCurve. */
+	get keys() { return this._keys; }
+
+	/** The easing function of the AnimationCurve. */
+	get easing() { return this._easing; }
+
+
 	// ------------------------------------------------------------ CONSTRUCTOR
 
 	/** Initializes a new Animation instance.
@@ -3952,18 +3964,6 @@ export class AnimationCurve extends Node {
 		if (data != undefined)
 			this.deserialize(data);
 	}
-
-
-	// ------------------------------------------------------ PUBLIC PROPERTIES
-
-	/** The property of the AnimationCurve. */
-	get property() { return this._property; }
-
-	/** The keys of the AnimationCurve. */
-	get keys() { return this._keys; }
-
-	/** The easing function of the AnimationCurve. */
-	get easing() { return this._easing; }
 }
 
 // --------------------------------------------------------------- METADATA
@@ -3975,6 +3975,15 @@ AnimationCurve.type = new NodeType('AnimationCurve', 'curve', Node.type, Animati
 
 /** Defines an animation key. */
 export class AnimationKey extends Node {
+
+
+	// ------------------------------------------------------ PUBLIC PROPERTIES
+
+	/** The time of the AnimationKey. */
+	get time() { return this._time; }
+
+	/** The value of the AnimationKey. */
+	get value() { return this._value; }
 
 
 	// ------------------------------------------------------------ CONSTRUCTOR
@@ -3996,15 +4005,6 @@ export class AnimationKey extends Node {
 		if (data != undefined)
 			this.deserialize(data);
 	}
-
-
-	// ------------------------------------------------------ PUBLIC PROPERTIES
-
-	/** The time of the AnimationKey. */
-	get time() { return this._time; }
-
-	/** The value of the AnimationKey. */
-	get value() { return this._value; }
 }
 
 // --------------------------------------------------------------- METADATA
@@ -4023,6 +4023,15 @@ AnimationKey.type = new NodeType('AnimationKey', 'key', Node.type, AnimationKey)
 
 /** Defines a visual style. */
 export class Style extends Node {
+
+
+	// ------------------------------------------------------ PUBLIC PROPERTIES
+
+	/** The color palette of the Style. */
+	get colors() { return this._colors; }
+
+	/** The font name of the Style. */
+	get font() { return this._font; }
 
 
 	// ------------------------------------------------------------ CONSTRUCTOR
@@ -4044,15 +4053,6 @@ export class Style extends Node {
 		if (data != undefined)
 			this.deserialize(data);
 	}
-
-
-	// ------------------------------------------------------ PUBLIC PROPERTIES
-
-	/** The color palette of the Style. */
-	get colors() { return this._colors; }
-
-	/** The font name of the Style. */
-	get font() { return this._font; }
 
 
 	// --------------------------------------------------------- PUBLIC METHODS
@@ -4097,6 +4097,43 @@ Style.type = new NodeType('Style', 'style', Node.type, Style);
 
 /** Defines a Viewport to display the user interface. */
 export class Viewport extends Element {
+
+
+	// ------------------------------------------------------ PUBLIC PROPERTIES
+
+
+	/** The resources Component of the Viewport. */
+	get resourcesComponent() { return this._resourcesComponent; }
+
+	/** The script Component of the Viewport. */
+	get scriptComponent() { return this._scriptComponent; }
+
+	/** The background Component of the Viewport. */
+	get backgroundComponent() { return this._backgroundComponent; }
+
+	/** The layers Component of the Viewport. */
+	get layersComponent() { return this._layersComponent; }
+
+	/** The state of the Viewport (hidden, normal, maximized or fullscreen). */
+	get state() { return this._state; }
+
+	/** The name of the current style of the Viewport. */
+	get style() { return this._style; }
+
+	/** The id of the parent HTML element where of the Viewport. */
+	get parentElement() { return this._parentElement; }
+
+	/** The color of the Viewport. */
+	get color() { return this._color; }
+
+	/** The styles of the Viewport. */
+	get styles() { return this._styles; }
+
+	/** The shapes of the Viewport. */
+	get shapes() { return this._shapes; }
+
+	/** The layers of the Viewport. */
+	get layers() { return this._layers; }
 
 
 	// ------------------------------------------------------------ CONSTRUCTOR
@@ -4168,43 +4205,6 @@ export class Viewport extends Element {
 		// Start the update
 		this.update();
 	}
-
-
-	// ------------------------------------------------------ PUBLIC PROPERTIES
-
-
-	/** The resources Component of the Viewport. */
-	get resourcesComponent() { return this._resourcesComponent; }
-
-	/** The script Component of the Viewport. */
-	get scriptComponent() { return this._scriptComponent; }
-
-	/** The background Component of the Viewport. */
-	get backgroundComponent() { return this._backgroundComponent; }
-
-	/** The layers Component of the Viewport. */
-	get layersComponent() { return this._layersComponent; }
-
-	/** The state of the Viewport (hidden, normal, maximized or fullscreen). */
-	get state() { return this._state; }
-
-	/** The name of the current style of the Viewport. */
-	get style() { return this._style; }
-
-	/** The id of the parent HTML element where of the Viewport. */
-	get parentElement() { return this._parentElement; }
-
-	/** The color of the Viewport. */
-	get color() { return this._color; }
-
-	/** The styles of the Viewport. */
-	get styles() { return this._styles; }
-
-	/** The shapes of the Viewport. */
-	get shapes() { return this._shapes; }
-
-	/** The layers of the Viewport. */
-	get layers() { return this._layers; }
 
 
 	// --------------------------------------------------------- PUBLIC METHODS
@@ -4352,6 +4352,22 @@ Viewport.instances = [];
 export class Context extends Node {
 
 
+	// ------------------------------------------------------- PROTECTED FIELDS
+
+	/** The variable of the Context. */ ;
+
+	/** The value of the Context */ ;
+
+
+	// ------------------------------------------------------ PUBLIC PROPERTIES
+
+	/** The variable of the Context. */ ;
+	get variable() { return this._variable; }
+
+	/** The value of the Context. */ ;
+	get value() { return this._value; }
+
+
 	// ------------------------------------------------------------ CONSTRUCTOR
 
 	/** Initializes a new Context instance.
@@ -4371,22 +4387,6 @@ export class Context extends Node {
 		if (data != undefined)
 			this.deserialize(data);
 	}
-
-
-	// ------------------------------------------------------- PROTECTED FIELDS
-
-	/** The variable of the Context. */ ;
-
-	/** The value of the Context */ ;
-
-
-	// ------------------------------------------------------ PUBLIC PROPERTIES
-
-	/** The variable of the Context. */ ;
-	get variable() { return this._variable; }
-
-	/** The value of the Context. */ ;
-	get value() { return this._value; }
 
 
 	// --------------------------------------------------------- PUBLIC METHODS
@@ -4439,6 +4439,27 @@ Context.type = new NodeType('Context', 'context', Node.type, Context);
 export class Action extends Node {
 
 
+	// ------------------------------------------------------- PROTECTED FIELDS
+
+	/** The event of the Action. */ ;
+
+	/** The variable of the Action. */ ;
+
+	/** The value of the Action */ ;
+
+
+	// ------------------------------------------------------ PUBLIC PROPERTIES
+
+	/** The event of the Action. */ ;
+	get event() { return this._event; }
+
+	/** The variable of the Action. */ ;
+	get variable() { return this._variable; }
+
+	/** The value of the Action. */ ;
+	get value() { return this._value; }
+
+
 	// ------------------------------------------------------------ CONSTRUCTOR
 
 	/** Initializes a new Action instance.
@@ -4459,27 +4480,6 @@ export class Action extends Node {
 		if (data != undefined)
 			this.deserialize(data);
 	}
-
-
-	// ------------------------------------------------------- PROTECTED FIELDS
-
-	/** The event of the Action. */ ;
-
-	/** The variable of the Action. */ ;
-
-	/** The value of the Action */ ;
-
-
-	// ------------------------------------------------------ PUBLIC PROPERTIES
-
-	/** The event of the Action. */ ;
-	get event() { return this._event; }
-
-	/** The variable of the Action. */ ;
-	get variable() { return this._variable; }
-
-	/** The value of the Action. */ ;
-	get value() { return this._value; }
 }
 
 // --------------------------------------------------------------- METADATA
@@ -4501,6 +4501,30 @@ Action.type = new NodeType('Action', 'action', Node.type, Action);
 
 /** Defines a Widget of the user interface. */
 export class Widget extends Element {
+
+
+	// ------------------------------------------------------ PUBLIC PROPERTIES
+
+	/** The whether the node is abstract or not. */
+	get abstract() { return this._abstract; }
+
+	/** The Widget node to extend from. */
+	get extends() { return this._extends; }
+
+	/** The context of the Widget. */
+	get context() { return this._context; }
+
+	/** The variables of the Widget. */
+	get variables() { return this._variables; }
+
+	/** The actions of the Widget. */
+	get actions() { return this._actions; }
+
+	/** The shapes of the Widget. */
+	get shapes() { return this._shapes; }
+
+	/** The child widgets of the Widget. */
+	get widgets() { return this._widgets; }
 
 
 	// ------------------------------------------------------------ CONSTRUCTOR
@@ -4530,30 +4554,6 @@ export class Widget extends Element {
 
 		this._component.element.addEventListener('click', (event) => { this.react(event); });
 	}
-
-
-	// ------------------------------------------------------ PUBLIC PROPERTIES
-
-	/** The whether the node is abstract or not. */
-	get abstract() { return this._abstract; }
-
-	/** The Widget node to extend from. */
-	get extends() { return this._extends; }
-
-	/** The context of the Widget. */
-	get context() { return this._context; }
-
-	/** The variables of the Widget. */
-	get variables() { return this._variables; }
-
-	/** The actions of the Widget. */
-	get actions() { return this._actions; }
-
-	/** The shapes of the Widget. */
-	get shapes() { return this._shapes; }
-
-	/** The child widgets of the Widget. */
-	get widgets() { return this._widgets; }
 
 
 	// --------------------------------------------------------- PUBLIC METHODS
@@ -4646,6 +4646,21 @@ Widget.type = new NodeType('Widget', 'widget', Widget.type, Widget);
 export class Layer extends Element {
 
 
+	// ------------------------------------------------------ PUBLIC PROPERTIES
+
+	/** Whether to enable panning the layer or not. */
+	get pan() { return this._pan; }
+
+	/** The zoom factor of the layer. */
+	get zoom() { return this._zoom; }
+
+	/** The shapes of the layer. */
+	get shapes() { return this._shapes; }
+
+	/** The child widgets of the layer. */
+	get widgets() { return this._widgets; }
+
+
 	// ------------------------------------------------------------ CONSTRUCTOR
 
 	/** Initializes a new Layer instance.
@@ -4702,21 +4717,6 @@ export class Layer extends Element {
 			e.preventDefault();
 		});
 	}
-
-
-	// ------------------------------------------------------ PUBLIC PROPERTIES
-
-	/** Whether to enable panning the layer or not. */
-	get pan() { return this._pan; }
-
-	/** The zoom factor of the layer. */
-	get zoom() { return this._zoom; }
-
-	/** The shapes of the layer. */
-	get shapes() { return this._shapes; }
-
-	/** The child widgets of the layer. */
-	get widgets() { return this._widgets; }
 
 
 	// --------------------------------------------------------- PUBLIC METHODS
@@ -4913,9 +4913,11 @@ export class Generator extends Widget {
 		let lines = {}, lineArray = [], lineIndex = 0, colors = ['#ef1de5', '#037e8e', '#00abcd',
 			'#620d7d', '#b206f9', '#082ebf', '#a59dcc', '#582bb1'], widths = [10, 10, 10, 10, 10, 10, 10, 10];
 		for (let lineData of model.relations) {
-			let line = { name: lineData.name, nodes: [], path: [],
+			let line = {
+				name: lineData.name, nodes: [], path: [],
 				color: colors[lineIndex], width: widths[lineIndex],
-				links: [], segments: [], paths: [] };
+				links: [], segments: [], paths: []
+			};
 			lines[lineData.name] = line;
 			lineArray.push(line);
 			lineIndex++;
@@ -4928,9 +4930,11 @@ export class Generator extends Widget {
 		for (let nodeData of model.classes) {
 			if (nodeData.abstract.value)
 				continue;
-			let node = { name: nodeData.name,
+			let node = {
+				name: nodeData.name,
 				data: nodeData, lines: [], links: [],
-				position: new Vector(nodeData.name + 'Position') };
+				position: new Vector(nodeData.name + 'Position')
+			};
 
 			for (let relation of nodeData.relations) {
 				node.lines.push(relation.name);
@@ -4997,8 +5001,10 @@ export class Generator extends Widget {
 				}
 
 				// Create the links between the nodes
-				let start = previousNodeInLine.position, end = node.position, current = start.values, goal = end.values, link = { line: line.name, start: previousNodeInLine.name,
-					end: node.name, path: [current] };
+				let start = previousNodeInLine.position, end = node.position, current = start.values, goal = end.values, link = {
+					line: line.name, start: previousNodeInLine.name,
+					end: node.name, path: [current]
+				};
 
 
 				// Look for the path to the
@@ -5007,13 +5013,13 @@ export class Generator extends Widget {
 
 					// Create the possible options
 					let options = [
-						{ x: current.x + 0, y: current.y - 1 },
-						{ x: current.x + 1, y: current.y - 1 },
-						{ x: current.x + 1, y: current.y + 0 },
-						{ x: current.x + 1, y: current.y + 1 },
-						{ x: current.x + 0, y: current.y + 1 },
-						{ x: current.x - 1, y: current.y + 1 },
-						{ x: current.x - 1, y: current.y + 0 },
+						{ x: current.x + 0, y: current.y - 1 }, // N
+						{ x: current.x + 1, y: current.y - 1 }, // NE
+						{ x: current.x + 1, y: current.y + 0 }, // E
+						{ x: current.x + 1, y: current.y + 1 }, // SE
+						{ x: current.x + 0, y: current.y + 1 }, // S
+						{ x: current.x - 1, y: current.y + 1 }, // SW
+						{ x: current.x - 1, y: current.y + 0 }, // W
 						{ x: current.x - 1, y: current.y - 1 }, // NW
 					];
 
@@ -5090,9 +5096,11 @@ export class Generator extends Widget {
 
 				// a.x *= 100; a.y *= 100; b.x *= 100; b.y *= 100;
 				let line = lines[link.line];
-				line.segments.push({ type: 'line',
+				line.segments.push({
+					type: 'line',
 					start: { x: ax * 100, y: ay * 100 },
-					end: { x: bx * 100, y: by * 100 } });
+					end: { x: bx * 100, y: by * 100 }
+				});
 			}
 		}
 
@@ -5101,9 +5109,11 @@ export class Generator extends Widget {
 			if (line.segments.length == 0)
 				continue;
 			console.log(line.segments);
-			this.shapes.add("shape", { color: "none",
+			this.shapes.add("shape", {
+				color: "none",
 				paths: [{ segments: line.segments }],
-				strokes: [{ width: line.width, color: line.color }] });
+				strokes: [{ width: line.width, color: line.color }]
+			});
 		}
 
 		// Create the widgets
@@ -5216,6 +5226,18 @@ Generator.type = new NodeType('Generator', 'generator', Widget.type, Generator);
 export class SHISHOU extends Node {
 
 
+	// ------------------------------------------------------ PUBLIC PROPERTIES
+
+	/** The title of the SHISHOU instance. */
+	get title() { return this._title; }
+
+	/** The data model of the SHISHOU instance. */
+	get model() { return this._model; }
+
+	/** The Viewports of the SHISHOU instance. */
+	get viewports() { return this._viewports; }
+
+
 	// ------------------------------------------------------------ CONSTRUCTOR
 
 	/** Initializes the SHISHOU instance.
@@ -5242,15 +5264,25 @@ export class SHISHOU extends Node {
 
 		// Deserialize the initialization data
 		if (data) {
-			if (typeof data != 'object')
-				throw Error('Invalid data for ' + this.nodePath);
+			if (typeof data == 'string') {
+				fetch(data).then((response) => response.text())
+					.then((data) => {
+					let d = JsonSerialization.deserialize(data);
+					this.deserialize(d);
+					if (this.onLoad)
+						this.onLoad(this);
+					this.update();
+				});
+				return;
+			}
+			else if (typeof data != 'object')
+				throw Error('Invalid data for SHISHOU instance' + this.nodePath);
 			this.deserialize(data);
 		}
 
 		//
 		if (this._viewports.count == 0) {
 			new Viewport('DefaultViewport', this._viewports, { state: 'maximized', layers: [{ pan: true, debug: true }] });
-
 		}
 
 		// Start updating everything
@@ -5258,35 +5290,11 @@ export class SHISHOU extends Node {
 	}
 
 
-	// ------------------------------------------------------ PUBLIC PROPERTIES
-
-	/** The title of the SHISHOU instance. */
-	get title() { return this._title; }
-
-	/** The data model of the SHISHOU instance. */
-	get model() { return this._model; }
-
-	/** The Viewports of the SHISHOU instance. */
-	get viewports() { return this._viewports; }
-
-
 	// --------------------------------------------------------- PUBLIC METHODS
 
 	/** Facilitates the creation of a new SHISHOU instance.
 	 * @param data The initialization data. */
-	static init(data) {
-		if (typeof data == 'object')
-			return new SHISHOU(data);
-		else if (typeof data == 'string') {
-			fetch(data).then((response) => response.text())
-				.then((data) => {
-				let d = JsonSerialization.deserialize(data);
-				return new SHISHOU(d);
-			});
-		}
-		else
-			throw Error('Invalid data for SHISHOU initialization');
-	}
+	static init(data) { return new SHISHOU(data); }
 }
 
 // --------------------------------------------------------------- METADATA
@@ -5302,8 +5310,6 @@ SHISHOU.version = '0.1';
 
 /** The name of the SHISHOU framework. */
 SHISHOU.instances = [];
-
-
 
 
 // Check the type of environment the system is running on

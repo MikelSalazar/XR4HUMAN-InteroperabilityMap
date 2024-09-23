@@ -320,7 +320,7 @@
 			},
 			"DataGovernance": {
 				"extends": "Element",
-				"title": "Data Provenance",
+				"title": "Data Governance",
 				"description": "Data governance means setting internal standards—data policies—that apply to \n how data is gathered, stored, processed, and disposed of. It governs who can access what kinds of data and \n what kinds of data are under governance. Data governance is a term used on both a macro and a micro level. \n The former is a political concept and forms part of international relations and Internet governance; the latter \n is a data management concept and forms part of corporate data governance.",
 				"domains": {},
 				"relations": { "Ethicists":1, "Regulators":1, "Developers":1, "Scientists":1, "Users":1 },
@@ -486,13 +486,13 @@
 						},
 						"shapes": [
 							{ "name": "Circle", "type": "circle", "radius": 30, "color": "url(#Background)", "strokes": [{ "width": 5, "color": "url(#Foreground)"}] },
-							{ "name": "Title", "type": "text",  "font": "Arial", "weight": "bold", "content": { "link": "variables/title" }, "position": [0, -20], "anchor": "bottom" }
+							{ "name": "Title", "type": "text",  "font": "Arial", "fontSize": 30, "weight": "bold", "content": { "link": "variables/title" }, "position": [0, -20], "anchor": "bottom" }
 						],
 						"actions": [ { "event": "click", "variable": "variables/showData", "value": "true" } ],
 						"widgets": [
 							{
 								"name": "StationToolTip",
-								// "context": { "variable": "variables/showData", "value": "true" },
+								"context": { "variable": "variables/showData", "value": "true" },
 								"shapes": [ { "type": "text", "font": "Arial", "weight": "bold", "content": { "link": "variables/description" }, "position": [0, 60], "anchor": "top", "color": "lightgrey" } ],
 								"actions": [ { "event": "click", "variable": "variables/showData", "value": "false" } ]
 							}
