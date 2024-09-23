@@ -11,27 +11,27 @@
 		"domains": {
 			"Standards": {
 				"title": "Standards",
-				"description": "3D Model/Data Formats; User Experience Description Languages; \n Sensors and IoT; Decentralized Computing Hardware Devices and Wearables; Open Source/Hardware; \n 3D Middleware and APIs; Open APIs; SDKs; Network; Architecture; Usability (UI/UX); Experience Discovery"
+				"description": ""
 			},
 			"Ethics": {
 				"title": "Ethics",
-				"description": "Sensors and IoT; Hardware Devices and Wearables; Business/Monetization Models; \n Privacy and Security; Usability (UI/UX); Accessibility; Research Ethics; Social Connectivity"
+				"description": ""
 			},
 			"Law": {
 				"title": "Law",
-				"description": "3D Model/Data Formats; Sensors and IoT; Hardware Devices and Wearables; SDKs; \n Network; Architecture; Business/Monetization Models; Privacy and Security; Accessibility; Social Connectivity"
+				"description": ""
 			},
 			"Science": {
 				"title": "Science",
-				"description": "3D Model/Data Formats; Sensors and IoT; Hardware Devices and Wearables; Open \n Source/Hardware; 3D Middleware and APIs; Open APIs; SDKs; Network; Architecture; Cloud Edge Computing; Research Ethics; Social Connectivity"
+				"description": ""
 			},
 			"Infrastructure": {
 				"title": "Infrastructure",
-				"description": "3D Model/Data Formats; Sensors and IoT; Open Source/Hardware; Hardware Devices \n and Wearables; Decentralized Computing; Network; Architecture; Cloud Edge \n Computing; Ergonomics; Accessibility"
+				"description": ""
 			},
 			"Content": {
 				"title": "Content",
-				"description": "3D Model/Data Formats; User Experience Description Languages; Sensors and IoT 3D Middleware \n and APIs; Open APIs; SDKs; Business/Monetization Models; Payment Platforms; \n Privacy and Security; Usability (UI/UX); Ergonomics; Accessibility; Social Connectivity; Experience Discovery"
+				"description": ""
 			}
 		},
 		"relations": {
@@ -90,10 +90,11 @@
 				"instances": {
 					"OBJ": {},
 					"USD": {},
-					"glTF": {},
+					"glTF": {"title": "glTF", "description": "Created by the Khronos Group"},
 					"FBX": {},
 				}
 			},
+
 			"UIDLs": {
 				"extends": "Element",
 				"title": "User Experience \n Description Language",
@@ -427,7 +428,9 @@
 				"domains": {},
 				"relations": { "Ethicists":1, "Regulators":1, "Developers":1, "Scientists":1, "Users":1 },
 				"instances": {
-					"DesignGuidelines": {},
+					"DesignGuidelines": {
+						
+					},
 					"DevelopmentGuidelines": {},
 				}
 			},
@@ -441,7 +444,7 @@
 				"instances": {}
 			},
 			
-			"Requirements&Userexpectation": {
+			"Requirements&UserExpectation": {
 				"extends": "Element",
 				"title": "Requirements & User expectation",
 				"description": "Social connection is the feeling of closeness and value in relationships. \n It's vital for human development and well-being, impacting health and longevity. \n According to Brené Brown, it involves being seen, heard, and accepted without judgment. \n Lack of connection, or loneliness, can lead to serious health risks and societal challenges.",
