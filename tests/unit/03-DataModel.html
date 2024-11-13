@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset='utf-8'>
+	<title>Data Model</title>
+	<meta name='viewport' content='width=device-width, initial-scale=1'>
+	<link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+
+</head>
+<body>
+	<script type="module">
+
+// Create the test environment
+import { TestEnvironment, TestGroup, Test } from "../js/TestEnvironment.js"
+import { TestControls } from "../js/TestControls.js"
+import { TestConsole } from "../js/TestConsole.js"
+let testEnvironment = new TestEnvironment();
+let testControls = new TestControls({description: 'Testing the Node and NodeSet classes.'})
+let testConsole = new TestConsole({size: 100});
+
+// Load the appropriate imports
+import { Node } from '../../builds/modules/data/Node.js'
+import { NodeSet } from '../../builds/modules/data/NodeSet.js'
+import { Model } from '../../builds/modules/data/model/Model.js'
+
+
+// -------------------------------------------------------------- MODEL NODES
+
+let modelTests = new TestGroup("Model Nodes", testEnvironment);
+
+new Test('Model node', modelTests, () => { 
+	return new Model('Model').toString();
+});
+
+
+
+// Run the tests
+testEnvironment.start();
+	</script>
+</body>
+</html>

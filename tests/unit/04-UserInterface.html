@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset='utf-8'>
+	<title>User Interface</title>
+	<meta name='viewport' content='width=device-width, initial-scale=1, user-scalable=no'>
+	<link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+
+</head>
+<body>
+	<script type="module">
+
+// Create the test environment
+import { TestControls } from "../js/TestControls.js"
+let testControls = new TestControls({description: 'Testing the User Interface.'})
+
+// Load the appropriate imports
+import { UserInterface } from '../../builds/modules/view/UserInterface.js'
+import { Widget } from '../../builds/modules/view/Widget.js'
+
+let ui = new UserInterface('UserInterface');
+
+let layer = new Widget('Layer', ui.layers, { debug: true, pivot: 'center'});
+
+let panel = new Widget('Widget', layer.widgets, { debug: true, 
+	anchor: 'center', width: 300, height: 300, background: 'red'}),
+	widget1 = new Widget('Widget-top-left', panel, { debug: true, 
+		anchor: 'top-left', width: 75, height: 75, background: 'green'}),
+	widget2 = new Widget('Widget-top', panel, { debug: true, 
+		anchor: 'top', width: 75, height: 75, background: 'blue' }),
+	widget3 = new Widget('Widget-top-right', panel, { debug: true, 
+		anchor: 'top-right', width: 75, height: 75}),
+	widget4 = new Widget('Widget-left', panel, { debug: true, 
+		anchor: 'left', width: 75, height: 75}),
+	widget5 = new Widget('Widget-center', panel, { debug: true, 
+		anchor: 'center', width: 75, height: 75, background: 'yellow' }),
+	widget6 = new Widget('Widget-right', panel, { debug: true, 
+		anchor: 'right', width: 75, height: 75, background: 'yellow' }),
+	widget7 = new Widget('Widget-bottom-left', panel, { debug: true, 
+		anchor: 'bottom-left', width: 75, height: 75}),
+	widget8 = new Widget('Widget-bottom', panel, { debug: true, 
+		anchor: 'bottom', width: 75, height: 75, background: 'yellow' }),
+	widget9 = new Widget('Widget-bottom-right', panel, { debug: true, 
+		anchor: 'bottom-right', width: 75, height: 75}),
+	test = 2
+
+let bottomLeft = new Widget('bottomLeft', layer.widgets, { debug: true, 
+	position: [20, -20], anchor: 'bottom-left', width: 150, height: 150, 
+	background: 'darkgrey' });
+
+let bottomRight = new Widget('bottomRight', layer.widgets, { debug: true, 
+	position: [-20, -20], anchor: 'bottom-right', width: 150, height: 150,
+	background: 'darkgrey' });
+
+</script>
+</body>
+</html>

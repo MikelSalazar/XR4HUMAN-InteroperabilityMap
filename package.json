@@ -1,0 +1,26 @@
+{
+  "name": "interoperability-map",
+  "version": "0.7.0",
+  "displayName": "XR4HUMAN- Interoperability Map",
+  "description": "The Interoperability Map created as part of the Work Package 4.2 of the XR4HUMAN project ",
+  "type": "module",
+  "author": {
+    "name": "Mikel Salazar",
+    "email": "mikel.salazar@ife.no"
+  },
+  "directories": {
+    "builds": "builds",
+    "modules": "builds/modules",
+    "example": "examples"
+  },
+  "main": "builds/InteroperabilityMap.js",
+  "mainSourceFile": "sources/InteroperabilityMap.ts",
+  "devDependencies": {
+    "typescript": "^5.6.2"
+  },
+  "scripts": {
+    "build": "node utilities/builder.mjs",
+    "prepack": "node utilities/packer.mjs",
+    "build-tsc-watch": "tsc -w"
+  }
+}
