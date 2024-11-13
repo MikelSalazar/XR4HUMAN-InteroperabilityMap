@@ -1,0 +1,17 @@
+{
+	"compilerOptions": {
+		"module": "ES6",
+		"target": "ES2020",
+		"lib": ["DOM", "ES2020"],
+		"noImplicitAny": true,
+		"removeComments": true,
+		"preserveConstEnums": true,
+		"experimentalDecorators": true,
+		"emitDecoratorMetadata": true,
+		"moduleResolution": "Node",
+		"outDir": "builds/modules/",
+		"sourceMap": true,
+	},
+	"include": ["sources/**/*"],
+	"exclude": ["node_modules", "tests"]
+}

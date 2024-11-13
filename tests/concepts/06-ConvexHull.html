@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		 <meta charset="UTF-8">
+		<meta name="author" content="Mikel Salazar">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>Convex Hull</title>
+		<link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+		<style>
+html, body { font-family: Arial; }
+#Drawing { width: 512px; height: 512px; border: 1px solid black;
+	font-family: Arial; text-anchor: middle; dominant-baseline: middle; 
+	user-select: none; }
+		</style>
+	</head>
+	<body>
+		<h1> Convex Hull Computation </h1>
+		<p id="Explanation">
+The <a href="https://en.wikipedia.org/wiki/Gift_wrapping_algorithm">Gift 
+wrapping algorithm </a> allows the computation of the convex hull of a 
+given set of points. 
+		</p>
+		<p id="Controls">
+			<label> Max Vertex Count: </label>
+			<input id="maxVertexCount" type="number" value="3"></input>
+			<button id="Randomize">Randomize Points</button>
+		</p>
+		<svg id="Drawing" xmlns="http://www.w3.org/2000/svg"></svg>
+		<script>
+
+// ----------------------------------------------------------- GLOBAL VARIABLES
+
+// The HTML elements
+let randomizeButton = document.getElementById("Randomize"),
+	maxVertexCountInput = document.getElementById("maxVertexCount"),
+	svg = document.getElementById('Drawing'), 
+	mainLayer = createSvgElement('g', svg);
+
+// The variables to control the point generation
+let points = [], pointIndex, pointCount = 10, pointRadius = 16,
+	pointSpread = 512 - (pointRadius * 2);
+	
+// The initial maximum number of vertices is the number of points
+let maxVertexCount = pointCount; 
+	
+
+// ---------------------------------------------------------- UTILITY FUNCTIONS
+
+/** Creates a SVG element.
+ * @param tag The tag of the SVG element.
+ * @param parent The parent of the SVG element.
+ * @param attributes The attributes of the SVG element.
+ * @param content The content of the SVG element.
+ * @returns The generated SVG element. */
+function createSvgElement (tag, parent, attributes = {}, content) {
+	let element = document.createElementNS('http://www.w3.org/2000/svg', tag);
+	(parent ||document.body).appendChild(element);
+	if (attributes) for (let attrib in attributes) 
+		element.setAttribute(attrib.replace(/_/g, '-'),
+			attributes[attrib].toString());
+	if (content != undefined) element.innerHTML = content;
+	return element;
+}
+
+
+/** Creates the points randomly */
+function createPoints() {
+	points = [];
+	for (pointIndex = 0; pointIndex < pointCount; pointIndex++) {
+		let x = Math.random() * pointSpread + pointRadius, 
+		y = Math.random() * pointSpread + pointRadius;
+		points.push({x: x, y: y});
+	}
+	maxVertexCount = pointCount; maxVertexCountInput.value= '' + maxVertexCount;
+}
+
+
+/** Draws the SVG content. */
+function draw() {
+
+	// Clean the SVG Element
+	mainLayer.innerHTML = ''
+
+	// Create the different layers
+	let lineLayer = createSvgElement('g', mainLayer),
+		pointLayer = createSvgElement('g', mainLayer),
+		debugLayer = createSvgElement('g', mainLayer);
+
+	// Get the starting point (the one with the lowest X value)
+	let startVertex = 0, startingX = points[0].x;
+	for (pointIndex = 1; pointIndex < pointCount; pointIndex++) {
+		let point = points[pointIndex];
+		if (startingX <= point.x) continue;
+		startVertex = pointIndex; startingX = point.x;
+	}
+
+	// Create the list of vertices by getting the point with the lowest angle
+	// in a clockwise orientation (from the current angle)
+	let vertices = [], angles = [], 
+		vertex = startVertex, newVertex = 0, dx, dy, vertexCount = pointCount,
+		angle, newAngle = Number.MAX_VALUE;
+	for (let vertexIndex = 0; vertexIndex < vertexCount; vertexIndex++) {
+
+		// Get the x and y values of the current vertex
+		let ox = points[vertex].x, oy = points[vertex].y;
+
+		// Check all other points to detect possible vertices
+		for (pointIndex = 0; pointIndex < pointCount; pointIndex++) {
+
+			// Skip the current point and any that are already vertices
+			if (pointIndex == vertex || vertices.includes(pointIndex)) continue;
+			
+			// Calculate the distance to the point
+			dx = points[pointIndex].x - ox, dy = points[pointIndex].y - oy;
+			if (dx == 0 && dy == 0) continue;
+
+			// Calculate the angle to the point
+			let a = Math.atan2(dy, dx);
+			if (angle != undefined && a < angle) a += Math.PI * 2;
+			if (newAngle > a) { newAngle = a; newVertex = pointIndex; }
+
+			// Display the las the values of the last point
+			if (vertexIndex == maxVertexCount) {
+				let deg = a * 180/ Math.PI;
+				console.log(dx + ' ' + dy + ' ' + deg)
+				createSvgElement('line', debugLayer, { 
+					x1: ox, y1: oy, x2: ox + dx, y2: oy + dy, stroke: "black"});
+				createSvgElement('text', debugLayer, { 
+					x: ox + dx/2, y: oy + dy/2, fill: "black"}, deg.toFixed(0));
+			}
+		}
+		
+		// Add the obtained vertex and angle values to the list
+		vertex = newVertex; angle = newAngle; newAngle = Number.MAX_VALUE;
+		vertices.push(vertex); angles.push(angle); 
+
+		// If the vertex is the starting vertex, stop the process
+		if (vertex == startVertex) { vertexCount = vertexIndex + 1; break; }
+	}
+
+	// Add the starting vertex at the beginning of the vertex list
+	vertices.unshift(startVertex);
+
+	// Show the results on console
+	console.log('Vertices [' + vertices.length + ']: ' + vertices.join(', '));
+	console.log('Angles [' + angles.length + ']: ' + angles.join(', '));
+
+	// Draw the points
+	for (pointIndex = 0; pointIndex < pointCount; pointIndex++) {
+		let point = points[pointIndex];
+		createSvgElement('circle', pointLayer, 
+			{ cx: point.x, cy: point.y, r: pointRadius, fill: 'black'});
+		createSvgElement('text', pointLayer, 
+			{ x: point.x, y: point.y, fill: 'white'}, pointIndex);
+	}
+
+	// Draw the convex hull with the vertices
+	let path = ''; maxVertexCount = parseInt(maxVertexCountInput.value);
+	if (maxVertexCount > vertexCount) maxVertexCount = vertexCount;
+	for (let vertexIndex = 0; vertexIndex <= maxVertexCount; vertexIndex++) {
+		let point = points[vertices[vertexIndex]];
+		path += path.length == 0? 'M' : 'L';
+		path += ' ' + point.x + ' ' + point.y + ' ';
+	}
+	path += ' Z';
+	createSvgElement('path', lineLayer, { d: path , fill: 'grey', stroke: 'red' });
+
+	// Update the input control
+	if ( parseInt(maxVertexCountInput.value) > vertexCount)
+		maxVertexCountInput.value = '' + vertexCount;
+	maxVertexCountInput.setAttribute('min', '0');
+	maxVertexCountInput.setAttribute('max', '' + vertexCount);
+}
+
+// ---------------------------------------------------------------- ENTRY POINT
+
+// Handle the events
+randomizeButton.onclick = () => { createPoints(); draw(); }
+maxVertexCountInput.onchange = (e) => { 
+	maxVertexCount = maxVertexCountInput.value; draw(); 
+}
+window.onkeyup = (e) => { // Use the left and arrow keys 
+	switch (e.code) {
+		case 'ArrowLeft': maxVertexCount--; break;
+		case 'ArrowRight': maxVertexCount++; break;
+		default: return;
+	}
+	if (maxVertexCount < 0) maxVertexCount = 0;
+	maxVertexCountInput.value = maxVertexCount; draw();
+}
+
+
+// Start drawing
+createPoints(); draw();
+
+		</script>
+	</body>
+</html>

@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="SvgElement" width="512" height="256" 
+	viewBox="0 0 512 256" style="background: blue;" >
+	<script type="text/javascript">//<![CDATA[
+
+/** Defines a generic parent class. */
+class ParentClass {
+
+	/** Initializes a new instance of ParentClass. */
+	constructor(data) {
+		
+		// Save the provided argument
+		this.data = arguments;
+
+		// Show a message on console
+		console.log('ParentClass constructor called');
+	}
+}
+	//]]>
+	</script>
+	<script type="text/javascript"> 
+	//<![CDATA[
+
+/** Defines a generic child class. */
+class ChildClass extends ParentClass {
+
+	/** Initializes a new instance of ChildClass. */
+	// constructor(param1) { // Valid
+	// constructor(required, optional?) { // Invalid
+	constructor(param1, param2 = "optional") { // Valid
+		
+		// Required
+		super(param1, param2);
+
+		// Show a message on console
+		console.log('ChildClass constructor called');
+
+		// Dispaly a property of the parent class
+		console.log(this.data);
+	}
+}
+
+
+// Create an instance of the child class
+let instance = new ChildClass("value1", "value2");
+
+	//]]></script>
+</svg>

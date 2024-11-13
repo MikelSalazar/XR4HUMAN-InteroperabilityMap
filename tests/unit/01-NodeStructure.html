@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset='utf-8'>
+	<title>Node Structure</title>
+	<meta name='viewport' content='width=device-width, initial-scale=1'>
+	<link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+
+</head>
+<body>
+	<script type="module">
+
+// Create the test environment
+import { TestEnvironment, TestGroup, Test } from "../js/TestEnvironment.js"
+import { TestControls } from "../js/TestControls.js"
+import { TestConsole } from "../js/TestConsole.js"
+let testEnvironment = new TestEnvironment();
+let testControls = new TestControls({description: 'Testing the Node and NodeSet classes.'})
+let testConsole = new TestConsole({size: 100});
+
+// Load the appropriate imports
+import { Node } from '../../builds/modules/data/Node.js'
+import { NodeSet } from '../../builds/modules/data/NodeSet.js'
+
+// ---------------------------------------------------------------------- NODES
+
+let nodeTests = new TestGroup("Nodes", testEnvironment);
+
+new Test('Basic Node', nodeTests, () => { 
+	let n = new Node('NodeTest')
+	testEnvironment.log('Result: ' + n, 4, '#cccccc');
+});
+
+new Test('Basic Node with no name', nodeTests, () => { 
+	let n = new Node('')
+	testEnvironment.log('Result: ' + n, 4, '#cccccc');
+}, 'ERROR');
+
+new Test('Basic Node with invalid name (debug)', nodeTests, () => { 
+	let n = new Node('debug')
+	testEnvironment.log('Result: ' + n, 4, '#cccccc');
+}, 'ERROR');
+
+new Test('Basic Child Structure', nodeTests, () => { 
+	let grandparent = new Node('grandparent');
+	let parent = new Node('parent', grandparent);
+	let child = new Node('child', parent);
+	testEnvironment.log('JSON: ' + grandparent, 4, '#cccccc');
+	testEnvironment.log('Path: ' + child.nodePath, 4, '#cccccc');
+});
+
+// ------------------------------------------------------------------- NODE SETS
+
+let nodeSetTests = new TestGroup("NodeSets", testEnvironment);
+
+new Test('Basic NodeSet', nodeSetTests, () => { 
+	let n = new NodeSet('NodeSetTest', null, Node);
+	testEnvironment.log('Result: ' + n, 4, '#cccccc');
+});
+
+new Test('NodeSet without name', nodeSetTests, () => { 
+	let n = new NodeSet(null, null, Node);
+	testEnvironment.log('Result: ' + n, 4, '#cccccc');
+}, 'ERROR');
+
+new Test('NodeSet without item type', nodeSetTests, () => { 
+	let n = new NodeSet('NodeSetTest');
+	testEnvironment.log('Result: ' + n, 4, '#cccccc');
+}, 'ERROR');
+
+testEnvironment.start();
+	</script>
+</body>
+</html>

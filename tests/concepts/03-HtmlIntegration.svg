@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="SvgElement" width="512" height="512" viewBox="-256 -256 512 512" style="width: 100%; height: 100%; background: blue; user-select: none;" >
+	<rect width="100%" height="100%" x="-50%" y="-50%" fill="yellow"/>
+	<circle id="RedCircle" cx="0" cy="0" r="64" fill="red" onclick="test(this)"/>
+	<button>test</button>
+	<script>
+function test(data) {
+	console.log(data);
+	console.log(data.id);
+}
+	</script>
+
+</svg>

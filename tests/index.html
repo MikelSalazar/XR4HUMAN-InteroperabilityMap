@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset='utf-8'>
+	<title>XR4HUMAN: Interoperability Map Tests</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon"> 
+	<style> 
+* { margin:0; box-sizing: border-box;}
+html, body { width:100%; height:100%; font-family: Verdana; 
+	background: #222; color: white; }
+a {color: white; text-decoration: none;}
+body { display: flex; flex-direction: row; }
+nav { height:100%; white-space: nowrap; padding: 2vmin; border-right: 1px solid black;}
+iframe { height:100%; flex-grow: 1; background: black; color: white; border: none; }
+	</style>
+</head>
+<body>
+	<nav>
+		<h1>Interoperability MAP</h1>
+		<h3>Unit Tests</h3>
+		<ol id="UnitTests"></ol>
+	</nav>
+	<iframe name="frame"></iframe>
+	<script>
+let unitTests = {
+	"Initialization": "Initialization.html",
+	"Node Structure": "NodeStructure.html",
+	"Data Types": "DataTypes.html",
+	"Data Model": "DataModel.html",
+	"User Interface": "UserInterface.html",
+}
+
+let list = document.getElementById("UnitTests"), testIndex = 0;
+for (let testName in unitTests) {
+	let item = document.createElement('li'), link = 'unit/' + 
+		(testIndex < 10? '0' : '') + testIndex + '-' + unitTests[testName];
+	item.innerHTML = '<a href="' + link +'" target="frame">' + testName + 
+		'</a> <a href="' + link +'">&#10697;</a>';
+	list.append(item);
+	testIndex++;
+}
+
+	</script>
+</body>
+</html>

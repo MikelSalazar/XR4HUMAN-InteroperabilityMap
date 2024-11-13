@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="SvgElement" width="512" height="256" 
+	viewBox="0 0 512 256" style="background: blue;" >
+	<rect x="0" y="0" width="1000" height="1000" />
+	<g id="LayerContent">
+	</g>
+	<g id="LayerUI">
+		<text id="FpsCounter" x="4" y="14" fill= "red" 
+		font-size="10px" font-family="Arial" text-anchor="start" >FPS:00</text>
+	</g>
+	<script>
+    // <![CDATA[
+// Create the necessary variables
+let lastTime = 0, elapsedTime = 0, frameCount = 0;
+let svgElement = document.getElementById("SvgElement");
+let fpsCounter = document.getElementById("FpsCounter");
+let layerContent = document.getElementById("LayerContent");
+let x = 0, y = 0, width = 512, height = 512;
+
+
+// Create an specific number of items to test the rendewring capabilities
+function createShapes(count) {
+	let colors = ['green', 'yellow', 'orange', 'blue'];
+	for (let i = 0; i < count; i++) {
+	let element = document.createElementNS('http://www.w3.org/2000/svg',"rect");
+		element.setAttribute("x", Math.random() * 256);
+		element.setAttribute("y", Math.random() * 128);
+		element.setAttribute("width", Math.random() * 256);
+		element.setAttribute("height", Math.random() * 128);
+		element.setAttribute("fill", colors[Math.floor(Math.random() * 4)]);
+		layerContent.append(element);
+	}
+}
+
+// Update the shape
+function render(time = 0) {
+	
+	// Calculate the FPS
+	time /= 1000; elapsedTime += time - lastTime; lastTime = time; frameCount++;
+	while (elapsedTime > 1) { 
+		fpsCounter.textContent = 'FPS: ' + frameCount; console.log(frameCount)
+		frameCount = 0; elapsedTime--;
+	}
+	// Play with the shapes
+	let angle = time * Math.PI;
+	x = Math.sin(angle) * 10, y = Math.cos(angle) * 10;
+	//svgElement.setAttribute('viewBox', x + ' ' + y + ' ' + width + ' ' + height)
+	layerContent.setAttribute('transform', 'rotate(' + (x * 10) + ')');
+
+	// Continue rendering
+	requestAnimationFrame(render);
+}
+
+createShapes(10000);
+render();
+    // ]]>
+	</script>
+</svg>

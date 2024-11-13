@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		 <meta charset="UTF-8">
+		<meta name="author" content="Mikel Salazar">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>Procedural Generation Graph</title>
+		<link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+		<style>
+html, body { font-family: Arial; }
+#Drawing { width: 512px; height: 512px; border: 1px solid black;
+	font-family: Arial; text-anchor: middle; dominant-baseline: middle; 
+	user-select: none; }
+input {width: 7ch;}
+		</style>
+	</head>
+	<body>
+		<h1>Procedural Generation Graph</h1>
+		<p id="Explanation">
+			Use a custom procedure to generate the graph.
+		</p>
+		<p id="Random">
+			<label for="SeedInput">Seed:</label>
+			<input id="SeedInput" type="number" min="0" max="999" value="0"/>
+			<button id="RandomizeButton">Randomize</button>
+		</p>
+		<p id="Controls">
+			<label for="NodesInput">Nodes:</label>
+			<input id="NodesInput" type="number" min="2" max="20" value="10"/>
+			<label for="LinesInput">Lines:</label>
+			<input id="LinesInput" type="number" min="2" max="7" value="6"/>
+			<button id="RestartButton">Restart</button>
+
+			
+		</p>
+		<svg id="Drawing" xmlns="http://www.w3.org/2000/svg"></svg>
+		<p>
+			<label for="SpeedInput">Steps:</label>
+			<input id="SpeedInput" type="number" min="1" max="20" value="10"/>
+			<label for="DebugInput">Debug:</label>
+			<input id="DebugInput" type="checkbox"/>
+			<label id="FpsDisplay">FPS: 00</label>
+		</p>
+		<script>
+
+"use strict";
+
+// ----------------------------------------------------------- GLOBAL VARIABLES
+
+// The HTML elements
+let seedInput = document.getElementById('SeedInput'), 
+	seed = parseInt(seedInput.value), rngOffset = seed,
+	randomizeButton = document.getElementById("RandomizeButton"),
+	nodesInput = document.getElementById('NodesInput'), 
+	linesInput = document.getElementById('LinesInput'), 
+	restartButton = document.getElementById("RestartButton"),
+	fpsDisplay = document.getElementById('FpsDisplay'), 
+	debugInput = document.getElementById('DebugInput'), 
+	stepsInput = document.getElementById('SpeedInput'),
+	svg = document.getElementById('Drawing');
+
+// The layers of the SVG 
+let mainLayer = createSvgElement('g', svg),
+	connectionLayer = createSvgElement('g', mainLayer),
+	nodeLayer = createSvgElement('g', mainLayer, {id: 'Nodes'}),
+	labelLayer = createSvgElement('g', mainLayer, {id: 'Labels'}),
+	debugLayer = createSvgElement('g', mainLayer, {id: 'Debug'});
+	
+// Variables related to the graph generation
+let grid, nodes = [], connections = [], lines = [],
+	nodeIndex = 0, nodeRadius = 16, nodeSpread = 512, nodePos = -10000,
+	lineIndex = 0, nodeSeparation = 64,
+	nodeCount = parseInt(nodesInput.value),
+	lineCount = parseInt(linesInput.value),
+	pointsPerLine = 5, 
+	lineColors = ['red', 'orange', 'gold', 'green', 'blue', 'violet', 'pink',
+		'brown', 'grey'];
+
+// The position of the view
+let lastTime = 0, deltaTime = 0, fpsTime = 0, fpsCounter = 0;
+
+// The position of the view
+let viewWidth = 512, viewHeight = 512, viewX = viewWidth/2, viewY = viewHeight/2;
+
+// Variables related to the graph visualization
+let debug = debugInput.checked, steps = parseInt(stepsInput.value);
+
+
+// -------------------------------------------------------------------- CLASSES
+
+/** A seedable (pseudo) Random Number Generator using a Linear 
+ * Congruential Generator (LCG) algorithm.
+ * @see https://en.wikipedia.org/wiki/Linear_congruential_generator */ 
+class RandomNumberGenerator {
+
+	/** Initializes the Random Number Generator.
+	 * @param seed The seed of the Random Number Generator. */
+	constructor(seed = 0) {
+		this._m = 0x80000000; this._a = 1103515245; this._c = 12345; 
+		this.seed = seed;
+	}
+
+	/** The Random Number Generator.
+	 * @param seed The seed of the Random Number Generator. */
+	get seed () { return this._seed; }
+	set seed (s = 0) { this._state = this._seed = s; }
+
+	/** Creates a new random integer. */
+	int() { return this._state = (this._a * this._state + this._c) % this._m; }
+
+	/** Generates a new random integer within a range. */
+	range (min, max) { return min+Math.floor((this.int()/this._m)*(max-min)); }
+
+	/** Resets the Random Number Generator. */
+	reset() { this._state = this._seed; }
+}
+
+// A global instance of the Random Number Generator class
+let rng = new RandomNumberGenerator(parseInt(seedInput.value));
+
+
+/** Defines a 2D Vector. */
+class Vector { 
+	
+	/** Initializes a new Vector instance.
+	 * @param x The value of the vector in the X axis
+	 * @param y The value of the vector in the Y axis. */
+	constructor(x = 0, y = 0) { this.x = x; this.y = y; }
+
+	/** The length of the vector. */
+	get length() { return Math.sqrt((this.x * this.x) + (this.y * this.y)); }
+	set length(l) { let f = l/this.length; this.x *= f; this.y *= f; }
+
+	/** Add a vector to this instance.
+	* @param v The vector to add. */
+	add(v) { this.x += v.x; this.y += v.y; }
+
+	/** Multiplies the vector by a scalar value.
+	* @param s The scalar value to multiply with. */
+	multiplyByScalar(s) { this.x *= s; this.y *= s; }
+}
+
+
+/** Defines a node of the graph. */
+class Node { 
+
+	/** Initializes a new Node Instance.
+	 * @param id The id of the node (and text of its label).
+	 * @param x The position of the node in the X axis.
+	 * @param y The position of the node in the Y axis. */
+	constructor(id, x, y) {
+		this.id = id; this.x = x; this.y = y; connections = [];
+		this.shape = createSvgElement('circle', nodeLayer,
+			{ cx: x, cy: y, r: nodeRadius, fill: 'white', stroke: 'black'});
+		this.label = createSvgElement('text', labelLayer,
+			{ x: x, y: y, fill: 'black'}, this.id);
+		this.lines = []; this.connections = [];
+		
+		this.shape.onclick = () => { console.log(this); };
+		this.label.onclick = () => { console.log(this); };
+	}
+
+	/** Updates the node.
+	 * @param deltaTime The time since last update. */
+	update(deltaTime) {
+
+		// Update the node position
+		this.shape.setAttribute('cx', this.x);
+		this.shape.setAttribute('cy', this.y);
+		this.label.setAttribute('x', this.x);
+		this.label.setAttribute('y', this.y);
+	}
+}
+
+
+/** Defines a connection between two nodes of the graph. */
+class Connection { 
+	
+	/** Initializes a new Line instance.
+	 * @param a The first node of the connection.
+	 * @param b The second node of the connection.
+	 * @param color The color of the connection. */
+	 constructor(a, b, color) { this.a = a; this.b = b; this.color = color; }
+}
+
+
+/** Defines a line of the graph. */
+class Line { 
+
+	/** Initializes a new Line instance.
+	 * @param id The id of the line.
+	 * @param color The color of the line. */
+	constructor(id, color = 'red') { 
+		this.id = id; this.color = color; this.points = [];
+		this.shape = createSvgElement('path', nodeLayer,
+			{ p: '', stroke: color, fill: 'none'});
+		this.update()
+	}
+
+	/** Updates the line.
+	 * @param deltaTime The time since last update. */
+	update(deltaTime) {
+		let path = '';
+		for(nodeIndex = 0; nodeIndex < this.points.length; nodeIndex++){
+			let node = nodes[this.points[nodeIndex]];
+			path += (nodeIndex == 0? 'M ' : ' L ') + node.x + ' ' + + node.y;
+		}
+		this.shape.setAttribute('d', path);
+	}
+}
+
+
+/** Defines a regular grid. */
+class Grid { 
+
+	/** Initializes a new Grid instance.
+	 * @param lines The number of lines of the grid.
+	 * @param columns The number of columns of the grid. */
+	constructor (lines = 16, columns = 16, width = 1024, height = 1024) {
+		if (lines < 2 || columns < 2 || width < lines || height < columns) 
+			throw Error('Invalid Grid parameters');
+		
+		this.nodes = []; this.width = width; this.height = height;
+		this.lines = lines; this.line = Math.floor(this.lines/2); 
+		this.columns = columns; this.column = Math.floor(this.columns/2);
+
+		// Fills the grid will undefined values
+		for (let line = 0; line < lines; line++) {
+			this.nodes.push([]);
+			for (let column = 0; column < columns; column++) 
+				this.nodes[line].push(undefined);
+		}
+	}
+	
+	/** Sets a node in a particular position of the grid.
+	 * @param node The node to set.
+	 * @param line The line of the grid.
+	 * @param column The column of the grid. */
+	set (node, line = this.line, column = this.column) {
+		this.nodes[line][column] = node;
+	}
+
+	/** Gets a node in a particular position of the grid.
+	 * @param line The line of the grid.
+	 * @param column The column of the grid. 
+	 * @returns The node at the specific position*/
+	get (line = this.line, column = this.column) { 
+		return this.nodes[line][column]; 
+	}
+
+	/** Checks if there is a node in a particular position of the grid.
+	 * @param line The line of the grid.
+	 * @param column The column of the grid. 
+	 * @returns A boolean value indicating of there is a node at the 
+	 * specific position*/
+	has (line = this.line, column = this.column) {
+		return this.nodes[line][column] != undefined; 
+	}
+
+	/** Updates the grid */
+	update() {
+		let x = -this.width/2, y = -this.height/2,
+			w = this.width / this.columns, h = this.height / this.lines;
+		for (let line = 0; line < this.lines; line++) {
+			for (let column = 0; column < this.columns; column++) {
+				let node = nodes[this.nodes[line][column]];
+				if (node == undefined) continue;
+				node.x = x + w * column; node.y = y + h * line;
+			}
+		}
+	}
+
+	/** Creates a string representation of the grid.
+	 *  @returns The string representation of the grid. */
+	toString () {
+		let result = '';
+		for (let line = 0; line < this.lines; line++) {
+			for (let column = 0; column < this.columns; column++) {
+				let node = this.nodes[line][column];
+				result += (node != undefined? node : 'X') + ',	';
+			}
+			result +='\n';
+		}
+		return result;
+	}
+}
+
+
+
+// ---------------------------------------------------------- UTILITY FUNCTIONS
+
+/** Creates a SVG element.
+ * @param tag The tag of the SVG element.
+ * @param parent The parent of the SVG element.
+ * @param attributes The attributes of the SVG element.
+ * @param content The content of the SVG element.
+ * @returns The generated SVG element. */
+function createSvgElement (tag, parent, attributes = {}, content) {
+	let element = document.createElementNS('http://www.w3.org/2000/svg', tag);
+	(parent ||document.body).appendChild(element);
+	if (attributes) for (let attrib in attributes) 
+		element.setAttribute(attrib.replace(/_/g, '-'),
+			attributes[attrib].toString());
+	if (content != undefined) element.innerHTML = content;
+	return element;
+}
+
+
+
+
+/** Creates the graph.  */
+function start() {
+
+	// Reset the Random Number Generator
+	rng.reset();
+
+	// Clean the different layers
+	for (let layer of mainLayer.children) layer.innerHTML = '';
+
+	// Clean the random elements
+	nodes = []; connections = []; lines = [];
+
+	// Initialize the lines
+	for (lineIndex = 0; lineIndex < lineCount; lineIndex++)
+		lines.push(new Line(lineIndex, lineColors[lineIndex]));
+
+	// Create each node
+	for (nodeIndex = 0; nodeIndex < nodeCount; nodeIndex++) {
+		let node = new Node("" + (nodeIndex), nodePos, nodePos);
+
+		let nodeLine = 0, nodeLines = rng.range(1, lineCount-1);
+		for (nodeLine = 0; nodeLine < nodeLines; nodeLine++) {
+			let lineIndex;
+			do { lineIndex = rng.range(0, lineCount); }
+			while (node.lines.includes(lineIndex));
+			node.lines.push(lineIndex);
+			lines[lineIndex].points.push(nodeIndex);
+		}
+		nodes.push(node);
+	}
+
+	// If there is a line with too few nodes, add some to it
+	pointsPerLine = Math.floor(pointsPerLine/2);
+	for (lineIndex = 0; lineIndex < lineCount; lineIndex++) {
+		let line = lines[lineIndex];
+		while (line.points.length < pointsPerLine) {
+			do { nodeIndex = rng.range(0, nodeCount); }
+			while (line.points.includes(nodeIndex));
+			line.points.push(nodeIndex);
+		}
+	}
+
+	// If there are nodes without a line, ad it to a line
+	for (nodeIndex = 0; nodeIndex < nodeCount; nodeIndex++) {
+		if (nodes[nodeIndex].lines.length == 0) {
+			let lineIndex = rng.range(0, lineCount);
+			nodes[nodeIndex].lines.push(line); 
+			lines[lineIndex].points.push(nodeIndex)
+		}
+	}
+
+	// Create the connections between nodes
+	for (lineIndex = 0; lineIndex < lineCount; lineIndex++) {
+		let line = lines[lineIndex], segmentIndex, 
+			segmentCount = line.points.length - 1;
+		for (segmentIndex = 0; segmentIndex < segmentCount; segmentIndex++) {
+			let a = line.points[segmentIndex], b = line.points[segmentIndex+1],
+				connection = new Connection(a, b, line.color);
+			nodes[a].connections.push(connection); 
+			nodes[b].connections.push(connection);
+		}
+	}
+
+	// Find the node with most connections
+	let mostConnections = 0, mostConnectedNode;
+	for (nodeIndex = 0; nodeIndex < nodeCount; nodeIndex++) {
+		let node = nodes[nodeIndex];
+		if (mostConnections < node.connections.length) {
+			mostConnections = node.connections.length;
+			mostConnectedNode = node;
+		}
+	}
+
+	grid = new Grid();
+
+	function extend(nodeId, line, column, level = 0) {
+		if (level > 6) return;
+		let node = nodes[nodeId], connectionIndex = 0;
+		if (node.placed == true) return; else node.placed = true;
+		grid.set(nodeId, line, column);
+		for (let connection of node.connections) {
+			let newNode = (connection.a == node.id)? connection.b: connection.a;
+			let dx = 0, dy = 0; 
+			if (connectionIndex++ > 7 ) break
+			do {
+				switch(rng.range(0,7)) {
+					case 0: dx = +0; dy = -1; break;
+					case 1: dx = +1; dy = -1; break;
+					case 2: dx = +1; dy = +0; break;
+					case 3: dx = +1; dy = +1; break;
+					case 4: dx = +0; dy = +1; break;
+					case 5: dx = -1; dy = +1; break;
+					case 6: dx = -1; dy = +1; break;
+					case 7: dx = -1; dy = -1; break;
+					case 8: console.log('Too many connections'); return;
+				}
+			} while (grid.has(line + dx, column + dy));
+			extend(newNode, line + dx, column + dy, level + 1);
+		}
+	}
+	extend(mostConnectedNode.id, grid.line, grid.column);
+
+	console.log(grid.toString());
+}
+
+
+/** Updates the graph.
+ * @param tag The current display time in milliseconds. */
+function update(time = 0) {
+	
+	// Calculate the Frame Per Second
+	time /= 1000; deltaTime = time - lastTime; 
+	if (deltaTime < 0.001) deltaTime = 0.001; if (deltaTime > 1) deltaTime = 1;
+	lastTime = time;
+	fpsTime += deltaTime; fpsCounter++
+	if (fpsTime > 1) { 
+		fpsDisplay.innerText = 'FPS: ' + fpsCounter;fpsCounter = 0;
+		while (fpsTime > 1) fpsTime--; 
+	}
+	
+	// Move the view
+	mainLayer.setAttribute('transform', 'translate(' + viewX +', ' + viewY +')');
+
+	debugLayer.innerHTML = '';
+	grid.update();
+	for (let node of nodes) node.update(deltaTime);
+	for (let line of lines) line.update(deltaTime);
+
+	// Request the next frame as soon as possible
+	requestAnimationFrame(update);
+}
+
+
+// ---------------------------------------------------------------- ENTRY POINT
+
+// Create the graph
+start(); update(0);
+
+
+// Handle the events
+seedInput.onchange = (e) => { rng.seed = parseInt(seedInput.value); start() }
+randomizeButton.onclick = () => { 
+	seedInput.value = rng.seed = Math.floor(Math.random() * 1000); start();
+}
+nodesInput.onchange = (e) => { nodeCount = parseInt(nodesInput.value); start(); }
+linesInput.onchange = (e) => { lineCount = parseInt(linesInput.value); start(); }
+restartButton.onclick = () => { start(); }
+
+debugInput.onchange = (e) => { debug = debugInput.checked; }
+stepsInput.onchange = (e) => { steps = parseInt(stepsInput.value); }
+
+svg.onmousemove = (e) => {
+	if (e.buttons) { viewX += e.movementX; viewY += e.movementY; }
+}
+svg.oncontextmenu = (e) => { e.preventDefault(); } 
+		</script>
+	</body>
+</html>
