@@ -40,7 +40,9 @@ export class Simple extends Node {
 
 	/** Indicates if the value is the default. */
 	get isDefault() {
-		return this.default != undefined && this._value == this._default;
+		if (this._default == undefined)
+			return false;
+		return this._value == undefined || this._value == this._default;
 	}
 
 	// ------------------------------------------------------------ CONSTRUCTOR

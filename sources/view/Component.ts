@@ -146,7 +146,7 @@ export class Component {
 	setAttribute(name: string, value: any) {
 		if (typeof value == 'number') value = Component.serializeNumber(value);
 		if (name.indexOf('_') >= 0) name = name.replace(/_/g, '-');
-		this._attributes[name] = value;
+		if (value != undefined) this._attributes[name] = value;
 		if (this._element) {
 			if (value != undefined) this._element.setAttribute(name, value);
 			else this._element.removeAttribute(name);
@@ -165,7 +165,8 @@ export class Component {
 
 	/** Clears the component. */
 	clear() {
-		for(let child of this._children) child._element.remove();
+		for(let child of this._children) 
+			if (child._element) child._element.remove();
 		this._children = [];
 	}
 

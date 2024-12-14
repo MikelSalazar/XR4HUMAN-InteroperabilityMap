@@ -95,13 +95,12 @@ export class TransitMap extends Widget {
 			let districtIndex = 0, districtColors = ['#ef1de5', '#037e8e',
 				'#00abcd', '#620d7d', '#b206f9', '#082ebf', '#C999D3', '#F2E6F4',
 				'#EBB3F3', '#F8E6FB', '#B3C3D4', '#E6EBF1', '#BFFBFF', '#EAFEFF'];
-
 			for (let d of model.domains) {
 				let district = { name: d.name, title: d.title.value,
 					description: d.description.value, stations: [],
 					color: districtColors[districtIndex] };
 				district.element = new Component('path', this._districtsElement, { id: district.name,
-					fill: district.color, fill_opacity: 0.4 });
+					fill: district.color, fill_opacity: 0.2 });
 				for (let c of d.classes)
 					district.stations.push(c.name);
 				this._districts[district.name] = district;
@@ -216,9 +215,6 @@ export class TransitMap extends Widget {
 					.lines.length - this._stations[a].lines.length);
 				this._lines[relation.name] = line;
 				this._linesList.push(line);
-
-				// Create the legends
-
 
 				// Increase the counter
 				lineIndex++;

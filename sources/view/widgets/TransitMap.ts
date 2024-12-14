@@ -92,7 +92,7 @@ export class TransitMap extends Widget {
 		this._map = new Widget('map', this.widgets,
 			// { debug: true}
 		); 
-		let c =this._map.component;
+		let c = this._map.component;
 		this._districtsElement = new Component('g', c, { id: 'districts' });
 		this._connectionsElement = new Component('g', c, { id: 'connections' });
 		this._stationsElement = new Component('g', c, { id: 'stations' });
@@ -159,14 +159,13 @@ export class TransitMap extends Widget {
 			let districtIndex = 0, districtColors = ['#ef1de5', '#037e8e', 
 				'#00abcd','#620d7d', '#b206f9', '#082ebf','#C999D3', '#F2E6F4',
 				'#EBB3F3','#F8E6FB','#B3C3D4','#E6EBF1','#BFFBFF','#EAFEFF'];
-
 			for (let d of model.domains) {
 				let district: any = { name: d.name, title: d.title.value,
 					description: d.description.value, stations: [], 
 					color: districtColors[districtIndex]};
 				district.element = new Component('path', 
 					this._districtsElement, {id: district.name,	
-						fill: district.color, fill_opacity: 0.4});
+						fill: district.color, fill_opacity: 0.2});
 				for (let c of d.classes) district.stations.push(c.name);
 				this._districts[district.name] = district; 
 				this._districtsList.push(district)
@@ -273,11 +272,8 @@ export class TransitMap extends Widget {
 				line.stations.sort((a:any, b: any) => this._stations[b]
 					.lines.length - this._stations[a].lines.length);
 				this._lines[relation.name] = line; 
-				this._linesList.push(line); 
-				
-				// Create the legends
-
-				
+				this._linesList.push(line); 	
+			
 				// Increase the counter
 				lineIndex++;
 			}

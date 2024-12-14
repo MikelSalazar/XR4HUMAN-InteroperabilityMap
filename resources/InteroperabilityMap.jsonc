@@ -260,7 +260,7 @@
 		},
 		"classes": {
 			"3DFormatsAndMiddleware": {									// 01
-				"title": "3D Formats\n&amp;Middleware",
+				"title": "3D Formats\n&amp; Middleware",
 				"description": "Having access to interoperable 3D data\n formats and tools/engines is essential \nfor the development of interactive media.\nYet, it is important to remember there\nmight be different ways to represent\nthe same tridimensional entities."
 			},
 			"HardwareInfrastructure": {									// 02
@@ -268,7 +268,7 @@
 				"description": "Traditional IT infrastructure includes\n both specialized hardware systems\n (servers, sensors, etc.) and advanced\n database management systems.\nIt requires more power, space, and cost, \n so it is generally kept in data centers."
 			},
 			"OpenSource": {												// 03
-				"title": "Open Software\n&amp;Hardware",
+				"title": "Open Software\n&amp; Hardware",
 				"description": "Open Source licenses allow universal\naccess to (and often modification and\nredistribution of) the source code and\nresources of a software project or a\n hardware product, enabling third parties\n to participate in its development."
 			},
 			"DeveloperTools": {											// 04
@@ -288,7 +288,7 @@
 				"description": "A business model explains how an\norganization generates profit. This is\noften a delicate balancing act, because \naggressive monetization practices might\ndamage the ecosystem, reducing the\nnumber of customers (and the revenue)."
 			},
 			"ErgonomicsAndUsability": {									// 08
-				"title": "Ergonomics\n&amp;Usability",
+				"title": "Ergonomics\n&amp; Usability",
 				"description": "Usability is a measure of how well \n human beings can use a product/design \nto achieve a particular goal effectively,\n efficiently, and satisfactorily. To ensure\nmaximum usability, designers have to\nbe aware of related ergonomic factors."
 			},
 			"ResearchEthics": {											// 09
@@ -312,15 +312,15 @@
 				"description": "This kind of content creation involves\n multiple individuals working together\n (often asynchronously), combining skills\n and ideas to enhance quality, foster\n community involvement, and build\nstronger creator-audience relationships."
 			},
 			"TerminologiesAndOntologies": {								// 14
-				"title": "Terminologies\n&amp;Ontologies",
+				"title": "Terminologies\n&amp; Ontologies",
 				"description": "Building a terminology (a glossary of\ncommon terms) is an essential step to\n build any interoperable system. After,\n the terms can be classified in a Taxonomy\n or semantically linked in an Ontology\n(or a similar knowledge management tool)"
 			},
 			"RegulationsAndPolicies": {									// 15
-				"title": "Regulations\n&amp;Policies",
+				"title": "Regulations\n&amp; Policies",
 				"description": "Policies and regulations are two impor-\ntant tools used by governments and\norganizations to achieve specific goals.\n Policies set broad guidelines for decision-\nmaking, while regulation enforces\n compliance with specific rules."
 			},
 			"IntellectualPropertyUnfairPractices": {					// 16
-				"title": "Intellectual Property\n&amp;Unfair Practices",
+				"title": "Intellectual Property\n&amp; Unfair Practices",
 				"description": "Intellectual Property (IP) laws protect\n intangible creations like patents, copy-\nrights, and trademarks. Meanwhile, \nunfair business practices, like fraud or\n false advertising, are penalized by laws\n to ensure fair market conditions."
 			},
 			"DataProtection": { 										// 17
@@ -328,7 +328,7 @@
 				"description": "The practice of safeguarding sensitive\n (often personal) information from misuse,\n theft or loss. Its goal is to protect data\n and ensure its availability and compliance\n with regulatory requirements (notably, \nthe General Data Protection Regulation)."
 			},
 			"Guidelines": { 											// 18
-				"title": "Ethical, Regulatory\n&amp;Technical Guidelines",
+				"title": "Ethical, Regulatory\n&amp; Technical Guidelines",
 				"description": "A guideline is a statement that provides\n guidance in a specific real-world context\n (Usually, in the form of a rule). Unlike\n regulations, guidelines do not require\n strict compliance and can be applied\n more openly to address ethical issues."
 			},
 			"UseCases": {												// 19
@@ -340,7 +340,7 @@
 				"description": "Consumer protection laws safeguard\n buyers from deceptive tactics or\n anti-competitive practices, while also\n providing a legal framework for the\n creation of consumer organizations that\n help buyers make better choices."
 			},
 			"DiversityAndInclusion": {									// 21
-				"title": "Diversity, Equity\n&amp;Inclusion (DEI)",
+				"title": "Diversity, Equity\n&amp; Inclusion (DEI)",
 				"description": "DEI frameworks promote fair treatment\nand participation, especially for under-\nrepresented or discriminated groups.\nYet, these efforts have been mired in \ncontroversy, due to excessive focus on\n the outcome rather than on the process."
 			},
 			"ResearchPrograms": {										// 22
@@ -352,7 +352,7 @@
 				"description": "The collection of published works in a\n  research field is called its \"literature\".\n And, in many fields, the size of these\n collections has grown to the point resear-\nchers need to write state-of-the-art\n articles to keep up with the changes."
 			},
 			"EthicalRequirementsAndUserExpectation": {					// 24
-				"title": "Ethical Requirements\n&amp;User Expectations",
+				"title": "Ethical Requirements\n&amp; User Expectations",
 				"description": "To meet the user expectations, a system\n has to satisfy a number of ethical\n requirements."
 			}
 		}

@@ -123,7 +123,7 @@ dataFileData = dataFileData.replace(/\,\s*\n(\s*[}|\]])/gm, '\n$1');
 
 // Create the initial SVG data using the very same file we are going to embed
 let graph = new KnowledgeGraph(JSON.parse(dataFileData)), tabulate = true,
-	inputData = graph.ui.component.toString().replace(/&/g, '&amp;').split('\n'), 
+	inputData = graph.ui.component.toString().split('\n'), 
 	svgInputData = [...inputData], svgOutputData = [], htmlOutputData = [],
 	svgStartTag = svgInputData.shift(), svgEndTag = svgInputData.pop(),
 	defsData = [];
@@ -180,6 +180,7 @@ htmlOutputData.push('\t\t<title>' + projectName + '</title>');
 htmlOutputData.push('\t\t<link rel="icon" type="image/x-icon" '+
 	'href="data:image/x-icon;base64,' + faviconFileData + '" >'); // Embedded favicon
 htmlOutputData.push('\t</head>');
+htmlOutputData.push('\t<style> * { margin: 0; } </style>');
 htmlOutputData.push('\t<body>');
 for (let svgLine of svgOutputData) { // Embedded SVG code
 	if (!tabulate && svgLine.trim().startsWith('</script>')) tabulate = true;

@@ -87,7 +87,7 @@ export class UserInterface extends Node {
 	
 	// ------------------------------------------------------------ CONSTRUCTOR
 
-	/** Initializes a new Interface instance.
+	/** Initializes a new UserInterface instance.
 	 * @param parent The app reference.
 	 * @param data The data of the app. */
 	constructor(name: string, parent: KnowledgeGraph, data: any = {}) {
@@ -125,8 +125,7 @@ export class UserInterface extends Node {
 			for (childIndex = 0; childIndex < childCount; childIndex++) {
 				let child = children.item(childIndex);
 				if (child.nodeType != child.ELEMENT_NODE ||
-					!((child as Element).tagName == 'defs' ||
-						(child as Element).tagName == 'script')) {
+					!((child as Element).tagName == 'script')) {
 						this._component.element.removeChild(child); 
 						childIndex--; childCount--;
 				}
@@ -134,12 +133,13 @@ export class UserInterface extends Node {
 			
 
 			// Add the element to the browser
-			let parentElement = data.element || document.body ;
+			let parentElement = data.element || document.body;
 			if (KnowledgeGraph.environment == 'browser' && ! parentElement) {
 				// Set the style of the element
 				this._width.value = window.innerWidth;
 				this._height.value = window.innerHeight;
-				console.log(this._width.value, this._height.value);
+				if (this.debug) 
+					console.log(this._width.value, this._height.value);
 			} else {
 				this._width.value = parentElement.clientWidth;
 				this._height.value = parentElement.clientHeight;
@@ -229,7 +229,6 @@ export class UserInterface extends Node {
 						c2 = Color.interpolate(color1, color2, t).hex;
 					foregroundNode.setAttribute('stop-color', c1);
 					backgroundNode.setAttribute('stop-color', c2);
-					console.log(c1);
 				}, undefined,0,1,0,0.2, true);
 
 			if (this.debug) console.log('Switched style to: ' + this._style.value);
@@ -240,7 +239,7 @@ export class UserInterface extends Node {
 				this._definitions,{ id: resource.name }, resource.value);
 				
 		// Call the base class method
-		super.update();
+		super.update(forced);
 
 		// Request a new update as soon as possible 
 		if (KnowledgeGraph.environment == 'browser') {

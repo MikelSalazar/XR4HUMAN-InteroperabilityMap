@@ -312,7 +312,7 @@ export class Widget extends Node {
 		element.addEventListener('wheel', (e) => {
 			this.react('zoom', e.buttons, e.pageX - element.clientLeft, e.pageY - element.clientTop, e.movementX, e.movementY, e.deltaY < 0 ? 0.1 : -0.1);
 			e.preventDefault();
-		});
+		}, { passive: false });
 
 		// Create multi-touch system
 		let cursorX = 0, cursorY = 0, maxTouches = 0;

@@ -623,7 +623,9 @@ NodeLink.type = new NodeType('Link', 'link', null, NodeLink);
 
 	/** Indicates if the value is the default. */
 	get isDefault() {
-		return this.default != undefined && this._value == this._default;
+		if (this._default == undefined)
+			return false;
+		return this._value == undefined || this._value == this._default;
 	}
 
 	// ------------------------------------------------------------ CONSTRUCTOR
@@ -2024,7 +2026,8 @@ Model.type = new NodeType('Model', 'model', Node.type, Model);
 			value = Component.serializeNumber(value);
 		if (name.indexOf('_') >= 0)
 			name = name.replace(/_/g, '-');
-		this._attributes[name] = value;
+		if (value != undefined)
+			this._attributes[name] = value;
 		if (this._element) {
 			if (value != undefined)
 				this._element.setAttribute(name, value);
@@ -2047,7 +2050,8 @@ Model.type = new NodeType('Model', 'model', Node.type, Model);
 	/** Clears the component. */
 	clear() {
 		for (let child of this._children)
-			child._element.remove();
+			if (child._element)
+				child._element.remove();
 		this._children = [];
 	}
 
@@ -2416,7 +2420,7 @@ Model.type = new NodeType('Model', 'model', Node.type, Model);
 		element.addEventListener('wheel', (e) => {
 			this.react('zoom', e.buttons, e.pageX - element.clientLeft, e.pageY - element.clientTop, e.movementX, e.movementY, e.deltaY < 0 ? 0.1 : -0.1);
 			e.preventDefault();
-		});
+		}, { passive: false });
 
 		// Create multi-touch system
 		let cursorX = 0, cursorY = 0, maxTouches = 0;
@@ -2564,7 +2568,7 @@ Widget.pivotValues = ['top-left', 'top', 'top-right', 'left', 'center',
 
 	// ------------------------------------------------------------ CONSTRUCTOR
 
-	/** Initializes a new Interface instance.
+	/** Initializes a new UserInterface instance.
 	 * @param parent The app reference.
 	 * @param data The data of the app. */
 	constructor(name, parent, data = {}) {
@@ -2600,8 +2604,7 @@ Widget.pivotValues = ['top-left', 'top', 'top-right', 'left', 'center',
 			for (childIndex = 0; childIndex < childCount; childIndex++) {
 				let child = children.item(childIndex);
 				if (child.nodeType != child.ELEMENT_NODE ||
-					!(child.tagName == 'defs' ||
-						child.tagName == 'script')) {
+					!(child.tagName == 'script')) {
 					this._component.element.removeChild(child);
 					childIndex--;
 					childCount--;
@@ -2615,7 +2618,8 @@ Widget.pivotValues = ['top-left', 'top', 'top-right', 'left', 'center',
 				// Set the style of the element
 				this._width.value = window.innerWidth;
 				this._height.value = window.innerHeight;
-				console.log(this._width.value, this._height.value);
+				if (this.debug)
+					console.log(this._width.value, this._height.value);
 			}
 			else {
 				this._width.value = parentElement.clientWidth;
@@ -2703,7 +2707,6 @@ Widget.pivotValues = ['top-left', 'top', 'top-right', 'left', 'center',
 				let c1 = Color.interpolate(color2, color1, t).hex, c2 = Color.interpolate(color1, color2, t).hex;
 				foregroundNode.setAttribute('stop-color', c1);
 				backgroundNode.setAttribute('stop-color', c2);
-				console.log(c1);
 			}, undefined, 0, 1, 0, 0.2, true);
 
 			if (this.debug)
@@ -2715,7 +2718,7 @@ Widget.pivotValues = ['top-left', 'top', 'top-right', 'left', 'center',
 				new Component('g', this._definitions, { id: resource.name }, resource.value);
 
 		// Call the base class method
-		super.update();
+		super.update(forced);
 
 		// Request a new update as soon as possible 
 		if (KnowledgeGraph.environment == 'browser') {
@@ -3032,13 +3035,12 @@ Text.type = new NodeType('Text', 'text', Widget.type, Text);
 			let districtIndex = 0, districtColors = ['#ef1de5', '#037e8e',
 				'#00abcd', '#620d7d', '#b206f9', '#082ebf', '#C999D3', '#F2E6F4',
 				'#EBB3F3', '#F8E6FB', '#B3C3D4', '#E6EBF1', '#BFFBFF', '#EAFEFF'];
-
 			for (let d of model.domains) {
 				let district = { name: d.name, title: d.title.value,
 					description: d.description.value, stations: [],
 					color: districtColors[districtIndex] };
 				district.element = new Component('path', this._districtsElement, { id: district.name,
-					fill: district.color, fill_opacity: 0.4 });
+					fill: district.color, fill_opacity: 0.2 });
 				for (let c of d.classes)
 					district.stations.push(c.name);
 				this._districts[district.name] = district;
@@ -3153,9 +3155,6 @@ Text.type = new NodeType('Text', 'text', Widget.type, Text);
 					.lines.length - this._stations[a].lines.length);
 				this._lines[relation.name] = line;
 				this._linesList.push(line);
-
-				// Create the legends
-
 
 				// Increase the counter
 				lineIndex++;
@@ -3565,7 +3564,7 @@ TransitMap.type = new NodeType('TransitMap', 'transit_map', Widget.type, Transit
 
 		// Create the components
 		let cx = 40, cy = 40, ir = 20, or = 30, stroke = 5;
-		for (let angle = 0; angle < 360; angle += 45) {
+		for (let angle = 1; angle < 361; angle += 45) {
 			let a = angle * Math.PI / 180, s = Math.sin(a), c = Math.cos(a);
 			new Component('line', this.component, {
 				x1: cx, x2: cy + c * or, y1: cx, y2: cy + s * or,

@@ -36,7 +36,7 @@ export class StyleSwitcher extends Widget {
 
 		// Create the components
 		let cx = 40, cy = 40, ir = 20, or = 30, stroke = 5;
-		for (let angle = 0; angle < 360; angle += 45) {
+		for (let angle = 1; angle < 361; angle += 45) {
 			let a = angle * Math.PI / 180, s = Math.sin(a), c = Math.cos(a);
 			new Component('line', this.component, {
 				x1: cx, x2: cy + c * or, y1: cx, y2: cy + s * or,
