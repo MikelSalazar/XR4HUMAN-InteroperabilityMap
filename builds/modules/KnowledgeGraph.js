@@ -124,7 +124,7 @@ KnowledgeGraph.type = new NodeType('KnowledgeGraph', 'root', Node.type, Knowledg
 // --------------------------------------------------------------- METADATA
 
 /** The version of the Knowledge Graph framework. */
-KnowledgeGraph.version = '0.7.0';
+KnowledgeGraph.version = '0.7.1';
 
 /** The global list of instances of the Knowledge Graph framework. */
 KnowledgeGraph.instances = [];

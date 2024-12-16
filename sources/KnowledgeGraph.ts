@@ -58,7 +58,7 @@ export class KnowledgeGraph extends Node {
 	// --------------------------------------------------------------- METADATA
 
 	/** The version of the Knowledge Graph framework. */
-	static version: string = '0.7.0';
+	static version: string = '0.7.1';
 
 	/** The global list of instances of the Knowledge Graph framework. */
 	static instances: KnowledgeGraph[] = [];

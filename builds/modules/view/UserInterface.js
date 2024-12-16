@@ -148,13 +148,23 @@ export class UserInterface extends Node {
 
 			// Disable the right click menu
 			window.oncontextmenu = (e) => { e.preventDefault(); };
+
+			this.render();
 		}
 	}
 
 
 	// --------------------------------------------------------- PUBLIC METHODS
 
-	/** Updates the Node instance.
+	/** Renders the UserInterface instance.
+	 * @param time The current time. */
+	render(time = 0) {
+
+		this.update();
+		requestAnimationFrame(this.render.bind(this));
+	}
+
+	/** Updates the UserInterface instance.
 	 * @param forced Whether to force the update or not.
 	 * @return Whether the node has been updated or not*/
 	update(forced = false) {
@@ -179,13 +189,13 @@ export class UserInterface extends Node {
 					break;
 			}
 			// Animate the transition between colors
-			// if (KnowledgeGraph.environment == 'browser') {
-			new Animation((t) => {
-
-				let c1 = Color.interpolate(color2, color1, t).hex, c2 = Color.interpolate(color1, color2, t).hex;
-				foregroundNode.setAttribute('stop-color', c1);
-				backgroundNode.setAttribute('stop-color', c2);
-			}, undefined, 0, 1, 0, 0.2, true);
+			if (KnowledgeGraph.environment == 'browser') {
+				new Animation((t) => {
+					let c1 = Color.interpolate(color2, color1, t).hex, c2 = Color.interpolate(color1, color2, t).hex;
+					foregroundNode.setAttribute('stop-color', c1);
+					backgroundNode.setAttribute('stop-color', c2);
+				}, undefined, 0, 1, 0, 0.2, true);
+			}
 
 			if (this.debug)
 				console.log('Switched style to: ' + this._style.value);
@@ -198,11 +208,7 @@ export class UserInterface extends Node {
 		// Call the base class method
 		super.update(forced);
 
-		// Request a new update as soon as possible 
-		if (KnowledgeGraph.environment == 'browser') {
-			requestAnimationFrame(this.update.bind(this));
-			return false;
-		}
+		return true;
 	}
 
 

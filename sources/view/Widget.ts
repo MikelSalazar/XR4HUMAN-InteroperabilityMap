@@ -94,6 +94,9 @@ export class Widget extends Node {
 	/** The main component of the widget. */
 	get component(): Component { return this._component; }
 
+	/** The background component of the widget. */
+	get background(): Component { return this._backgroundComponent; }
+
 	/** The width of the widget. */
 	get width(): Number { return this._width; }
 
@@ -156,7 +159,7 @@ export class Widget extends Node {
 		this._component = new Component('g', 
 			this._parentComponent, { id: this.name });
 		this._backgroundComponent = new Component('rect', 
-			this._component, { fill: 'none' });
+			this._component, { fill: this._backgroundColor.toString() });
 
 		// Set the properties of the widget
 		this._enabled = true; this._dragEvents = false;

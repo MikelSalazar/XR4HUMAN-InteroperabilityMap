@@ -1983,11 +1983,9 @@ Model.type = new NodeType('Model', 'model', Node.type, Model);
 
 		// Set the attributes
 		this._attributes = {};
-		let a = attributes;
-		if (attributes != undefined && typeof attributes == 'object') {
+		if (attributes != undefined && typeof attributes == 'object')
 			for (let key in attributes)
 				this.setAttribute(key, attributes[key]);
-		}
 
 		// Create the list of animations
 		this._animations = {};
@@ -2130,6 +2128,9 @@ Model.type = new NodeType('Model', 'model', Node.type, Model);
 	/** The main component of the widget. */
 	get component() { return this._component; }
 
+	/** The background component of the widget. */
+	get background() { return this._backgroundComponent; }
+
 	/** The width of the widget. */
 	get width() { return this._width; }
 
@@ -2190,7 +2191,7 @@ Model.type = new NodeType('Model', 'model', Node.type, Model);
 
 		// Create the main component and the background in it
 		this._component = new Component('g', this._parentComponent, { id: this.name });
-		this._backgroundComponent = new Component('rect', this._component, { fill: 'none' });
+		this._backgroundComponent = new Component('rect', this._component, { fill: this._backgroundColor.toString() });
 
 		// Set the properties of the widget
 		this._enabled = true;
@@ -2670,13 +2671,23 @@ Widget.pivotValues = ['top-left', 'top', 'top-right', 'left', 'center',
 
 			// Disable the right click menu
 			window.oncontextmenu = (e) => { e.preventDefault(); };
+
+			this.render();
 		}
 	}
 
 
 	// --------------------------------------------------------- PUBLIC METHODS
 
-	/** Updates the Node instance.
+	/** Renders the UserInterface instance.
+	 * @param time The current time. */
+	render(time = 0) {
+
+		this.update();
+		requestAnimationFrame(this.render.bind(this));
+	}
+
+	/** Updates the UserInterface instance.
 	 * @param forced Whether to force the update or not.
 	 * @return Whether the node has been updated or not*/
 	update(forced = false) {
@@ -2701,13 +2712,13 @@ Widget.pivotValues = ['top-left', 'top', 'top-right', 'left', 'center',
 					break;
 			}
 			// Animate the transition between colors
-			// if (KnowledgeGraph.environment == 'browser') {
-			new Animation((t) => {
-
-				let c1 = Color.interpolate(color2, color1, t).hex, c2 = Color.interpolate(color1, color2, t).hex;
-				foregroundNode.setAttribute('stop-color', c1);
-				backgroundNode.setAttribute('stop-color', c2);
-			}, undefined, 0, 1, 0, 0.2, true);
+			if (KnowledgeGraph.environment == 'browser') {
+				new Animation((t) => {
+					let c1 = Color.interpolate(color2, color1, t).hex, c2 = Color.interpolate(color1, color2, t).hex;
+					foregroundNode.setAttribute('stop-color', c1);
+					backgroundNode.setAttribute('stop-color', c2);
+				}, undefined, 0, 1, 0, 0.2, true);
+			}
 
 			if (this.debug)
 				console.log('Switched style to: ' + this._style.value);
@@ -2720,11 +2731,7 @@ Widget.pivotValues = ['top-left', 'top', 'top-right', 'left', 'center',
 		// Call the base class method
 		super.update(forced);
 
-		// Request a new update as soon as possible 
-		if (KnowledgeGraph.environment == 'browser') {
-			requestAnimationFrame(this.update.bind(this));
-			return false;
-		}
+		return true;
 	}
 
 
@@ -2964,7 +2971,6 @@ Text.type = new NodeType('Text', 'text', Widget.type, Text);
 		// Create the map 
 		this._map = new Widget('map', this.widgets);
 		let c = this._map.component;
-		this._districtsElement = new Component('g', c, { id: 'districts' });
 		this._connectionsElement = new Component('g', c, { id: 'connections' });
 		this._stationsElement = new Component('g', c, { id: 'stations' });
 		this._infoElement = new Component('g', c, { id: 'info' });
@@ -2975,28 +2981,38 @@ Text.type = new NodeType('Text', 'text', Widget.type, Text);
 		let width = this._width.value, height = this._height.value, vmin = width < height ? width : height, legendSize = vmin / 10, fontFamily = 'arial';
 		this._linesLegend = new Widget('LinesLegend', this.widgets, {
 			width: legendSize, height: legendSize, anchor: 'bottom-left',
-			position: [10, -10], background: '#88888844', radius: 10
+			position: [10, -10], background: '#888888', radius: 10
 		});
 		new Component('text', this._linesLegend.component, {
 			id: 'LinesLegendTitle', x: 10, y: 20, font_family: fontFamily,
-			font_size: 15, font_weight: "bold",
-			fill: 'url(#foreground_color)'
-		}, 'Lines (Stakeholders):');
+			font_size: 15, font_weight: "bold", fill: 'url(#foreground_color)'
+		}, 'Lines (Stakeholders):', () => { this.selectLine(); });
 		this._linesLegendItems = new Component('g', this._linesLegend.component);
-		this._districtsLegend = new Widget('DistrictsLegend', this.widgets, {
-			width: legendSize, height: legendSize, anchor: 'bottom-right',
-			position: [-10, -10], background: '#88888844', radius: 10
-		});
-		new Component('text', this._districtsLegend.component, {
-			id: 'DistrictsLegendTitle', x: 10, y: 20, font_family: fontFamily,
-			font_size: 15, font_weight: "bold",
-			fill: 'url(#foreground_color)'
-		}, 'Districts (Domains):');
-		this._districtsLegendItems = new Component('g', this._districtsLegend.component);
+		this._linesLegend.background.setAttribute('fill_opacity', 0.4);
 
 		// Connect the reset view event
 		let ui = this.ancestor(UserInterface);
 		ui.onViewReset.push(this.resetView.bind(this));
+
+		// Debug mode with the plus/minus keys
+		if (KnowledgeGraph.environment == 'browser') {
+			document.onkeydown = (e) => {
+				if (this.debug == undefined)
+					this.debug = 0;
+				switch (e.key) {
+					case '+':
+						if (this.debug < this._stationsList.length)
+							this.debug++;
+						this.update(true);
+						break;
+					case '-':
+						if (this.debug > 0)
+							this.debug--;
+						this.update(true);
+						break;
+				}
+			};
+		}
 	}
 
 
@@ -3018,14 +3034,11 @@ Text.type = new NodeType('Text', 'text', Widget.type, Text);
 		if (forced || !this._updateTime || this._updateTime <= model.updateTime) {
 
 			// Clean the current elements
-			this._districtsElement.clear();
 			this._connectionsElement.clear();
 			this._stationsElement.clear();
 			this._infoElement.clear();
 
 			// Create the data structures
-			this._districts = {};
-			this._districtsList = [];
 			this._stations = {};
 			this._stationsList = [];
 			this._connections = {};
@@ -3039,12 +3052,8 @@ Text.type = new NodeType('Text', 'text', Widget.type, Text);
 				let district = { name: d.name, title: d.title.value,
 					description: d.description.value, stations: [],
 					color: districtColors[districtIndex] };
-				district.element = new Component('path', this._districtsElement, { id: district.name,
-					fill: district.color, fill_opacity: 0.2 });
 				for (let c of d.classes)
 					district.stations.push(c.name);
-				this._districts[district.name] = district;
-				this._districtsList.push(district);
 
 				// Increase the counter
 				districtIndex++;
@@ -3059,8 +3068,6 @@ Text.type = new NodeType('Text', 'text', Widget.type, Text);
 					station.lines.push(lineName);
 				for (let district of c.domains.references)
 					station.districts.push(district);
-				// if (station.districts.length > 1)
-				// 	console.log(station.name, station.districts)
 
 				// Create the station group element
 				station.element = new Component('g', this._stationsElement, {
@@ -3132,6 +3139,11 @@ Text.type = new NodeType('Text', 'text', Widget.type, Text);
 				// Add the element to the lists
 				this._stations[station.name] = station;
 				this._stationsList.push(station);
+
+				if (this.debug && this._stations.count >= this.debug) {
+					console.log(this.debug);
+					break;
+				}
 			}
 			this._stationsList.sort((a, b) => b.lines.length - a.lines.length);
 			// console.log('Sorted stations:', this._stationsList);
@@ -3165,44 +3177,30 @@ Text.type = new NodeType('Text', 'text', Widget.type, Text);
 			// Update the legends
 			this.updateLegends();
 
-			// DEBUG position the stations in a simpler grid
-			// this.createSimpleGrid();
 
 			// Create the grid
 			this.createGrid();
 
 			// Recenter the view
 			this.resetView((KnowledgeGraph.environment == 'browser') ? 0.5 : 0);
+
+			// Update the elements
+			this.updateStations();
+			this.updateConnections();
+
+			console.log("Updated TransitMap");
 		}
 
-		// Update the elements
-		this.updateStations();
-		this.updateDistricts();
-		this.updateConnections();
+
 
 		// Call the base class method
-		return super.update(forced);
+		super.update(forced);
+
+		return true;
 	}
 
 
 	// -------------------------------------------------------- PRIVATE METHODS
-
-	/** Positions the stations using a simple grid.
-	 * @param columns The number of columns of the grid.
-	 * @param cellSize The size of the cells of the grid. */
-	createSimpleGrid(columns = 5, separation = 200) {
-		let rows = Math.round(this._stationsList.length / columns), halfWidth = (columns - 1) / 2, halfHeight = (rows - 1) / 2, x = -halfWidth, y = -halfHeight;
-		for (let stationName in this._stations) {
-			let station = this._stations[stationName];
-			station.x = x * separation;
-			station.y = y * separation;
-			x++;
-			if (x > halfWidth) {
-				x = -halfWidth;
-				y++;
-			}
-		}
-	}
 
 
 	/** Positions the stations using a regular grid.
@@ -3219,8 +3217,18 @@ Text.type = new NodeType('Text', 'text', Widget.type, Text);
 				grid[x][y] = undefined;
 		}
 
+		// Checks the position of a point relative to a segment
+		function ccw(A, B, C) {
+			return (C.y - A.y) * (B.x - A.x) > (B.y - A.y) * (C.x - A.x);
+		}
+
+		// Calculates if two segments intersect
+		function intersect(A, B, C, D) {
+			return ccw(A, C, D) != ccw(B, C, D) && ccw(A, B, C) != ccw(A, B, D);
+		}
+
 		// Position the stations and create the connections
-		let remainingStations = [...this._stationsList], stations = [];
+		let remainingStations = [...this._stationsList], stations = [], lines = [];
 		this._connections = {};
 		this._connectionsList = [];
 		while (remainingStations.length > 0) {
@@ -3248,13 +3256,21 @@ Text.type = new NodeType('Text', 'text', Widget.type, Text);
 						if (!bestStation)
 							continue;
 						links.push({ station: bestStation.name, line: line });
-						value -= bestValue / 10;
-						if (station.districts[0] == bestStation.districts[0])
-							value -= 0.01;
+						// value -= bestValue / 10;
+						// if (station.districts[0] == bestStation.districts[0])
+						// 	value -= 0.01;
+
+						for (let line of lines) {
+							if (intersect(line.a, line.b, { x: x, y: y }, { x: bestStation.gridX, y: bestStation.gridY }))
+								value -= 0.1;
+						}
+
 					}
 					options.push({ x: x, y: y, v: value, links: links });
+					// console.log(links)
 				}
 			}
+
 			options.sort((a, b) => a.v - b.v);
 			let bestGridPosition = options[0];
 			grid[bestGridPosition.x][bestGridPosition.y] = station;
@@ -3272,15 +3288,20 @@ Text.type = new NodeType('Text', 'text', Widget.type, Text);
 						lines: [], width: 0, component: new Component('g', this._connectionsElement, { id: connectionName }) };
 					this._connections[connectionName] = connection;
 					this._connectionsList.push(connection);
+					let o = station, d = this._stations[link.station];
+					lines.push({ a: { x: o.gridX, y: o.gridY },
+						b: { x: d.gridX, y: d.gridY } });
 				}
 
 				// Add the line to the connection
 				let line = this._lines[link.line];
 				new Component('polyline', connection.component, {
-					id: connectionName + '-' + link.line,
+					id: connectionName + '-' + link.line, fill: 'none',
 					stroke: line.color, stroke_width: line.width
 				});
 				connection.width += line.width;
+				connection.lines.push(line);
+				line.connections.push(connection);
 			}
 			stations.push(station);
 		}
@@ -3319,161 +3340,80 @@ Text.type = new NodeType('Text', 'text', Widget.type, Text);
 	/** Updates the connections. */
 	updateConnections() {
 		for (let connection of this._connectionsList) {
-			let a = this._stations[connection.a], b = this._stations[connection.b], x1 = a.x, y1 = a.y, x2 = b.x, y2 = b.y;
+			let a = this._stations[connection.a], b = this._stations[connection.b], x1 = a.x, y1 = a.y, x2 = b.x, y2 = b.y, xd = x2 - x1, yd = y2 - y1, xa = Math.abs(xd), ya = Math.abs(yd);
 
+			// Check the current state of the connection
 			if (x1 == x2 && y1 == y2)
 				continue;
-			if (!a.visible)
+			if (!a.visible || connection.lines == 0)
 				continue;
 
-			// Calculate the combined width of the lines
-			let width = 0;
-			for (let lineName of connection.lines)
-				width += this._lines[lineName].width;
 
-			let offset = -width / 2, ox = y2 - y1, oy = -(x2 - x1);
+			// Generate the points in a 45 degree grid
+			let points = [{ x: x1, y: y1 }];
+			if (xd != 0 && yd != 0 && xa != ya) {
+				let d = (xa < ya ? xa : ya) / 2, xs = Math.sign(xd), ys = Math.sign(yd);
+				points.push({ x: x1 + d * xs, y: y1 + d * ys }, { x: x2 - d * xs, y: y2 - d * ys });
+			}
+			points.push({ x: x2, y: y2 });
+
+			// Draw the points
+			let offset = -connection.width / 2, ox = y2 - y1, oy = -(x2 - x1);
 			let l = Math.sqrt(ox * ox + oy * oy);
 			ox /= l;
 			oy /= l;
-
 			for (let component of connection.component.children) {
 				offset += parseFloat(component.getAttribute('stroke-width'));
-				component.setAttribute('points', (x1 + ox * offset) + ',' + (y1 + oy * offset) + ' ' +
-					(x2 + ox * offset) + ',' + (y2 + oy * offset));
+				let p = '';
+				for (let point of points)
+					p += (p.length ? ' ' : ' ') +
+						(point.x + ox * offset) + ',' + (point.y + oy * offset);
+				component.setAttribute('points', p);
 			}
 		}
 	}
 
-
-	/** Updates the districts. */
-	updateDistricts() {
-		let districtRadius = 50;
-		for (let district of this._districtsList) {
-
-			// Create the list of points
-			let points = [];
-			for (let stationName of district.stations) {
-				let station = this._stations[stationName];
-				if (station.gridX == undefined)
-					continue;
-				points.push({ x: station.x, y: station.y });
-			}
-
-			// If there are no points, don't draw anything
-			if (points.length == 0)
-				continue;
-
-			// If there are is one point, create another point next to it
-			if (points.length == 1)
-				points.push({ x: points[0].x + 0.0001, y: points[0].y });
-
-			// Get the starting point (the one with the lowest X value)
-			let pointIndex, pointCount = points.length;
-			let startVertex = 0, startingX = points[0].x;
-			for (pointIndex = 1; pointIndex < pointCount; pointIndex++) {
-				let point = points[pointIndex];
-				if (startingX <= point.x)
-					continue;
-				startVertex = pointIndex;
-				startingX = point.x;
-			}
-
-			// Calculate the convex hull
-			let vertex = startVertex, angle, newAngle = 1000, vertexIndex = 0, vertexCount = pointCount, vertices = [];
-			for (vertexIndex = 0; vertexIndex < vertexCount; vertexIndex++) {
-
-				// Get the x and y values of the current vertex
-				let ox = points[vertex].x, oy = points[vertex].y;
-
-				// Check all other points to detect possible vertices
-				for (pointIndex = 0; pointIndex < pointCount; pointIndex++) {
-					if (pointIndex == vertex ||
-						vertices.includes(pointIndex))
-						continue;
-					let dx = points[pointIndex].x - ox, dy = points[pointIndex].y - oy;
-					if (dx == 0 && dy == 0)
-						continue;
-					let a = Math.atan2(dy, dx);
-					if (angle != undefined && a < angle)
-						a += Math.PI * 2;
-					if (newAngle > a) {
-						newAngle = a;
-						vertex = pointIndex;
-					}
-				}
-
-				// Add the obtained vertex and angle values to the list
-				vertices.push(vertex);
-				angle = newAngle;
-				newAngle = 1000;
-
-				// If the vertex is the starting vertex, stop the process
-				if (vertex == startVertex)
-					break;
-			}
-			vertices.push(startVertex);
-			vertices.unshift(startVertex);
-			vertexCount = vertices.length;
-
-			// Create the segments
-			let lines = [], lineIndex = 0, lineCount = vertexCount - 1;
-			for (lineIndex = 0; lineIndex < lineCount; lineIndex++) {
-				let v1 = points[vertices[lineIndex]], v2 = points[vertices[lineIndex + 1]];
-				lines.push({ p1: v1, p2: v2, angle: Math.atan2(v2.y - v1.y, v2.x - v1.x) });
-			}
-
-			// Create the path to draw, with an offset
-			let offset = 50, path = '';
-			for (lineIndex = 0; lineIndex < lineCount; lineIndex++) {
-				let l = lines[lineIndex], l2 = lines[(lineIndex + 1) % lineCount], dx1 = Math.sin(l.angle) * districtRadius, dy1 = -Math.cos(l.angle) * districtRadius, dx2 = Math.sin(l2.angle) * districtRadius, dy2 = -Math.cos(l2.angle) * districtRadius, x1 = l.p1.x + dx1, y1 = l.p1.y + dy1, x2 = l.p2.x + dx1, y2 = l.p2.y + dy1, x3 = l.p2.x + dx2, y3 = l.p2.y + dy2;
-				if (lineIndex == 0)
-					path += 'M ' + x1 + ' ' + y1 + ' ';
-				path += 'L ' + x2 + ' ' + y2 + ' '; // Line between points
-				path += 'A ' + districtRadius + ' ' + districtRadius +
-					' 0 0 1 ' + x3 + ' ' + y3 + ' '; // Arc to next line
-			}
-			district.element.setAttribute('d', path + 'Z');
-		}
-	}
 
 	/** Updates the legends. */
 	updateLegends() {
-		let fontFamily = 'arial';
-		this._linesLegendItems.clear();
+		let fontFamily = 'arial', linesLegendItems = this._linesLegendItems;
+		linesLegendItems.clear();
 		let lineIndex = 0;
 		this._linesLegend.width.value = 200;
 		this._linesLegend.height.value = 30 + 20 * (this._linesList.length);
 		for (let line of this._linesList) {
-			new Component('rect', this._linesLegend.component, {
-				fill: line.color,
-				x: 10, y: 30 + 20 * lineIndex, width: 20, height: 10
-			});
-			new Component('text', this._linesLegend.component, {
-				id: line.name + 'legend', fill: 'url(#foreground_color)',
-				x: 40, y: 40 + 20 * lineIndex, font_family: fontFamily,
-				font_size: 14
-			}, line.title);
-			lineIndex++;
-		}
-
-		this._districtsLegendItems.clear();
-		let districtIndex = 0;
-		this._districtsLegend.width.value = 200;
-		this._districtsLegend.height.value = 30 + 20 * (this._districtsList.length);
-		for (let district of this._districtsList) {
-			new Component('rect', this._districtsLegendItems, {
-				fill: district.color,
-				x: 10, y: 30 + 20 * districtIndex, width: 20, height: 10
-			});
-			new Component('text', this._districtsLegendItems, {
-				id: district.name + 'legend', fill: 'url(#foreground_color)',
-				x: 40, y: 40 + 20 * districtIndex, font_family: fontFamily,
-				font_size: 14
-			}, district.title);
-			districtIndex++;
+			let group = new Component('g', linesLegendItems, { id: line.name,
+				transform: 'translate(10, ' + (30 + 20 * lineIndex++) + ')' }, undefined, () => { this.selectLine(line.name); });
+			new Component('rect', group, { fill: line.color,
+				width: 20, height: 10 });
+			new Component('text', group, { fill: 'url(#foreground_color)',
+				x: 40, y: 10, font_family: fontFamily, font_size: 14 }, line.title);
 		}
 	}
 
+
+	/** Selects a particular line.
+	 * @param lineName The name of the line to select. */
+	selectLine(lineName) {
+
+		// If no line is selected, make all of them visible
+		if (!lineName) {
+			for (let connection of this._connectionsList)
+				for (let polyline of connection.component.children)
+					polyline.setAttribute('stroke_opacity', 1);
+			return;
+		}
+
+		// Show the selected line and hide the rest
+		let selectedLine = this._lines[lineName];
+		if (!selectedLine)
+			throw Error('Invalid line: ' + lineName);
+		let c = selectedLine.color;
+		for (let line of this._linesList)
+			for (let connection of line.connections)
+				for (let polyline of connection.component.children)
+					polyline.setAttribute('stroke_opacity', (polyline.getAttribute('stroke') == c) ? 1 : 0.1);
+	}
 
 
 	/** Reset the view.
@@ -3817,7 +3757,7 @@ KnowledgeGraph.type = new NodeType('KnowledgeGraph', 'root', Node.type, Knowledg
 // --------------------------------------------------------------- METADATA
 
 /** The version of the Knowledge Graph framework. */
-KnowledgeGraph.version = '0.7.0';
+KnowledgeGraph.version = '0.7.1';
 
 /** The global list of instances of the Knowledge Graph framework. */
 KnowledgeGraph.instances = [];

@@ -112,10 +112,9 @@ export class Component {
 		}
 
 		// Set the attributes
-		this._attributes = {}; let a = attributes;
-		if (attributes != undefined && typeof attributes == 'object') {
-			for(let key in attributes) this.setAttribute(key, attributes[key]);
-		}
+		this._attributes = {};
+		if (attributes != undefined && typeof attributes == 'object')
+			for (let key in attributes) this.setAttribute(key, attributes[key]);
 
 		// Create the list of animations
 		this._animations = {};
